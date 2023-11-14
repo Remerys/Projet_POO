@@ -35,4 +35,21 @@ public abstract class Location {
             throw new Exception("removeExit : The exit doesn't exist !");
         }
     }
+
+    /**
+     * Returns the new location associated to the string
+     */
+    public Location exitTo(String exit)  {
+        return EXITS.get(exit).exitTo(exit);
+    }
+
+    public String getName() {
+        return this.NAME;
+    }
+
+    public String getDescription() {
+        return this.DESCRIPTION;
+    }
+
+    // TODO: Characters
 }
