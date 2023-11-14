@@ -4,10 +4,22 @@ package characters;
  * An abstract class representing all the characters in the world except the hero
  */
 abstract class Character {
+	/**
+	 * MAX_HP (int) : 500
+	 */
 	public static int MAX_HP = 500;
 	
+	/**
+	 * The character's name
+	 */
 	private final String NAME;
+	/**
+	 * The character's description/history
+	 */
 	private String description;
+	/**
+	 * The character's health points
+	 */
 	private int hp;
 	
 	public Character(String name, String description, int hp) {
@@ -15,6 +27,11 @@ abstract class Character {
 		this.description = name;
 		this.hp = hp;
 	}
+	
+	public Character(String name, int hp) {
+		this(name, "", hp);
+	}
+	
 	
 	/*------------------------------------------------------------------------------------
 	 * 

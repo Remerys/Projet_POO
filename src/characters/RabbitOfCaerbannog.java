@@ -8,7 +8,7 @@ package characters;
 public class RabbitOfCaerbannog extends Vilain {
 
 	public RabbitOfCaerbannog() {
-		super("Rabbit Of Caerbannog", "", 1, Vilain.MAX_DAMAGE, Vilain.MAX_SPEED);
-		this.setDescription("A cute rabbit surrounded by corpses");
+		super("Rabbit Of Caerbannog", 1, Vilain.MAX_DAMAGE, Vilain.MAX_SPEED);
+		this.setDescription("A cute rabbit surrounded by corpses.");
 	}
 }

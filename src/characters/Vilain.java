@@ -6,14 +6,33 @@ import hero.Hero;
  * An abstract class representing all the characters that can attack the hero
  */
 abstract class Vilain extends Character {
+	/**
+	 * MAX_DAMAGE (int) : 1000
+	 */
 	public static int MAX_DAMAGE = 1000;
+	/**
+	 * MAX_SPEED (int) : 10
+	 */
 	public static int MAX_SPEED = 10;
 	
+	/**
+	 * damage (int) : Damages that can be inflict to the hero 
+	 */
 	private int damage;
+	/**
+	 * speed (int) : Determine the first attacker in a fight
+	 */
 	private int speed;
 
-	public Vilain(String name, String description, int hp, int damage, int speed) {
-		super(name, description, hp);
+	private Vilain(String name, String description, int hp, int damage, int speed) {
+		super(name, hp);
+		this.damage = damage;
+		this.speed = speed;
+		this.setDescription(description);
+	}
+	
+	public Vilain(String name, int hp, int damage, int speed) {
+		super(name, hp);
 		this.damage = damage;
 		this.speed = speed;
 	}

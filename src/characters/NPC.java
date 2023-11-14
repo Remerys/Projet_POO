@@ -6,8 +6,8 @@ package characters;
  */
 abstract class NPC extends Character implements Talker{
 
-	public NPC(String name, String description, int hp) {
-		super(name, description, hp);
+	public NPC(String name, int hp) {
+		super(name, hp);
 	}
 
 }
