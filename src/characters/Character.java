@@ -5,7 +5,7 @@ import hero.Hero;
 /**
  * An abstract class representing all the characters in the world except the hero
  */
-abstract class Character {
+public abstract class Character {
 	/**
 	 * MAX_HP (int) : 500
 	 */

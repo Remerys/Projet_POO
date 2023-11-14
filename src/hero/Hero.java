@@ -1,7 +1,10 @@
 package hero;
 
 import items.Item;
+import items.Usable;
+import items.Weapon;
 import locations.Location;
+import characters.Character;
 
 /**
  * Principal player of the history
@@ -18,7 +21,7 @@ public class Hero {
 	
 	private final String NAME;
 	private Location loc;
-	//private Weapon weapon;
+	private Weapon weapon;
 	//private Inventory inventory;
 	private int hp;
 	private int mp;
@@ -77,17 +80,16 @@ public class Hero {
 		this.loc = loc;
 	}
 	
-	/*
 	public Weapon getWeaponEquiped() {
 		return this.weapon;
 	}
 	public void changeEquipedWeapon(Weapon weapon) {
-		this.weapon(weapon);
-	}*/
-	/*
+		this.weapon = weapon;
+	}
+	
 	public void useItem(Usable item) {
 		item.use();
-	}*/
+	}
 	
 	public void getAttacked(int damage) {
 		this.hp -= damage;
@@ -96,8 +98,7 @@ public class Hero {
 		}
 	}
 	
-	/*
 	public void attack(Character character) {
-		character.getAttacked(hero.getWeaponEquiped().getAttack());
-	}*/
+		character.getAttacked(hero.getWeaponEquiped().getDamage());
+	}
 }

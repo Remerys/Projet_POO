@@ -59,7 +59,7 @@ abstract class Vilain extends Character {
 	 * @param hero (Hero)
 	 */
 	public void attack(Hero hero) {
-		//hero.isAttacked(this.getDamage());
+		Character.hero.getAttacked(this.getDamage());
 	}
 
 }
