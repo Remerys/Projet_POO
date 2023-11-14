@@ -13,5 +13,5 @@ interface Talker {
 	 * @param choice (String)
 	 * @return (String) : the text talked
 	 */
-	public String talk(Hero hero, String choice);
+	public String talk(String choice);
 }

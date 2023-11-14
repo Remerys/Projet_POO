@@ -16,13 +16,13 @@ public class Healer extends NPC {
 	}
 
 	@Override
-	public String talk(Hero hero, String choice) {
+	public String talk(String choice) {
 		if (choice == null) {
 			return "Do you want to be healed ? (yes/no)";
 		}
 		else {
 			if (Pattern.matches("[Yy][Ee][Ss]", choice)) {
-				this.heal(hero);
+				this.heal();
 				return "I'm healing you";
 			} else if (Pattern.matches("[Nn][Oo]", choice)) {
 				return "Oh ... ok";
@@ -32,8 +32,8 @@ public class Healer extends NPC {
 		}
 	}
 	
-	public void heal(Hero hero) {
-		hero.setHp(Hero.MAX_HP);
+	public void heal() {
+		Character.hero.heal(Character.hero.maxHp);
 	}
 
 }

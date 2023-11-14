@@ -23,7 +23,7 @@ public class Diogene extends NPC {
 	}
 	
 	@Override
-	public String talk(Hero hero, String choice) {
+	public String talk(String choice) {
 		return "Get out of my sun!";
 	}
 }

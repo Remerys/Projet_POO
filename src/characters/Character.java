@@ -1,5 +1,7 @@
 package characters;
 
+import hero.Hero;
+
 /**
  * An abstract class representing all the characters in the world except the hero
  */
@@ -21,6 +23,8 @@ abstract class Character {
 	 * The character's health points
 	 */
 	private int hp;
+	
+	protected static Hero hero;
 	
 	public Character(String name, String description, int hp) {
 		this.NAME = name;
@@ -79,8 +83,7 @@ abstract class Character {
 		this.hp -= damage;
 		if (this.hp < 0) {
 			this.hp = 0;
-		}
-			
+		}		
 	}
 
 	/*------------------------------------------------------------------------------------
@@ -95,5 +98,9 @@ abstract class Character {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public static void setHero(Hero hero) {
+		Character.hero = hero;
 	}
 }
