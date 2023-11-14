@@ -17,4 +17,22 @@ public abstract class Location {
         this.DESCRIPTION = description;
     }
 
+    /**
+     * Adds an exit to the location
+     */
+    public void addExit(String name, Exit exit) {
+        this.EXITS.put(name, exit);
+    }
+
+    /**
+     * Removes the exit from the location if it exists. Else throws an error.
+     */
+    public void removeExit(Exit exit) throws Exception {
+        if (this.EXITS.containsValue(exit)){
+            this.EXITS.remove(exit);
+        } 
+        else {
+            throw new Exception("removeExit : The exit doesn't exist !");
+        }
+    }
 }
