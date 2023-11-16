@@ -5,13 +5,27 @@ import java.util.List;
 
 import hero.Hero;
 import locations.Location;
+import quests.Quest;
 
 public class Game {
-    Hero hero;
-    List<Location> locations = new ArrayList<Location>();
+    private Hero hero;
+    private List<Location> locations = new ArrayList<Location>();
+    private boolean cont; // pas utile non plus
 
     public Game() {
         // Location.createLocations();
+    	this.init(); // Pareil qu'en bas
+    	this.loop(); // Pareil qu'en bas
+    }
+    
+    public void init() {
+    	this.cont = true; // Pas vraiment besoin je pense même raison qu'en bas : | <-- magnifique flèche
+    }                                                                          // | <-- magnifique flèche
+                                                                               // | <-- magnifique flèche
+    public void loop() {                                                       // v <-- magnifique flèche
+    	while(this.cont) { // Pas vraiment non plus --> Le jeu tourne tant que la commande stop est pas écrite --> le while true est dans le handleCommands de la classe Command qui elle est appellé dans le main donc pas d'intérêt de faire 2 boucles true
+    		
+    	}
     }
 
     /* --------------------------------------------------------------------------------------------------------------------------- */
@@ -36,20 +50,25 @@ public class Game {
         System.out.println("INVENTORY :");
     }
 
-    public static void heal() {
-        System.out.println("The Hero heals himself");
+    public void heal() {
+        //le hero utilise une potion
+    	if (hero.hasPotion()) {
+            System.out.println(hero.getName() + " heals himself");
+    		//hero.heal(hero.get);
+        }
     }
 
-    public static void goTo(String direction) {
-        System.out.println("The Hero go to " + direction);
+    public void goTo(Location location) {
+        System.out.println(hero.getName() + " go to " + location); // location devrait afficher north east west ou south
     }
 
-    public static void attack(String characterName) {
-        System.out.println("Attaque du personnage : " + characterName);
+    public void attack(Character character) {
+        // lance un fight
+        System.out.println(hero.getName() " attack : " + character.getName());
     }
 
-    public static void talk(String characterName) {
-        System.out.println("The Hero talk to " + characterName);
+    public static void talk(Character character) {
+        System.out.println(hero.getName() + " talk to " + character.getName());
     }
 
     public static void stop() {
@@ -58,14 +77,14 @@ public class Game {
     }
 
     public static void stats() {
-        System.out.println("Statistics of the Hero :");
+        System.out.println("STATISTICS :");
     }
 
     public static void quests() {
         System.out.println("List of available quests :");
     }
 
-    public static void quest(String questName) {
-        System.out.println("Details of : " + questName);
+    public static void quest(Quest quest) {
+        
     }
 }
