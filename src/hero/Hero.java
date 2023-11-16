@@ -17,6 +17,7 @@ public class Hero {
 	private static final int DEFAULT_SPEED = 5;
 	private static final int DEFAULT_LEVEL = 1;
 	private static final int MULTIPLIER_LEVEL = 2;
+	private static final double CONSTANT_PROGRESSION = 1.2;
 	private static Hero hero;
 	
 	//attribute
@@ -174,6 +175,22 @@ public class Hero {
 		setMp(this.mp - mp);
 	}
 	
+	private void changeHpLvl() {
+		this.maxHp *= CONSTANT_PROGRESSION;
+		this.hp *= CONSTANT_PROGRESSION;
+	}
+	
+	private void changeMpLvl() {
+		if (this.maxMp == 0) {
+			this.maxMp += 10;
+			this.mp += 10;
+		}	
+		else {
+			this.maxMp *= CONSTANT_PROGRESSION;
+			this.mp *= CONSTANT_PROGRESSION;
+		}
+	}
+	
 	public void addXp(int xp) {
 		this.xp += xp;
 		if (this.xpNewLvl <= this.xp) {
@@ -187,15 +204,12 @@ public class Hero {
 		//2^(level-1) x 10
 		this.xpNewLvl = (int)Math.pow(Hero.MULTIPLIER_LEVEL, this.level-1)*10;
 		
-		this.maxHp *= 1.5;
-		
-		if (this.maxMp == 0)
-			this.maxMp += 10;
-		else
-			this.maxMp *= 1.5;
+		this.changeHpLvl();
+		this.changeMpLvl();	
 		
 		this.addXp(0); //if there is another level to gain
 	}	
+	
 	
 	public void setLocation(Location loc) {
 		this.loc = loc;

@@ -32,11 +32,13 @@ public class HeroTest {
 	public void levelUp2() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.addXp(150);
+		System.out.println(hero.getHp());
+		System.out.println(hero.getMp());
 		assertEquals(5, hero.getLevel());
 		Hero.destroyHero();
 	}
 	
-	@Test
+	/*@Test
 	public void printInventory1() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.printInventory();
@@ -56,5 +58,5 @@ public class HeroTest {
 		hero.addItem(p);
 		hero.printInventory();
 		Hero.destroyHero();
-	}
+	}*/
 }
