@@ -1,8 +1,8 @@
 /**
- * 
+ *
  */
 /**
- * 
+ *
  */
 module poo {
 	requires java.base;
