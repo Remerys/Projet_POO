@@ -1,7 +1,5 @@
 package characters;
 
-import hero.Hero;
-
 /**
  * An interface allowing the characters to talk
  */

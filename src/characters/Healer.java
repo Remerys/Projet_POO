@@ -2,9 +2,6 @@ package characters;
 
 import java.util.regex.Pattern;
 
-import hero.Hero;
-
-
 /**
  * A NPC who can heal the hero
  */
@@ -33,7 +30,7 @@ public class Healer extends NPC {
 	}
 	
 	public void heal() {
-		Character.hero.heal(Character.hero.maxHp);
+		Character.hero.heal(Character.hero.getMaxHp());
 	}
 
 }

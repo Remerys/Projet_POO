@@ -24,15 +24,15 @@ abstract class Vilain extends Character {
 	 */
 	private int speed;
 
-	private Vilain(String name, String description, int hp, int damage, int speed) {
-		super(name, hp);
+	private Vilain(String name, String description, int hp, int xpDropped, int damage, int speed) {
+		super(name, hp, xpDropped);
 		this.damage = damage;
 		this.speed = speed;
 		this.setDescription(description);
 	}
 	
-	public Vilain(String name, int hp, int damage, int speed) {
-		super(name, hp);
+	public Vilain(String name, int hp, int xpDropped, int damage, int speed) {
+		super(name, hp, xpDropped);
 		this.damage = damage;
 		this.speed = speed;
 	}

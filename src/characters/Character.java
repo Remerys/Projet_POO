@@ -24,16 +24,19 @@ public abstract class Character {
 	 */
 	private int hp;
 	
+	private int xpDropped;
+	
 	protected static Hero hero;
 	
-	public Character(String name, String description, int hp) {
+	public Character(String name, String description, int hp, int xpDropped) {
 		this.NAME = name;
 		this.description = name;
 		this.hp = hp;
+		this.xpDropped = xpDropped;
 	}
 	
-	public Character(String name, int hp) {
-		this(name, "", hp);
+	public Character(String name, int hp, int xpDropped) {
+		this(name, "", hp, xpDropped);
 	}
 	
 	
@@ -84,6 +87,10 @@ public abstract class Character {
 		if (this.hp < 0) {
 			this.hp = 0;
 		}		
+	}
+	
+	public int getXpDropped() {
+		return this.xpDropped;
 	}
 
 	/*------------------------------------------------------------------------------------

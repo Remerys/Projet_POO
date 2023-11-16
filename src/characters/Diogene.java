@@ -1,7 +1,5 @@
 package characters;
 
-import hero.Hero;
-
 /**
  * A odd person in a barrel
  */
