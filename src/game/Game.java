@@ -18,7 +18,7 @@ public class Game {
     /* ALL COMMANDS */
 
     public static void displayAvailableCommands() {
-        System.out.println("\033[0;1m" + "List of available commands :\n");
+        System.out.println("List of available commands :\n");
         System.out.println("/help - Displays the list of available commands.");
         System.out.println("/heal - Heal the Hero.");
         System.out.println("/inventory - Display the inventory.");
@@ -33,31 +33,32 @@ public class Game {
     }
 
     public static void displayInventory() {
-
+        System.out.println("INVENTORY :");
     }
 
     public static void heal() {
-        
+        System.out.println("The Hero heals himself");
     }
 
     public static void goTo(String direction) {
-        
+        System.out.println("The Hero go to " + direction);
     }
 
     public static void attack(String characterName) {
-        
+        System.out.println("Attaque du personnage : " + characterName);
     }
 
     public static void talk(String characterName) {
-        
+        System.out.println("The Hero talk to " + characterName);
     }
 
     public static void stop() {
-        
+        System.out.println("GAME STOP");
+        System.exit(0);
     }
 
     public static void stats() {
-        
+        System.out.println("Statistics of the Hero :");
     }
 
     public static void quests() {
@@ -65,6 +66,6 @@ public class Game {
     }
 
     public static void quest(String questName) {
-        
+        System.out.println("Details of : " + questName);
     }
 }
