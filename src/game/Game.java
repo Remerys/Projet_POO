@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import characters.Character;
 import hero.Hero;
 import locations.Location;
 import quests.Quest;
@@ -17,14 +18,14 @@ public class Game {
     	this.init(); // Pareil qu'en bas
     	this.loop(); // Pareil qu'en bas
     }
-    
+
     public void init() {
     	this.cont = true; // Pas vraiment besoin je pense même raison qu'en bas : | <-- magnifique flèche
     }                                                                          // | <-- magnifique flèche
                                                                                // | <-- magnifique flèche
     public void loop() {                                                       // v <-- magnifique flèche
     	while(this.cont) { // Pas vraiment non plus --> Le jeu tourne tant que la commande stop est pas écrite --> le while true est dans le handleCommands de la classe Command qui elle est appellé dans le main donc pas d'intérêt de faire 2 boucles true
-    		
+
     	}
     }
 
@@ -50,25 +51,27 @@ public class Game {
         System.out.println("INVENTORY :");
     }
 
-    public void heal() {
+    public static void heal() {
         //le hero utilise une potion
     	if (hero.hasPotion()) {
             System.out.println(hero.getName() + " heals himself");
     		//hero.heal(hero.get);
         }
     }
-
-    public void goTo(Location location) {
-        System.out.println(hero.getName() + " go to " + location); // location devrait afficher north east west ou south
+// BTW Je ne vois pas pk elles ne pourraient pas être static sachant qu'elles font tjrs la même chose selon un paramètre spécifique
+    public static void goTo(String location) { // Il faut des String car on travaille en ligne de commande et je ne peux récupérer que des String et pas de personnage ou je ne sais quoi directement donc il faut se démerder pour obtenir le character ou location ou n'importe avec une chaîne de caractère
+        System.out.println(hero.getName() + " go to " + location);
     }
 
-    public void attack(Character character) {
+    public static void attack(String character) { // Il faut des String car on travaille en ligne de commande et je ne peux récupérer que des String et pas de personnage ou je ne sais quoi directement donc il faut se démerder pour obtenir le character ou location ou n'importe avec une chaîne de caractère
         // lance un fight
-        System.out.println(hero.getName() " attack : " + character.getName());
+        Character THECHARACTER = Character.getCharacter(character); // Une solution ? pour récupérer le character à gérer avec des exceptions ect..
+        System.out.println(hero.getName() + " attack : " + character);
     }
 
-    public static void talk(Character character) {
-        System.out.println(hero.getName() + " talk to " + character.getName());
+    public static void talk(String character) { // Il faut des String car on travaille en ligne de commande et je ne peux récupérer que des String et pas de personnage ou je ne sais quoi directement donc il faut se démerder pour obtenir le character ou location ou n'importe avec une chaîne de caractère
+        Character THECHARACTER = Character.getCharacter(character); // Une solution ? pour récupérer le character à gérer avec des exceptions ect..
+        System.out.println(hero.getName() + " talk to " + character);
     }
 
     public static void stop() {
@@ -84,7 +87,7 @@ public class Game {
         System.out.println("List of available quests :");
     }
 
-    public static void quest(Quest quest) {
-        
+    public static void quest(String questName) { // Il faut des String car on travaille en ligne de commande et je ne peux récupérer que des String et pas de personnage ou je ne sais quoi directement donc il faut se démerder pour obtenir le character ou location ou n'importe avec une chaîne de caractère
+        System.out.println("Details of : " + questName);
     }
 }
