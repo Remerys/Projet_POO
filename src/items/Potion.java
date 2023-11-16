@@ -10,6 +10,10 @@ public abstract class Potion extends Item implements Usable {
         super(Potion.WEIGHT);
     }
 
+    /**
+     * Set the Hero to use some Potions on him
+     * @param hero
+     */
     public void setHero(Hero hero) {
         Potion.hero = hero;
     }

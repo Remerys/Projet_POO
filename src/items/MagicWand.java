@@ -8,5 +8,4 @@ public class MagicWand extends Weapon {
     public MagicWand() {
         super(MagicWand.WEIGHT, MagicWand.DAMAGE, MagicWand.RANGE);
     }
-    
 }

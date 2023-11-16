@@ -7,6 +7,9 @@ public abstract class Item {
         this.WEIGHT = weight;
     }
 
+    /**
+     * @return The weight of the Item
+     */
     public int getWeight() {
         return this.WEIGHT;
     }

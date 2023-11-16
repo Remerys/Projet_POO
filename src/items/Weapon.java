@@ -10,10 +10,16 @@ public abstract class Weapon extends Item {
         this.RANGE = range;
     }
 
+    /**
+     * @return The damage of the weapon
+     */
     public int getDamage() {
         return this.DAMAGE;
     }
 
+    /**
+     * @return The range of the weapon
+     */
     public int getRange() {
         return this.RANGE;
     }
