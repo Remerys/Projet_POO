@@ -5,13 +5,27 @@ import java.util.List;
 
 import hero.Hero;
 import locations.Location;
+import quests.Quest;
 
 public class Game {
-    Hero hero;
-    List<Location> locations = new ArrayList<Location>();
+    private Hero hero;
+    private List<Location> locations = new ArrayList<Location>();
+    private boolean cont;
 
     public Game() {
         // Location.createLocations();
+    	this.init();
+    	this.loop();
+    }
+    
+    public void init() {
+    	this.cont = true;
+    }
+    
+    public void loop() {
+    	while(this.cont) {
+    		
+    	}
     }
 
     /* --------------------------------------------------------------------------------------------------------------------------- */
@@ -32,28 +46,31 @@ public class Game {
         System.out.println();
     }
 
-    public static void displayInventory() {
-
+    public void displayInventory() {
+    	
     }
 
-    public static void heal() {
+    public void heal() {
+        //le hero utilise une potion
+    	if (hero.hasPotion()) {
+    		//hero.heal(hero.get);
+    	}
+    }
+
+    public void goTo(Location location) {
         
     }
 
-    public static void goTo(String direction) {
+    public void attack(Character character) {
+        //lance un fight
+    }
+
+    public static void talk(Character character) {
         
     }
 
-    public static void attack(String characterName) {
-        
-    }
-
-    public static void talk(String characterName) {
-        
-    }
-
-    public static void stop() {
-        
+    public void stop() {
+        this.cont = false;
     }
 
     public static void stats() {
@@ -64,7 +81,7 @@ public class Game {
         System.out.println("List of available quests :");
     }
 
-    public static void quest(String questName) {
+    public static void quest(Quest quest) {
         
     }
 }

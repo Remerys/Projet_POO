@@ -1,8 +1,6 @@
 package hero;
 
-import items.Item;
-import items.Usable;
-import items.Weapon;
+import items.*;
 import locations.Location;
 import characters.Character;
 
@@ -233,8 +231,19 @@ public class Hero {
 	 * 
 	 ------------------------------------------------------------------------------------*/
 	
-	public void useItem(Usable item) {
-		item.use();
+	public void useItem(Item item) throws Exception {
+		if (this.hasItem(item)) {
+			//(Usable) item.use();
+			this.inventory.removeItem(item);
+		}
+	}
+	
+	public boolean hasItem(Item item) {
+		return this.inventory.hasItem(item);
+	}
+	
+	public boolean hasPotion() {
+		return this.inventory.hasPotion();
 	}
 	
 	public void attack(Character character) {

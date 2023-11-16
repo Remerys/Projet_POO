@@ -85,7 +85,7 @@ public class Inventory {
 	 * 
 	 ------------------------------------------------------------------------------------*/
 	
-	private <Type extends Item> boolean hasTypeItem(Class<Type> itemType) {
+	public <Type extends Item> boolean hasTypeItem(Class<Type> itemType) {
 		return this.countItemsOfType(itemType) > 0;
 	}
 	
