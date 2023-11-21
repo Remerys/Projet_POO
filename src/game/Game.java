@@ -14,7 +14,7 @@ import quests.Quest;
 
 /**
  * The principal game
- * 
+ *
  * @author Romain
  * @author Lilian
  */
@@ -22,33 +22,23 @@ public class Game {
     private Hero hero;
     private List<Location> locations = new ArrayList<Location>();
     private List<Character> characters = new ArrayList<Character>();
-    private boolean cont; // pas utile non plus
     private MainQuest mainQuest;
 
     public Game() {
         // Location.createLocations();
-        this.init(); // Pareil qu'en bas
-        this.loop(); // Pareil qu'en bas
+        this.init();
     }
 
     public void init() {
     	Command.setGame(this);
-    	
-    	String name = Command.getName();
-        
-    	this.hero = Hero.createHero(name, null);
-    	
-    	this.mainQuest = new MainQuest();
-    	
-        this.cont = true; // Pas vraiment besoin je pense même raison qu'en bas : | <-- magnifique flèche
-    } 																		   // | <-- magnifique flèche
-      																		   // | <-- magnifique flèche
-    public void loop() { 													   // v <-- magnifique flèche
-        while (this.cont) { // Pas vraiment non plus --> Le jeu tourne tant que la commande stop est pas
-        	Command.handleCommands(); // écrite --> le while true est dans le handleCommands de la classe Command qui
-                            // elle est appellé dans le main donc pas d'intérêt de faire 2 boucles true
 
-        }
+    	String name = Command.getName();
+
+    	this.hero = Hero.createHero(name, null);
+
+    	this.mainQuest = new MainQuest();
+
+        Command.handleCommands();
     }
 
     private Character getCharacter(String character, Location loc) {
@@ -61,8 +51,7 @@ public class Game {
     }
 
     /*
-     * -----------------------------------------------------------------------------
-     * ----------------------------------------------
+     * ---------------------------------------------------------------------------------------------------------------------------
      */
     /* ALL COMMANDS */
 
@@ -93,19 +82,11 @@ public class Game {
         }
     }
 
-    // BTW Je ne vois pas pk elles ne pourraient pas être static sachant qu'elles
-    // font tjrs la même chose selon un paramètre spécifique
-    public void goTo(String location) { // Il faut des String car on travaille en ligne de commande et je ne peux
-                                        // récupérer que des String et pas de personnage ou je ne sais quoi directement
-                                        // donc il faut se démerder pour obtenir le character ou location ou n'importe
-                                        // avec une chaîne de caractère
+    public void goTo(String location) {
         System.out.println(hero.getName() + " go to " + location);
     }
 
-    public void attack(String character) { // Il faut des String car on travaille en ligne de commande et je ne peux
-                                           // récupérer que des String et pas de personnage ou je ne sais quoi
-                                           // directement donc il faut se démerder pour obtenir le character ou location
-                                           // ou n'importe avec une chaîne de caractère
+    public void attack(String character) {
         // lance un fight
         Character characterAttacked = this.getCharacter(character, hero.getLocation());
         if (characterAttacked != null) {
@@ -116,12 +97,12 @@ public class Game {
 
     }
 
-    public void talk(String character) { 										
-    	Character characterTalked = this.getCharacter(character, hero.getLocation());                    										
-    	if (characterTalked != null) {	
-    		Scanner scanner = new Scanner(System.in);		
+    public void talk(String character) {
+    	Character characterTalked = this.getCharacter(character, hero.getLocation());
+    	if (characterTalked != null) {
+    		Scanner scanner = new Scanner(System.in);
     		System.out.println(hero.getName() + " talk to " + character);
-    		
+
     		Talker talker = (Talker) characterTalked;
     		talker.talk(null);
     		while (!talker.hasFinishedToTalk()) {
@@ -151,19 +132,16 @@ public class Game {
         this.mainQuest.printQuest();
     }
 
-    public void quest(String questName) { // Il faut des String car on travaille en ligne de commande et je ne peux
-                                          // récupérer que des String et pas de personnage ou je ne sais quoi
-                                          // directement donc il faut se démerder pour obtenir le character ou location
-                                          // ou n'importe avec une chaîne de caractère
+    public void quest(String questName) {
         System.out.println("Details of : " + questName);
     }
-    
+
     public void addXp(int xp) { //to test
-    	System.out.println("Gain d'xp");
+    	System.out.println("Gain d'xp :" + xp);
     	System.out.println();
     	this.hero.addXp(xp);
     }
-    
+
     public void addSword() {
     	System.out.println("add Sword");
     	try {

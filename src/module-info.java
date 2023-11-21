@@ -6,7 +6,7 @@
  */
 module poo {
 	requires java.base;
-	//requires junit;
+	requires junit;
 
 	// exports
 	exports game;
