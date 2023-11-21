@@ -1,11 +1,13 @@
 package characters;
 
 import hero.Hero;
+import locations.Location;
 
 /**
  * An abstract class representing all the characters that can attack the hero
+ * @author Lilian
  */
-abstract class Vilain extends Character {
+public abstract class Vilain extends Character {
 	/**
 	 * MAX_DAMAGE (int) : 1000
 	 */
@@ -24,15 +26,15 @@ abstract class Vilain extends Character {
 	 */
 	private int speed;
 
-	private Vilain(String name, String description, int hp, int xpDropped, int damage, int speed) {
-		super(name, hp, xpDropped);
+	private Vilain(String name, String description, Location loc, int hp, int xpDropped, int damage, int speed) {
+		super(name, loc, hp, xpDropped);
 		this.damage = damage;
 		this.speed = speed;
 		this.setDescription(description);
 	}
 	
-	public Vilain(String name, int hp, int xpDropped, int damage, int speed) {
-		super(name, hp, xpDropped);
+	public Vilain(String name, Location loc, int hp, int xpDropped, int damage, int speed) {
+		super(name, loc, hp, xpDropped);
 		this.damage = damage;
 		this.speed = speed;
 	}

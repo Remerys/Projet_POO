@@ -6,17 +6,31 @@ import java.util.Scanner;
 
 public class Command {
     private static final Map<String, Runnable> commandMap = new HashMap<>();
+    private static Game game;
 
     static {
         // Initialise la map des commandes
-        // Ici qu'il faut ajouter les commandes générales qui ne demandent pas de traitement spécifique
-        // Sinon il faut les ajouter dans un else if de handleCommands() et dans une méthode spécifique pour rendre le code plus lisible
-        commandMap.put("/help", Game::displayAvailableCommands);
-        commandMap.put("/heal", Game::heal);
-        commandMap.put("/inventory", Game::displayInventory);
-        commandMap.put("/stop", Game::stop);
-        commandMap.put("/stats", Game::stats);
-        commandMap.put("/quests", Game::quests);
+        // Ici qu'il faut ajouter les commandes générales qui ne demandent pas de
+        // traitement spécifique
+        // Sinon il faut les ajouter dans un else if de handleCommands() et dans une
+        // méthode spécifique pour rendre le code plus lisible
+        /*commandMap.put("/help", game::displayAvailableCommands);
+        commandMap.put("/heal", game::heal);
+        commandMap.put("/inventory", game::displayInventory);
+        commandMap.put("/stop", game::stop);
+        commandMap.put("/stats", game::stats);
+        commandMap.put("/quests", game::quests);*/
+    }
+    
+    public static void setGame(Game game) {
+    	Command.game = game;
+    	commandMap.put("/help", game::displayAvailableCommands);
+        commandMap.put("/heal", game::heal);
+        commandMap.put("/inventory", game::displayInventory);
+        commandMap.put("/stop", game::stop);
+        commandMap.put("/stats", game::stats);
+        commandMap.put("/quests", game::quests);
+        commandMap.put("/addSword", game::addSword);
     }
 
     // Gestionnaire des commandes
@@ -28,15 +42,36 @@ public class Command {
                 String command = scanner.nextLine();
 
                 // Vérifie la commande et exécute la méthode correspondante
+                
+                 String start = command.split(" ")[0];
+                 //Pour gerer les arguments
+                 switch (start) {
+                 	case "/go":
+                 		handleGoCommand(command);
+                 	case "/attack":
+                 		handleInteractionCommand(command);
+                 	case "/talk":
+                 		handleInteractionCommand(command);
+                 	case "/quest":
+                 		handleQuestCommand(command);
+                 	case "/addXp":
+                 		addXpCommand(command);
+                 	default:
+                 		handleGeneralCommand(command);
+                 }
+                 
+                /*
                 if (command.startsWith("/go")) {
                     handleGoCommand(command);
                 } else if (command.startsWith("/attack") || command.startsWith("/talk")) {
                     handleInteractionCommand(command);
-                } else if (command.startsWith("/quest") && !command.endsWith("s")) { // !command.endsWith("s") --> Sinon ça rentre toujours dans cette condition
+                } else if (command.startsWith("/quest") && !command.endsWith("s")) { // !command.endsWith("s") --> Sinon
+                                                                                     // ça rentre toujours dans cette
+                                                                                     // condition
                     handleQuestCommand(command);
                 } else {
                     handleGeneralCommand(command);
-                }
+                }*/
             }
         }
     }
@@ -48,7 +83,7 @@ public class Command {
 
         if (parts.length == 2) {
             String direction = parts[1];
-            Game.goTo(direction);
+            game.goTo(direction);
         } else {
             System.out.println("Incorrect command format. Usage : /go <Direction>");
         }
@@ -63,12 +98,13 @@ public class Command {
             String characterName = parts[1];
 
             if (command.startsWith("/attack")) {
-                Game.attack(characterName);
+                game.attack(characterName);
             } else {
-                Game.talk(characterName);
+                game.talk(characterName);
             }
         } else {
-            System.out.println("Incorrect command format. Usage : " + (command.startsWith("/attack") ? "/attack" : "/talk") + " <Character Name>");
+            System.out.println("Incorrect command format. Usage : "
+                    + (command.startsWith("/attack") ? "/attack" : "/talk") + " <Character Name>");
         }
 
     }
@@ -80,7 +116,7 @@ public class Command {
 
         if (parts.length == 2) {
             String questName = parts[1];
-            Game.quest(questName);
+            game.quest(questName);
         } else {
             System.out.println("Incorrect command format. Usage : /quest <Quest Name>");
         }
@@ -96,5 +132,27 @@ public class Command {
         } else {
             System.out.println("Unrecognized command. Type '/help' to display the list of available commands.");
         }
+    }
+    
+    private static void addXpCommand(String command) {
+        // Sépare la commande et le nom de la quête
+        String[] parts = command.split(" ");
+
+        if (parts.length == 2) {
+            int xp = Integer.valueOf(parts[1]);
+            game.addXp(xp);
+        } else {
+            System.out.println("Incorrect command format. Usage : /quest <Quest Name>");
+        }
+    }
+    
+    public static String getName() {
+    	String name = "";
+    	Scanner scanner = new Scanner(System.in);
+    	System.out.print("Enter yout name : ");
+    	while (name == "") {
+    		name = scanner.nextLine();
+    	}
+    	return name;
     }
 }

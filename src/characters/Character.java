@@ -1,9 +1,11 @@
 package characters;
 
 import hero.Hero;
+import locations.Location;
 
 /**
  * An abstract class representing all the characters in the world except the hero
+ * @author Lilian
  */
 public abstract class Character {
 	/**
@@ -11,32 +13,27 @@ public abstract class Character {
 	 */
 	public static int MAX_HP = 500;
 	
-	/**
-	 * The character's name
-	 */
+	
 	private final String NAME;
-	/**
-	 * The character's description/history
-	 */
 	private String description;
-	/**
-	 * The character's health points
-	 */
 	private int hp;
-	
 	private int xpDropped;
-	
+	private Location loc;
 	protected static Hero hero;
 	
-	public Character(String name, String description, int hp, int xpDropped) {
+	protected boolean hasFinishedToTalk;
+	
+	public Character(String name, String description, Location loc, int hp, int xpDropped) {
 		this.NAME = name;
 		this.description = name;
+		this.loc = loc;
 		this.hp = hp;
 		this.xpDropped = xpDropped;
+		this.hasFinishedToTalk = false;
 	}
 	
-	public Character(String name, int hp, int xpDropped) {
-		this(name, "", hp, xpDropped);
+	public Character(String name, Location loc, int hp, int xpDropped) {
+		this(name, "", loc, hp, xpDropped);
 	}
 	
 	
@@ -60,6 +57,14 @@ public abstract class Character {
 	 */
 	public String getDescription() {
 		return this.description;
+	}
+	
+	/**
+	 * Give the character's location
+	 * @return location (Location)
+	 */
+	public Location getLocation() {
+		return this.loc;
 	}
 	
 	/**
@@ -89,6 +94,10 @@ public abstract class Character {
 		}		
 	}
 	
+	/**
+	 * Return the experience obtain after kill this character
+	 * @return the experience obtain
+	 */
 	public int getXpDropped() {
 		return this.xpDropped;
 	}
@@ -107,6 +116,10 @@ public abstract class Character {
 		this.description = description;
 	}
 	
+	/**
+	 * Define the hero for the class
+	 * @param hero (Hero)
+	 */
 	public static void setHero(Hero hero) {
 		Character.hero = hero;
 	}

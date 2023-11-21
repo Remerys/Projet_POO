@@ -6,15 +6,14 @@
  */
 module poo {
 	requires java.base;
-	requires junit;
+	//requires junit;
 
 	// exports
 	exports game;
 	exports characters;
 	exports hero;
 	exports items;
-	// exports hero;
 	exports locations;
-	// exports quests;
+	exports quests;
 	exports tests;
 }

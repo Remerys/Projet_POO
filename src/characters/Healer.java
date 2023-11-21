@@ -2,13 +2,16 @@ package characters;
 
 import java.util.regex.Pattern;
 
+import locations.Location;
+
 /**
  * A NPC who can heal the hero
+ * @author Lilian
  */
 public class Healer extends NPC {
 	
-	public Healer() {
-		super("Healer", Character.MAX_HP/50);
+	public Healer(Location loc) {
+		super("Healer", loc, Character.MAX_HP/50);
 		this.setDescription("A cute cosplayer with a wood stick.");
 	}
 
@@ -24,6 +27,7 @@ public class Healer extends NPC {
 			} else if (Pattern.matches("[Nn][Oo]", choice)) {
 				return "Oh ... ok";
 			} else {
+				this.finishedToTalk();
 				return "What are you talking about ?";
 			}
 		}

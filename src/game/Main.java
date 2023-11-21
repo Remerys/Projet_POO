@@ -4,8 +4,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("GAME START");
-
-		Command.handleCommands();
+		Game game = new Game();
+		//Command.handleCommands();
 	}
 
 }
