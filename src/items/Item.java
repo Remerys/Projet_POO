@@ -7,6 +7,11 @@ public abstract class Item {
         this.WEIGHT = weight;
     }
 
+    @Override
+    public String toString() {
+    	return this.getClass().getSimpleName();
+    }
+
     /**
      * @return The weight of the Item
      */

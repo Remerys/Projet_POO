@@ -9,11 +9,12 @@ module poo {
 	requires junit;
 
 	// exports
-	// exports game;
-	// exports characters;
+	exports game;
+	exports characters;
+	exports hero;
 	exports items;
 	// exports hero;
-	// exports locations;
+	exports locations;
 	// exports quests;
-	// exports tests;
+	exports tests;
 }
