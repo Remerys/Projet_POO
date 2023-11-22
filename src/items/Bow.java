@@ -8,5 +8,4 @@ public class Bow extends Weapon {
     public Bow() {
         super(Bow.WEIGHT, Bow.DAMAGE, Bow.RANGE);
     }
-    
 }
