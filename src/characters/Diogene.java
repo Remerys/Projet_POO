@@ -9,7 +9,7 @@ import locations.Location;
 public class Diogene extends NPC {
 
 	private static Diogene instance = null;
-	
+
 	private Diogene(Location loc) {
 		super("Diogene", loc,  1);
 		this.setDescription("A odd person in a barrel.");
@@ -22,10 +22,10 @@ public class Diogene extends NPC {
 		}
 		return instance;
 	}
-	
+
 	@Override
 	public String talk(String choice) {
-		this.finishedToTalk();
+		super.stopsTalking();
 		return "Get out of my sun!";
 	}
 }

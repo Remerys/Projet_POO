@@ -2,6 +2,7 @@ package characters;
 
 import java.util.regex.Pattern;
 
+import hero.Hero;
 import locations.Location;
 
 /**
@@ -17,24 +18,32 @@ public class Healer extends NPC {
 
 	@Override
 	public String talk(String choice) {
+		String string = "";
+
 		if (choice == null) {
-			return "Do you want to be healed ? (yes/no)";
-		}
-		else {
+			string = "Do you want to be healed ? (yes/no)";
+		} else {
 			if (Pattern.matches("[Yy][Ee][Ss]", choice)) {
 				this.heal();
-				return "I'm healing you";
+				string = "I'm healing you";
 			} else if (Pattern.matches("[Nn][Oo]", choice)) {
-				return "Oh ... ok";
+				string = "Oh ... ok";
 			} else {
-				this.finishedToTalk();
-				return "What are you talking about ?";
+				string = "What are you talking about ?";
 			}
+			super.stopsTalking();
 		}
+
+		return string;
 	}
 
 	public void heal() {
-		Character.hero.heal(Character.hero.getMaxHp());
+		try {
+			hero = Hero.getHero();
+			hero.heal(hero.getMaxHp());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

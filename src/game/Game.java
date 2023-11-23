@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import characters.Character;
 import characters.Diogene;
+import characters.Healer;
+import characters.NPC;
 import characters.Ork;
 import characters.RabbitOfCaerbannog;
 import characters.Talker;
@@ -26,8 +28,10 @@ public class Game {
     private Hero hero;
     private List<Location> locations = new ArrayList<Location>();
     private List<Character> characters = new ArrayList<Character>();
+    private List<NPC> npcs = new ArrayList<NPC>();
     private List<Villain> villains = new ArrayList<Villain>();
     private MainQuest mainQuest;
+    public static final String SEPARATION = "--------------------------------------------------------------------";
 
     public Game() {
         // Location.createLocations();
@@ -46,10 +50,17 @@ public class Game {
         Command.handleCommands();
     }
 
-    private Character getCharacter(String character, Location loc) {
-        for (Character c : this.characters) {
-            if (c.getName().toUpperCase().equals(character.toUpperCase())) {
-                return c;
+    private void printSeparation() {
+        System.out.println(Game.SEPARATION);
+    }
+
+    private NPC getCharacter(String npcName, Location loc) {
+        this.npcs.add(new Healer(loc));
+        this.npcs.add(Diogene.getDiogene(loc));
+
+        for (NPC npc : this.npcs) {
+            if (npc.getName().toUpperCase().equals(npcName.toUpperCase())) {
+                return npc;
             }
         }
         return null;
@@ -60,6 +71,7 @@ public class Game {
         // il faudrait normalement le faire à chaque fois qu'on se déplace d'une map à une autre avec des fonctions du style
         // this.characters = loc.getCharacters();
         // this.villains = this.characters.getVillains();
+        // this.npcs = this.characters.getNpcs();
         // fin initialisation locs
 
 
@@ -116,10 +128,11 @@ public class Game {
 
         if (villainAttacked != null) {
             int turnNumber = 0;
-            System.out.println(hero.getName() + " attacks " + villainAttacked.getName() + ":\n");
-            System.out.print("--------------------------------------------------------------------");
+            printSeparation();
+            System.out.println(hero.getName() + " attacks " + villainAttacked.getName() + ":");
 
             while (villainAttacked.getHp() != 0 & this.hero.getHp() != 0) {
+                printSeparation();
                 System.out.println("Turn " + turnNumber);
                 turnNumber++;
 
@@ -149,7 +162,7 @@ public class Game {
                     System.out.println("| HP remaining :" + villainAttacked.getHp());
                 }
 
-                System.out.println("--------------------------------------------------------------------");
+                printSeparation();
             }
 
             if (villainAttacked.getHp() != 0) {
@@ -161,19 +174,23 @@ public class Game {
     }
 
     public void talk(String character) {
-    	Character characterTalked = this.getCharacter(character, hero.getLocation());
-    	if (characterTalked != null) {
-    		Scanner scanner = new Scanner(System.in);
-    		System.out.println(hero.getName() + " talk to " + character);
+    	NPC npcTalked = this.getCharacter(character, hero.getLocation());
 
-    		Talker talker = (Talker) characterTalked;
-    		talker.talk(null);
-    		while (!talker.hasFinishedToTalk()) {
+    	if (npcTalked != null) {
+            npcTalked.startsTalking();
+            printSeparation();
+
+    		Scanner scanner = new Scanner(System.in);
+    		System.out.println(hero.getName() + " talks to " + character);
+
+    		System.out.println(npcTalked.talk(null));
+
+    		while (!npcTalked.hasFinishedTalking()) {
     			System.out.print("What's your answer ? ");
                 String answer = scanner.nextLine();
-                talker.talk(answer);
+                System.out.println(npcTalked.talk(answer));
     		}
-    		//Should put FinishedToTalk to false here
+            printSeparation();
     	} else {
     		System.out.println("This character doesn't exist");
     	}
