@@ -9,9 +9,9 @@ import locations.Location;
  * @author Lilian
  */
 public class Healer extends NPC {
-	
+
 	public Healer(Location loc) {
-		super("Healer", loc, Character.MAX_HP/50);
+		super("Healer", loc, Character.DEFAULT_MAX_HP/50);
 		this.setDescription("A cute cosplayer with a wood stick.");
 	}
 
@@ -32,7 +32,7 @@ public class Healer extends NPC {
 			}
 		}
 	}
-	
+
 	public void heal() {
 		Character.hero.heal(Character.hero.getMaxHp());
 	}

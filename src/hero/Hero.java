@@ -18,7 +18,8 @@ public class Hero {
 	private static final int MULTIPLIER_LEVEL = 2;
 	private static final double CONSTANT_PROGRESSION = 1.2;
 	private static Hero hero;
-	
+	private static final Weapon DEFAULT_WEAPON = new Fist();
+
 	//attribute
 	private final String NAME;
 	private Location loc;
@@ -32,29 +33,31 @@ public class Hero {
 	private int xp;
 	private int level;
 	private int xpNewLvl;
-	
-	private Hero(String name, Location loc, int hp, int mp, int xp, int level) {
+
+	private Hero(String name, Location loc, int hp, int mp, int xp, int level, Weapon weapon) {
 		this.NAME = name;
 		this.loc = loc;
-		
+
 		this.hp = hp;
 		this.maxHp = hp;
-		
+
 		this.mp = mp;
 		this.maxMp = mp;
-		
+
 		this.speed = Hero.DEFAULT_SPEED;
 		this.xp = xp;
 		this.level = level;
 		this.xpNewLvl = 10;
 		this.inventory = new Inventory();
+
+		this.weapon = weapon;
 	}
-	
+
 	private Hero(String name, Location loc) {
-		this(name, loc, Hero.DEFAULT_HP, Hero.DEFAULT_MP, Hero.DEFAULT_XP, Hero.DEFAULT_LEVEL);
+		this(name, loc, Hero.DEFAULT_HP, Hero.DEFAULT_MP, Hero.DEFAULT_XP, Hero.DEFAULT_LEVEL, Hero.DEFAULT_WEAPON);
 	}
-	
-	
+
+
 	/**
 	 * @param name (String)
 	 * @param loc (Location)
@@ -66,7 +69,7 @@ public class Hero {
 		}
 		return Hero.hero;
 	}
-	
+
 	/**
 	 * When the hero exist
 	 * @return the hero
@@ -79,25 +82,25 @@ public class Hero {
 			throw new Exception("getHero : No hero has been created !");
 		}
 	}
-	
+
 	/**
 	 * Destroy the instance of hero
 	 */
 	public static void destroyHero() {
 		Hero.hero = null;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("%s :\n hp %d\n lvl %d \n", this.NAME, this.hp, this.level); 
+		return String.format("%s :\n hp %d\n lvl %d \n", this.NAME, this.hp, this.level);
 	}
-	
+
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Getters
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
-	
+
 	/**
 	 * Get the hero's location
 	 * @return hero's location
@@ -105,7 +108,7 @@ public class Hero {
 	public Location getLocation() {
 		return this.loc;
 	}
-	
+
 	/**
 	 * Get the hero's weapon equiped
 	 * @return hero's weapon
@@ -113,7 +116,7 @@ public class Hero {
 	public Weapon getWeaponEquiped() {
 		return this.weapon;
 	}
-	
+
 	/**
 	 * Get the hero's name
 	 * @return hero's name
@@ -121,7 +124,7 @@ public class Hero {
 	public String getName() {
 		return this.NAME;
 	}
-	
+
 	/**
 	 * Get the hero's health points
 	 * @return hero's health points
@@ -129,7 +132,7 @@ public class Hero {
 	public int getHp() {
 		return this.hp;
 	}
-	
+
 	/**
 	 * Get the hero's max health points
 	 * @return hero's max health points
@@ -137,7 +140,7 @@ public class Hero {
 	public int getMaxHp() {
 		return this.maxHp;
 	}
-	
+
 	/**
 	 * Get the hero's magic points
 	 * @return hero's magic points
@@ -145,7 +148,7 @@ public class Hero {
 	public int getMp() {
 		return this.mp;
 	}
-	
+
 	/**
 	 * Get the hero's max magic points
 	 * @return hero's max magic points
@@ -153,7 +156,7 @@ public class Hero {
 	public int getMaxMp() {
 		return this.maxMp;
 	}
-	
+
 	/**
 	 * Get the hero's speed
 	 * @return hero's speed
@@ -161,7 +164,7 @@ public class Hero {
 	public int getSpeed() {
 		return this.speed;
 	}
-	
+
 	/**
 	 * Get the hero's level
 	 * @return hero's level
@@ -169,7 +172,7 @@ public class Hero {
 	public int getLevel() {
 		return this.level;
 	}
-	
+
 	/**
 	 * Get the hero's experience
 	 * @return hero's current experience
@@ -177,7 +180,7 @@ public class Hero {
 	public int getXp() {
 		return this.xp;
 	}
-	
+
 	/**
 	 * Get the hero's xp to next level
 	 * @return experiences to obtain to level up
@@ -185,7 +188,7 @@ public class Hero {
 	public int getXpNewLevel() {
 		return this.xpNewLvl;
 	}
-	
+
 	/**
 	 * Get the hero's damage
 	 * @return hero's damage
@@ -193,7 +196,7 @@ public class Hero {
 	public int getDamage() {
 		return this.weapon.getDamage();
 	}
-	
+
 	/**
 	 * Get the hero's range
 	 * @return hero's range
@@ -201,13 +204,13 @@ public class Hero {
 	public int getRange() {
 		return this.weapon.getRange();
 	}
-	
+
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Setters
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
-	
+
 	/**
 	 * Change the hero's health points
 	 * @param hp (int)
@@ -221,7 +224,7 @@ public class Hero {
 			this.hp = 0;
 		}
 	}
-	
+
 	/**
 	 * Add to the hero's health points, a number of health points
 	 * @param hp (int)
@@ -229,7 +232,7 @@ public class Hero {
 	public void heal(int hp) {
 		setHp(this.hp + hp);
 	}
-	
+
 	/**
 	 * Remove to the hero's health points, a number of health points
 	 * @param damage (int)
@@ -237,7 +240,7 @@ public class Hero {
 	public void getAttacked(int damage) {
 		setHp(this.hp - damage);
 	}
-	
+
 	/**
 	 * Change the hero's magic points
 	 * @param mp
@@ -251,7 +254,7 @@ public class Hero {
 			this.mp = 0;
 		}
 	}
-	
+
 	/**
 	 * Add to the hero's magic points, a number of magic points
 	 * @param mp (int)
@@ -259,7 +262,7 @@ public class Hero {
 	public void gainMp(int mp) {
 		setMp(this.mp + mp);
 	}
-	
+
 	/**
 	 * Remove to the hero's magic points, a number of magic points
 	 * @param mp (int)
@@ -267,29 +270,29 @@ public class Hero {
 	public void useMp(int mp) {
 		setMp(this.mp - mp);
 	}
-	
+
 	/**
-	 * Change some variables linked by hp when level up 
+	 * Change some variables linked by hp when level up
 	 */
 	private void changeHpLvl() {
 		this.maxHp *= CONSTANT_PROGRESSION;
 		this.hp *= CONSTANT_PROGRESSION;
 	}
-	
+
 	/**
-	 * Change some variables linked by mp when level up 
+	 * Change some variables linked by mp when level up
 	 */
 	private void changeMpLvl() {
 		if (this.maxMp == 0) {
 			this.maxMp += 10;
 			this.mp += 10;
-		}	
+		}
 		else {
 			this.maxMp *= CONSTANT_PROGRESSION;
 			this.mp *= CONSTANT_PROGRESSION;
 		}
 	}
-	
+
 	/**
 	 * Add experience and level up if there is enough xp
 	 * @param xp (int)
@@ -300,22 +303,22 @@ public class Hero {
 			this.levelUp();
 		}
 	}
-	
+
 	/**
-	 * Increase hero's stats 
+	 * Increase hero's stats
 	 */
 	public void levelUp() {
 		this.level++;
 		this.xp -= this.xpNewLvl;
 		//2^(level-1) x 10
 		this.xpNewLvl = (int)Math.pow(Hero.MULTIPLIER_LEVEL, this.level-1)*10;
-		
+
 		this.changeHpLvl();
-		this.changeMpLvl();	
-		
+		this.changeMpLvl();
+
 		this.addXp(0); //if there is another level to gain
-	}	
-	
+	}
+
 	/**
 	 * Change hero's location
 	 * @param loc (Location)
@@ -323,14 +326,14 @@ public class Hero {
 	public void setLocation(Location loc) {
 		this.loc = loc;
 	}
-	
+
 	/**
 	 * Change hero's equiped weapon
 	 */
 	public void changeEquipedWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
-	
+
 	/**
 	 * Add an item in hero's inventory
 	 * @param item (Item)
@@ -339,7 +342,7 @@ public class Hero {
 	public void addItem(Item item) throws Exception{
 		this.inventory.addItem(item);
 	}
-	
+
 	/**
 	 * Remove an item in hero's inventory
 	 * @param item (Item)
@@ -348,13 +351,13 @@ public class Hero {
 	public void removeItem(Item item) throws Exception{
 		this.inventory.removeItem(item);
 	}
-	
+
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Others
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
-	
+
 	/**
 	 * Use the effect of the item and remove it from hero's inventory
 	 * @param item (Item)
@@ -366,7 +369,7 @@ public class Hero {
 			this.inventory.removeItem(item);
 		}
 	}
-	
+
 	/**
 	 * Verify there an item in the inventory
 	 * @param item (Item)
@@ -375,7 +378,7 @@ public class Hero {
 	public boolean hasItem(Item item) {
 		return this.inventory.hasItem(item);
 	}
-	
+
 	/**
 	 * Verify there a potion in the inventory
 	 * @return if there is a potion
@@ -383,7 +386,7 @@ public class Hero {
 	public boolean hasPotion() {
 		return this.inventory.hasPotion();
 	}
-	
+
 	/**
 	 * Get a hero's potion
 	 * @return a hero's potion
@@ -391,7 +394,7 @@ public class Hero {
 	public Potion getPotion() {
 		return this.inventory.getPotion();
 	}
-	
+
 	/**
 	 * Attack a character with the hero's weapon
 	 * @param character (Character)
@@ -399,14 +402,14 @@ public class Hero {
 	public void attack(Character character) {
 		character.getAttacked(hero.getWeaponEquiped().getDamage());
 	}
-	
+
 	/**
 	 * Print the hero's inventory
 	 */
 	public void printInventory() {
 		this.inventory.printInventory();
 	}
-	
+
 	/**
 	 * Print the hero's statistics
 	 */
@@ -417,18 +420,18 @@ public class Hero {
 		System.out.println(String.format("Hp : %d / %d", this.hp, this.maxHp));
 		System.out.println(String.format("Mp : %d / %d", this.mp, this.maxMp));
 		System.out.println(String.format("Inventory : %d / %d", this.inventory.getWeight(), this.inventory.getMaxWeight()));
-		
+
 		if (this.weapon != null) {
 			System.out.println("Location : " + this.loc);
 			} else {
 				System.out.println("Location : None");
-		}	
-		
+		}
+
 		if (this.weapon != null) {
 			System.out.println("Weapon Equiped : " + this.weapon);
 			} else {
 				System.out.println("Weapon Equiped : None");
-		}	
+		}
 		System.out.println();
 	}
 }
