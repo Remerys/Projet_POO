@@ -1,11 +1,10 @@
 # Projet_POO
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 
 ## Description du projet :
 Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textuel inspiré du style de Colossal Cave Adventure. Dans ce RPG textuel, les joueurs évoluent dans un univers interactif où ils peuvent explorer des lieux, interagir avec des personnages, collecter des objets et accomplir des quêtes.
 
-## Badges:
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 ## Table des matières
 
