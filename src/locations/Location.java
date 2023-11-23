@@ -74,6 +74,10 @@ public abstract class Location {
         return this.NAME;
     }
 
+    public List<Character> getCharacters() {
+        return this.characters;
+    }
+
     /**
      * Returns the description of the location
      */
@@ -89,8 +93,8 @@ public abstract class Location {
     /**
      * Returns the new location associated to the string
      */
-    public Location exitTo(String exit)  {
-        return this.exits.get(exit).exitTo(exit);
+    public Location exitTo(String exit) throws Exception {
+        return this.exits.get(exit).exit();
     }
 
     
