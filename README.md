@@ -16,7 +16,7 @@ Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textu
 
 3. [Documentation](#documentation)
 
-4. [Contact](#contact)
+4. [Contacts](#contacts)
 
 
 ## Installation
@@ -58,8 +58,8 @@ La documentation complète de ce projet est disponible au format HTML dans le do
 3. La page d'accueil de la documentation devrait apparaître, vous permettant de naviguer à travers les différentes sections pour obtenir des informations détaillées sur les classes et méthodes de notre projet.
 
 
-## Contact
+## Contacts
 Pour des questions ou des commentaires, veuillez contacter :
-1. NOMS à l'adresse EMAIL.
-2. NOMS à l'adresse EMAIL.
-3. NOMS à l'adresse EMAIL.
+1. DUGAS Romain à l'adresse `romain.dugas@etu.univ-poitiers.fr`.
+2. AFCHAIN--BOUCHER Philéas à l'adresse `phileas.afchain.boucher@etu.univ-poitiers.fr`.
+3. MARCHEBOUT Lilian à l'adresse `lilian.marchebout@etu.univ-poitiers.fr`.
