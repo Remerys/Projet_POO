@@ -5,7 +5,7 @@
 Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textuel inspiré du style de Colossal Cave Adventure. Dans ce RPG textuel, les joueurs évoluent dans un univers interactif où ils peuvent explorer des lieux, interagir avec des personnages, collecter des objets et accomplir des quêtes.
 
 ## Badges:
-
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 ## Table des matières
 
@@ -13,9 +13,7 @@ Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textu
 
 2. [Utilisation](#utilisation)
 
-3. [Contribuer](#contribuer)
-
-4. [Documentation](#documentation)
+3. [Documentation](#documentation)
 
 4. [Contact](#contact)
 
@@ -24,11 +22,12 @@ Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textu
 
 1. Clonez le dépot : `https://github.com/Remerys/Projet_POO`
 
-2. Accédez au répertoire `cd Projet_POO/src`
-
 
 ## Utilisation
-1. Exécutez le fichier : `game.exe`
+1. Accédez au répertoire `cd Projet_POO/src`
+
+2. Exécutez le fichier : `game.exe`
+
 
 ## Documentation
 
@@ -43,6 +42,6 @@ La documentation complète de ce projet est disponible au format HTML dans le do
 
 ## Contact
 Pour des questions ou des commentaires, veuillez contacter :
-    - NOMS à l'adresse EMAIL.
-    - NOMS à l'adresse EMAIL.
-    - NOMS à l'adresse EMAIL.
+1. NOMS à l'adresse EMAIL.
+2. NOMS à l'adresse EMAIL.
+3. NOMS à l'adresse EMAIL.
