@@ -10,20 +10,20 @@ public abstract class Quest {
 	private String description;
 	private HashMap <String, QuestStatus> steps = new HashMap <String, QuestStatus>();
 	private QuestStatus state;
-	
+
 	public Quest(String name, String description) {
 		this.NAME = name;
 		this.description = description;
 		this.state = QuestStatus.Todo;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	private String printState(QuestStatus state) {
 		switch (state) {
-			case Todo: 
+			case Todo:
 				return "Todo";
 			case Ongoing:
 				return "Ongoing";
@@ -33,34 +33,33 @@ public abstract class Quest {
 				return "Not Evaluate";
 		}
 	}
-	
+
 	public void printQuest() {
 		System.out.println(this.NAME + " : " + printState(this.state));
 		System.out.println(this.description);
 		System.out.println("Steps : ");
 		this.steps.forEach((key, value) -> {
-		      System.out.println("\t-" + key + " : " + printState(value));
+		      System.out.println("\t- " + key + " : " + printState(value));
 		    }
 		);
-		System.out.println();
 	}
-	
+
 	public void addStep(String name) {
 		this.steps.put(name, QuestStatus.Todo);
 	}
-	
+
 	public void OngoingQuest() {
 		this.state = QuestStatus.Ongoing;
 	}
-	
+
 	public void DoneQuest() {
 		this.state = QuestStatus.Done;
 	}
-	
+
 	public void OngoingStep(String name) {
 		this.steps.put(name, QuestStatus.Ongoing);
 	}
-	
+
 	public void DoneStep(String name) {
 		this.steps.put(name, QuestStatus.Done);
 	}

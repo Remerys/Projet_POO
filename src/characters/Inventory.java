@@ -293,7 +293,7 @@ public class Inventory {
 	 */
 	public void printInventory() {
 		if (this.nbItems > 0) {
-			System.out.println("Inventory : ");
+			System.out.println("INVENTORY : ");
 
 			System.out.print("\tWeapons : ");
 			printItemsWithCount(this.getWeapons());
@@ -303,11 +303,8 @@ public class Inventory {
 
 			System.out.print("\tOthers : ");
 			printItemsWithCount(this.getOtherItems());
-
-			System.out.println();
 		} else {
 			System.out.println("Nothing in the inventory.");
-			System.out.println();
 		}
 
 	}
