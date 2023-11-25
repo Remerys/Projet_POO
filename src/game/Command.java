@@ -37,38 +37,36 @@ public class Command {
 
     // Gestionnaire des commandes
     public static void handleCommands() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                // Attend la commande de l'utilisateur
-                System.out.print("Enter a command : ");
-                String command = scanner.nextLine();
+        while (true) {
+            // Attend la commande de l'utilisateur
+            System.out.print("Enter a command : ");
+            String command = Game.SCANNER.nextLine();
 
-                // Vérifie la commande et exécute la méthode correspondante
+            // Vérifie la commande et exécute la méthode correspondante
 
-                String start = command.split(" ")[0];
-                // Pour gerer les arguments
-                switch (start) {
-                    case "/go":
-                        handleGoCommand(command);
-                        break;
-                    case "/attack":
-                        handleInteractionCommand(command);
-                        break;
-                    case "/talk":
-                        handleInteractionCommand(command);
-                        break;
-                    case "/quest":
-                        handleQuestCommand(command);
-                        break;
-                    case "/addXp":
-                        addXpCommand(command);
-                        break;
-                    case "/use":
-                        handleItemCommand(command);
-                        break;
-                    default:
-                        handleGeneralCommand(command);
-                }
+            String start = command.split(" ")[0];
+            // Pour gerer les arguments
+            switch (start) {
+                case "/go":
+                    handleGoCommand(command);
+                    break;
+                case "/attack":
+                    handleInteractionCommand(command);
+                    break;
+                case "/talk":
+                    handleInteractionCommand(command);
+                    break;
+                case "/quest":
+                    handleQuestCommand(command);
+                    break;
+                case "/addXp":
+                    addXpCommand(command);
+                    break;
+                case "/use":
+                    handleItemCommand(command);
+                    break;
+                default:
+                    handleGeneralCommand(command);
             }
         }
     }
@@ -158,13 +156,12 @@ public class Command {
 
     public static String getName() {
         String name = "";
-        Scanner scanner = new Scanner(System.in);
 
         while (name == "") {
             System.out.print("Enter your name : ");
-            name = scanner.nextLine();
+            name = Game.SCANNER.nextLine();
         }
-        scanner.close();
+
         return name;
     }
 }

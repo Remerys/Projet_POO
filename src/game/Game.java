@@ -26,6 +26,7 @@ public class Game {
     private List<NPC> npcs = new ArrayList<NPC>(); //same
     private MainQuest mainQuest;
     public static final String SEPARATION = "--------------------------------------------------------------------";
+    public static final Scanner SCANNER = new Scanner(System.in);
 
     public Game() {
         // Location.createLocations();
@@ -190,17 +191,16 @@ public class Game {
             npcTalked.resetTalkState();
             printSeparation();
 
-            Scanner scanner = new Scanner(System.in);
             System.out.println(hero.getName() + " talks to " + character);
 
             System.out.println(npcTalked.talk());
 
             while (!npcTalked.hasFinishedToTalk()) {
                 System.out.print("What's your answer ? ");
-                String answer = scanner.nextLine();
+                String answer = SCANNER.nextLine();
                 System.out.println(npcTalked.talk(answer));
             }
-            scanner.close();
+
             printSeparation();
         } else {
             System.out.println("This character doesn't exist");
