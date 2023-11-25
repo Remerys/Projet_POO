@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import characters.*;
 import characters.Character;
+import items.Flute;
 import items.Item;
 import items.Sword;
 import locations.Location;
@@ -39,6 +40,13 @@ public class Game {
         // String name = Command.getName();
 
         this.hero = Hero.createHero("Player", null);
+        Item flute = new Flute();
+        try {
+            this.hero.addItem(flute);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         this.mainQuest = new MainQuest();
 
@@ -58,7 +66,7 @@ public class Game {
         return null;
     }
 
-    private void printSeparation() {
+    public static void printSeparation() {
         System.out.println(Game.SEPARATION);
     }
 
@@ -104,7 +112,8 @@ public class Game {
     /* ALL COMMANDS */
 
     public void displayAvailableCommands() {
-        System.out.println("List of available commands :\n");
+        System.out.println("List of available commands :");
+        Game.printSeparation();
         System.out.println("/help - Displays the list of available commands.");
         System.out.println("/heal - Heal the Hero.");
         System.out.println("/inventory - Display the inventory.");
@@ -115,11 +124,10 @@ public class Game {
         System.out.println("/stats - Display the statistics of the hero.");
         System.out.println("/quests - Display the list of available quests.");
         System.out.println("/quest <Quest name> - Display a specific quest with more information.");
-        System.out.println();
+        System.out.println("/use <item name> - Display a specific quest with more information.");
     }
 
     public void displayInventory() {
-        System.out.println("INVENTORY :");
         this.hero.printInventory();
     }
 
@@ -127,6 +135,8 @@ public class Game {
         if (hero.hasPotion()) {
             System.out.println(hero.getName() + " heals himself");
             hero.getPotion().use();
+        } else {
+            System.out.println("No potions available");
         }
     }
 
@@ -139,11 +149,12 @@ public class Game {
 
         if (fighterAttacked != null) {
             int turnNumber = 0;
-            System.out.println(hero.getName() + " attacks " + fighterAttacked.getName() + ":\n");
-            System.out.println("--------------------------------------------------------------------");
+            System.out.println(hero.getName() + " attacks " + fighterAttacked.getName() + " :");
 
             while (fighterAttacked.getHp() != 0 & this.hero.getHp() != 0) {
+                Game.printSeparation();
                 System.out.println("Turn " + turnNumber);
+                Game.printSeparation();
                 turnNumber++;
                 Fighter attacker;
                 Fighter attacked;
@@ -159,15 +170,11 @@ public class Game {
                 System.out.println(attacker.getName() + " attacks first :");
                 attack_aux(attacker, attacked);
 
-                /*
-                 * -----------------------------------------------------------------------------
-                 * ---------------------------
-                 */
+                /* -------------------------------------------------------------------------------------------------------- */
+
                 if (attacked.getHp() != 0) {
                     attack_aux(attacked, attacker);
                 }
-                System.out.println("--------------------------------------------------------------------");
-                printSeparation();
             }
 
             if (fighterAttacked.getHp() != 0) {
@@ -189,9 +196,10 @@ public class Game {
 
         if (npcTalked != null) {
             npcTalked.resetTalkState();
-            printSeparation();
 
             System.out.println(hero.getName() + " talks to " + character);
+
+            Game.printSeparation();
 
             System.out.println(npcTalked.talk());
 
@@ -201,7 +209,6 @@ public class Game {
                 System.out.println(npcTalked.talk(answer));
             }
 
-            printSeparation();
         } else {
             System.out.println("This character doesn't exist");
         }
@@ -209,17 +216,19 @@ public class Game {
 
     public void stop() {
         System.out.println("GAME STOP");
+        Game.SCANNER.close();
         System.exit(0);
     }
 
     public void stats() {
         System.out.println("STATISTICS :");
+        Game.printSeparation();
         this.hero.printStats();
     }
 
     public void quests() {
         System.out.println("List of available quests :");
-        System.out.println();
+        Game.printSeparation();
         this.mainQuest.printQuest();
     }
 
@@ -243,7 +252,8 @@ public class Game {
     }
 
     public void use(String itemName) {
-        System.out.println("Utilisation de : " + itemName);
+        System.out.println("Use of : " + itemName);
+
         Item itemUsed = this.hero.getItem(itemName);
         try {
 			this.hero.useItem(itemUsed);

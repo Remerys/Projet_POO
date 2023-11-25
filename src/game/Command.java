@@ -42,8 +42,9 @@ public class Command {
             System.out.print("Enter a command : ");
             String command = Game.SCANNER.nextLine();
 
-            // Vérifie la commande et exécute la méthode correspondante
+            Game.printSeparation();
 
+            // Vérifie la commande et exécute la méthode correspondante
             String start = command.split(" ")[0];
             // Pour gerer les arguments
             switch (start) {
@@ -68,6 +69,8 @@ public class Command {
                 default:
                     handleGeneralCommand(command);
             }
+
+            Game.printSeparation();
         }
     }
 

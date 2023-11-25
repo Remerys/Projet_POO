@@ -446,6 +446,5 @@ public class Hero extends Fighter {
 		} else {
 			System.out.println("Equipped Weapon : None");
 		}
-		System.out.println();
 	}
 }
