@@ -32,6 +32,7 @@ public class Command {
         commandMap.put("/stop", game::stop);
         commandMap.put("/stats", game::stats);
         commandMap.put("/quests", game::quests);
+        commandMap.put("/map", game::map);
         commandMap.put("/addSword", game::addSword);
     }
 

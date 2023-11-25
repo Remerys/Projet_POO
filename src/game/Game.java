@@ -30,16 +30,19 @@ public class Game {
     public static final Scanner SCANNER = new Scanner(System.in);
 
     public Game() {
-        // Location.createLocations();
         this.init();
     }
 
     public void init() {
         Command.setGame(this);
 
-        // String name = Command.getName();
+        this.locations = Location.createGameLocations();
+        Location startLocation = this.locations.get(0);
 
-        this.hero = Hero.createHero("Player", null);
+        // String playerName = Command.getName(); // TODO Remettre à la fin
+        // this.hero = Hero.createHero(playerName, startLocation); // TODO Remettre à la fin
+
+        this.hero = Hero.createHero("Player", startLocation); // TODO Enlever à la fin
         Item flute = new Flute();
         try {
             this.hero.addItem(flute);
@@ -124,7 +127,8 @@ public class Game {
         System.out.println("/stats - Display the statistics of the hero.");
         System.out.println("/quests - Display the list of available quests.");
         System.out.println("/quest <Quest name> - Display a specific quest with more information.");
-        System.out.println("/use <item name> - Display a specific quest with more information.");
+        System.out.println("/use <item name> - Use an item.");
+        System.out.println("/map - Displays information from the current map.");
     }
 
     public void displayInventory() {
@@ -140,8 +144,14 @@ public class Game {
         }
     }
 
-    public void goTo(String location) {
-        System.out.println(hero.getName() + " go to " + location);
+    public void goTo(String locationName) {
+        try {
+            Location location = this.hero.getLocation().exitTo(locationName);
+            System.out.println(hero.getName() + " go to " + locationName);
+            this.hero.setLocation(location);
+        } catch (Exception e) {
+            System.out.println("You can't access this map OR it doesn't exist : " + locationName);
+        }
     }
 
     public void attack(String enemyName) {
@@ -260,5 +270,29 @@ public class Game {
 		} catch (Exception e) {
 			System.out.println("This item isn't usable.");
 		}
+    }
+
+    public void map() {
+        Location location = this.hero.getLocation();
+        System.out.println("Map : " + location.getName());
+
+        String locationDescription = location.getDescription();
+        System.out.println("A short description : " + locationDescription + "\n");
+
+        // printList("List of maps you can go :", location.getExits()); // TODO Remettre quand la fonction getExits existera
+        printList("List of items in this map :", location.getItems());
+        printList("List of mobs in this map :", location.getFighters());
+        printList("List of NPCs you can talk to in this map :", location.getTalkers());
+
+    }
+
+    private void printList(String title, List<?> list) {
+        System.out.println(title);
+
+        if (list.isEmpty()) {
+            System.out.println("\t" + "None");
+        } else {
+            list.forEach(object -> System.out.println("\t" + object));
+        }
     }
 }

@@ -435,8 +435,8 @@ public class Hero extends Fighter {
 		System.out.println(String.format("Inventory Capacity : %d / %d", this.inventory.getWeight(),
 				this.inventory.getMaxWeight()));
 
-		if (this.weapon != null) {
-			System.out.println("Location : " + this.loc);
+		if (this.loc != null) {
+			System.out.println("Location : " + this.loc.getName());
 		} else {
 			System.out.println("Location : None");
 		}

@@ -22,7 +22,7 @@ public class Location {
     private List<Talker> talkers = new ArrayList<Talker>();
 
     private List<Item> items = new ArrayList<Item>();
-    
+
     /**
      * Returns a list of locations for the game
      */
@@ -42,10 +42,10 @@ public class Location {
 
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "En observant l'horizon, vous distinguez aisément une immense île. Elle semble habitée. S'y rendre à la nage semble possible");
-        
+
         // Exits for the 3rd island
         locs.get(3).addExit(locs.get(1), "Vous semblez pouvoir vous rendre à la première île visitée à la nage.");
-        locs.get(3).addExit(locs.get(2), "L'île principale semble aussi atteignable aisément.");       
+        locs.get(3).addExit(locs.get(2), "L'île principale semble aussi atteignable aisément.");
 
         return locs;
     }
@@ -88,7 +88,7 @@ public class Location {
     public void removeExit(String exitName) throws Exception {
         if (this.exits.containsKey(exitName)){
             this.exits.remove(exitName);
-        } 
+        }
         else {
             throw new Exception("removeExit : The exit doesn't exist !");
         }
@@ -101,12 +101,12 @@ public class Location {
         boolean hasCharacterBeenAdded = false;
 
         if (c instanceof Talker) {
-            this.talkers.add((Talker)c));
+            this.talkers.add((Talker)c);
             hasCharacterBeenAdded = true;
         }
 
         if (c instanceof Fighter) {
-            this.fighters.add((Fighter)c)
+            this.fighters.add((Fighter)c);
             hasCharacterBeenAdded = true;
         }
 
@@ -130,7 +130,7 @@ public class Location {
 
     private void removeTalker(Talker c) throws Exception {
         boolean res = this.talkers.remove(c);
-        
+
         if (!res) {
             throw new Exception("removeTalker : The character couldn't be removed !");
         }
@@ -138,7 +138,7 @@ public class Location {
 
     private void removeFighter(Fighter c) throws Exception {
         boolean res = this.fighters.remove(c);
-        
+
         if (!res) {
             throw new Exception("removeFighters : The character couldn't be removed !");
         }
