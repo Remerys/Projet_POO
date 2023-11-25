@@ -1,7 +1,9 @@
 package characters;
 
 /**
- * An abstract class representing all the characters in the world except the hero
+ * An abstract class representing all the characters in the world except the
+ * hero
+ * 
  * @author Lilian
  */
 public abstract class Character {
@@ -12,7 +14,6 @@ public abstract class Character {
 
 	protected final String NAME;
 	private String description;
-	protected static Hero hero;
 
 	protected boolean hasFinishedToTalk;
 
@@ -25,12 +26,11 @@ public abstract class Character {
 	public Character(String name) {
 		this(name, "");
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();
 	}
-
 
 	/*------------------------------------------------------------------------------------
 	 *
@@ -40,6 +40,7 @@ public abstract class Character {
 
 	/**
 	 * Give the character's name
+	 * 
 	 * @return NAME (String)
 	 */
 	public String getName() {
@@ -48,13 +49,12 @@ public abstract class Character {
 
 	/**
 	 * Give the character's description/history
+	 * 
 	 * @return description (String)
 	 */
 	public String getDescription() {
 		return this.description;
 	}
-
-	
 
 	/*------------------------------------------------------------------------------------
 	 *
@@ -64,17 +64,10 @@ public abstract class Character {
 
 	/**
 	 * Changes the character's description
+	 * 
 	 * @param description (String)
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * Define the hero for the class
-	 * @param hero (Hero)
-	 */
-	public static void setHero(Hero hero) {
-		Character.hero = hero;
 	}
 }

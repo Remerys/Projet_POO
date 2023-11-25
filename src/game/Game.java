@@ -38,7 +38,6 @@ public class Game {
         // String name = Command.getName();
 
         this.hero = Hero.createHero("Player", null);
-        Character.setHero(this.hero);
 
         this.mainQuest = new MainQuest();
 
@@ -188,7 +187,7 @@ public class Game {
     	NPC npcTalked = this.getNpc(character, hero.getLocation());
 
         if (npcTalked != null) {
-            npcTalked.startsTalking();
+            npcTalked.resetTalkState();
             printSeparation();
 
             Scanner scanner = new Scanner(System.in);
@@ -196,7 +195,7 @@ public class Game {
 
             System.out.println(npcTalked.talk(null));
 
-            while (!npcTalked.hasFinishedTalking()) {
+            while (!npcTalked.hasFinishedToTalk()) {
                 System.out.print("What's your answer ? ");
                 String answer = scanner.nextLine();
                 System.out.println(npcTalked.talk(answer));

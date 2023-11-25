@@ -21,10 +21,11 @@ public class Diogene extends NPC {
 		}
 		return instance;
 	}
-
+	
 	@Override
-	public String talk(String choice) {
-		super.stopsTalking();
+	public String talk() {
+		super.finishedToTalk();
 		return "Get out of my sun!";
 	}
+	
 }

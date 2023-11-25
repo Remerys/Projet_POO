@@ -20,7 +20,6 @@ public class GameTest {
 	@Before
 	public void init() {
 		game = new Game();
-		Character.setHero(game.hero);
 	}
 	
 	@Test
@@ -28,7 +27,7 @@ public class GameTest {
 		Diogene dio = Diogene.getDiogene();
 		
 		game.talk(dio.toString());
-		assertTrue(dio.hasFinishedTalking());
+		assertTrue(dio.hasFinishedToTalk());
 	}
 	
 	@Test
@@ -36,7 +35,7 @@ public class GameTest {
 		Healer heal = new Healer();
 		game.talk(heal.toString());
 		//System.out.println(heal.hasFinishedTalking());
-		assertTrue(heal.hasFinishedTalking());
+		assertTrue(heal.hasFinishedToTalk());
 	}
 	
 	

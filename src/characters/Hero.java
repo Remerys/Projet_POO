@@ -5,21 +5,22 @@ import locations.Location;
 
 /**
  * Principal player of the history
+ * 
  * @author Lilian
  */
-public class Hero extends Fighter{
-	//static
+public class Hero extends Fighter {
+	// static
 	private static final int DEFAULT_HP = 10;
 	private static final int DEFAULT_MP = 0;
 	private static final int DEFAULT_XP = 0;
-	private static final int DEFAULT_SPEED = 5;
 	private static final int DEFAULT_LEVEL = 1;
+	private static final int DEFAULT_SPEED = 5;
 	private static final int MULTIPLIER_LEVEL = 2;
 	private static final double CONSTANT_PROGRESSION = 1.2;
 	private static Hero hero;
-	//private static final Weapon DEFAULT_WEAPON = new Fist();
+	// private static final Weapon DEFAULT_WEAPON = new Fist();
 
-	//attribute
+	// attribute
 	private Location loc;
 	private Weapon weapon;
 	private Inventory inventory;
@@ -37,7 +38,7 @@ public class Hero extends Fighter{
 
 		this.mp = mp;
 		this.maxMp = mp;
-		
+
 		this.xp = xp;
 		this.level = level;
 		this.xpNewLvl = 10;
@@ -49,10 +50,9 @@ public class Hero extends Fighter{
 		this(name, loc, Hero.DEFAULT_HP, Hero.DEFAULT_MP, Hero.DEFAULT_XP, Hero.DEFAULT_LEVEL);
 	}
 
-
 	/**
 	 * @param name (String)
-	 * @param loc (Location)
+	 * @param loc  (Location)
 	 * @return a new hero if it didn't exist
 	 */
 	public static Hero createHero(String name, Location loc) {
@@ -64,6 +64,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * When the hero exist
+	 * 
 	 * @return the hero
 	 * @throws Exception no hero has been created
 	 */
@@ -95,6 +96,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's location
+	 * 
 	 * @return hero's location
 	 */
 	public Location getLocation() {
@@ -103,6 +105,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's weapon equiped
+	 * 
 	 * @return hero's weapon
 	 */
 	public Weapon getWeaponEquiped() {
@@ -111,6 +114,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's max health points
+	 * 
 	 * @return hero's max health points
 	 */
 	public int getMaxHp() {
@@ -119,6 +123,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's magic points
+	 * 
 	 * @return hero's magic points
 	 */
 	public int getMp() {
@@ -127,6 +132,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's max magic points
+	 * 
 	 * @return hero's max magic points
 	 */
 	public int getMaxMp() {
@@ -135,6 +141,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's level
+	 * 
 	 * @return hero's level
 	 */
 	public int getLevel() {
@@ -143,6 +150,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's experience
+	 * 
 	 * @return hero's current experience
 	 */
 	public int getXp() {
@@ -151,6 +159,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's xp to next level
+	 * 
 	 * @return experiences to obtain to level up
 	 */
 	public int getXpNewLevel() {
@@ -159,6 +168,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Get the hero's damage
+	 * 
 	 * @return hero's damage
 	 */
 	@Override
@@ -168,28 +178,31 @@ public class Hero extends Fighter{
 		} else {
 			return this.getLevel();
 		}
-		
+
 	}
 
 	/**
 	 * Get the hero's range
+	 * 
 	 * @return hero's range
 	 */
 	public int getRange() {
 		return this.weapon.getRange();
 	}
-	
+
 	/**
 	 * Get a hero's item
+	 * 
 	 * @param itemType
 	 * @return
 	 */
 	public Item getItem(String itemType) {
 		return this.inventory.getItem(itemType);
 	}
-	
+
 	/**
 	 * Get a hero's potion
+	 * 
 	 * @return a hero's potion
 	 */
 	public Potion getPotion() {
@@ -204,6 +217,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Change the hero's health points
+	 * 
 	 * @param hp (int)
 	 */
 	public void setHp(int hp) {
@@ -218,6 +232,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Add to the hero's health points, a number of health points
+	 * 
 	 * @param hp (int)
 	 */
 	public void heal(int hp) {
@@ -226,6 +241,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Remove to the hero's health points, a number of health points
+	 * 
 	 * @param damage (int)
 	 */
 	public void getAttacked(int damage) {
@@ -234,6 +250,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Change the hero's magic points
+	 * 
 	 * @param mp
 	 */
 	public void setMp(int mp) {
@@ -248,6 +265,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Add to the hero's magic points, a number of magic points
+	 * 
 	 * @param mp (int)
 	 */
 	public void gainMp(int mp) {
@@ -256,6 +274,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Remove to the hero's magic points, a number of magic points
+	 * 
 	 * @param mp (int)
 	 */
 	public void useMp(int mp) {
@@ -277,8 +296,7 @@ public class Hero extends Fighter{
 		if (this.maxMp == 0) {
 			this.maxMp += 10;
 			this.mp += 10;
-		}
-		else {
+		} else {
 			this.maxMp *= CONSTANT_PROGRESSION;
 			this.mp *= CONSTANT_PROGRESSION;
 		}
@@ -286,6 +304,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Add experience and level up if there is enough xp
+	 * 
 	 * @param xp (int)
 	 */
 	public void addXp(int xp) {
@@ -301,17 +320,18 @@ public class Hero extends Fighter{
 	public void levelUp() {
 		this.level++;
 		this.xp -= this.xpNewLvl;
-		//2^(level-1) x 10
-		this.xpNewLvl = (int)Math.pow(Hero.MULTIPLIER_LEVEL, this.level-1)*10;
+		// 2^(level-1) x 10
+		this.xpNewLvl = (int) Math.pow(Hero.MULTIPLIER_LEVEL, this.level - 1) * 10;
 
 		this.changeHpLvl();
 		this.changeMpLvl();
 
-		this.addXp(0); //if there is another level to gain
+		this.addXp(0); // if there is another level to gain
 	}
 
 	/**
 	 * Change hero's location
+	 * 
 	 * @param loc (Location)
 	 */
 	public void setLocation(Location loc) {
@@ -327,19 +347,21 @@ public class Hero extends Fighter{
 
 	/**
 	 * Add an item in hero's inventory
+	 * 
 	 * @param item (Item)
 	 * @throws Exception : Cannot add another item
 	 */
-	public void addItem(Item item) throws Exception{
+	public void addItem(Item item) throws Exception {
 		this.inventory.addItem(item);
 	}
 
 	/**
 	 * Remove an item in hero's inventory
+	 * 
 	 * @param item (Item)
 	 * @throws Exception : Cannot remove an item not present in the inventory
 	 */
-	public void removeItem(Item item) throws Exception{
+	public void removeItem(Item item) throws Exception {
 		this.inventory.removeItem(item);
 	}
 
@@ -351,13 +373,14 @@ public class Hero extends Fighter{
 
 	/**
 	 * Use the effect of the item and remove it from hero's inventory
+	 * 
 	 * @param item (Item)
 	 * @throws Exception : This item isn't usable
 	 */
 	public void useItem(Item item) throws Exception {
 		if (this.hasItem(item)) {
 			if (item instanceof Usable) {
-				((Usable)item).use();
+				((Usable) item).use();
 				this.inventory.removeItem(item);
 			} else {
 				throw new Exception("This item isn't usable");
@@ -367,6 +390,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Verify there an item in the inventory
+	 * 
 	 * @param item (Item)
 	 * @return if there is the item
 	 */
@@ -376,6 +400,7 @@ public class Hero extends Fighter{
 
 	/**
 	 * Verify there a potion in the inventory
+	 * 
 	 * @return if there is a potion
 	 */
 	public boolean hasPotion() {
@@ -384,10 +409,11 @@ public class Hero extends Fighter{
 
 	/**
 	 * Attack a character with the hero's weapon
+	 * 
 	 * @param character (Character)
 	 */
 	public void attack(Fighter fighter) {
-		fighter.getAttacked(hero.getDamage());	
+		fighter.getAttacked(hero.getDamage());
 	}
 
 	/**
@@ -406,7 +432,8 @@ public class Hero extends Fighter{
 		System.out.println(String.format("XP : %d / %d", this.xp, this.xpNewLvl));
 		System.out.println(String.format("HP : %d / %d", this.hp, this.maxHp));
 		System.out.println(String.format("MP : %d / %d", this.mp, this.maxMp));
-		System.out.println(String.format("Inventory Capacity : %d / %d", this.inventory.getWeight(), this.inventory.getMaxWeight()));
+		System.out.println(String.format("Inventory Capacity : %d / %d", this.inventory.getWeight(),
+				this.inventory.getMaxWeight()));
 
 		if (this.weapon != null) {
 			System.out.println("Location : " + this.loc);

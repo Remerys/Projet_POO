@@ -81,9 +81,10 @@ public class Inventory {
 	public Item getItem(int index) {
 		return this.items.get(index);
 	}
-	
+
 	/**
 	 * Get an item with a string
+	 * 
 	 * @param itemType
 	 * @return
 	 */

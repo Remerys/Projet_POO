@@ -2,20 +2,25 @@ package characters;
 
 /**
  * An interface allowing the characters to talk
+ * 
  * @author Lilian
  */
 public interface Talker {
 
 	/**
 	 * Determine the text to return in function of the choice
+	 * 
 	 * @param choice (String)
 	 * @return (String) : the text talked
 	 */
-	public String talk(String choice);
+	public String talk(); // Parler au départ
+	;
 
-	public boolean hasFinishedTalking();
+	public String talk(String choice); // Apporter une réponse
 
-	public void stopsTalking();
+	public boolean hasFinishedToTalk();
 
-	public void startsTalking();
+	public void finishedToTalk();
+
+	public void resetTalkState();
 }
