@@ -6,7 +6,7 @@ public class HealPotion extends Potion {
     public HealPotion() {
         super();
     }
-    
+
     public void use() {
         Potion.hero.heal(HealPotion.HEAL);
     }

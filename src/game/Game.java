@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import characters.*;
 import characters.Character;
+import items.Item;
 import items.Sword;
 import locations.Location;
 import quests.MainQuest;
@@ -60,7 +61,7 @@ public class Game {
         System.out.println(Game.SEPARATION);
     }
 
-    private NPC getCharacter(String npcName, Location loc) {
+    private NPC getNpc(String npcName, Location loc) {
         this.npcs.add(new Healer());
         this.npcs.add(Diogene.getDiogene());
 
@@ -183,7 +184,7 @@ public class Game {
     }
 
     public void talk(String character) {
-        NPC npcTalked = this.getCharacter(character, hero.getLocation());
+    	NPC npcTalked = this.getNpc(character, hero.getLocation());
 
         if (npcTalked != null) {
             npcTalked.startsTalking();
@@ -240,5 +241,11 @@ public class Game {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void use(String itemName) {
+        System.out.println("Utilisation de : " + itemName);
+        Item itemUsed = getItem(itemName);
+        Hero.useItem(itemUsed);
     }
 }

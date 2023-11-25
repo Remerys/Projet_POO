@@ -393,7 +393,7 @@ public class Hero extends Fighter{
 		System.out.println(String.format("XP : %d / %d", this.xp, this.xpNewLvl));
 		System.out.println(String.format("HP : %d / %d", this.hp, this.maxHp));
 		System.out.println(String.format("MP : %d / %d", this.mp, this.maxMp));
-		System.out.println(String.format("Inventory weight : %d / %d", this.inventory.getWeight(), this.inventory.getMaxWeight()));
+		System.out.println(String.format("Inventory Capacity : %d / %d", this.inventory.getWeight(), this.inventory.getMaxWeight()));
 
 		if (this.weapon != null) {
 			System.out.println("Location : " + this.loc);
@@ -402,9 +402,9 @@ public class Hero extends Fighter{
 		}
 
 		if (this.weapon != null) {
-			System.out.println("Weapon Equiped : " + this.weapon);
+			System.out.println("Equipped Weapon : " + this.weapon);
 		} else {
-			System.out.println("Weapon Equiped : None");
+			System.out.println("Equipped Weapon : None");
 		}
 		System.out.println();
 	}

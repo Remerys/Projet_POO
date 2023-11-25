@@ -61,6 +61,9 @@ public class Command {
                  	case "/addXp":
                  		addXpCommand(command);
                         break;
+                 	case "/use":
+                 		handleItemCommand(command);
+                        break;
                  	default:
                  		handleGeneralCommand(command);
                  }
@@ -111,6 +114,19 @@ public class Command {
             game.quest(questName);
         } else {
             System.out.println("Incorrect command format. Usage : /quest <Quest Name>");
+        }
+    }
+
+    // Traitement de la commande /use <Item Name>
+    private static void handleItemCommand(String command) {
+        // Sépare la commande et le nom de l'item
+        String[] parts = command.split(" ");
+
+        if (parts.length == 2) {
+            String itemName = parts[1];
+            game.use(itemName);
+        } else {
+            System.out.println("Incorrect command format. Usage : /use <Item Name>");
         }
     }
 
