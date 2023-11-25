@@ -1,14 +1,13 @@
-package hero;
+package characters;
 
 import items.*;
 import locations.Location;
-import characters.Character;
 
 /**
  * Principal player of the history
  * @author Lilian
  */
-public class Hero {
+public class Hero extends Fighter{
 	//static
 	private static final int DEFAULT_HP = 10;
 	private static final int DEFAULT_MP = 0;
@@ -18,43 +17,36 @@ public class Hero {
 	private static final int MULTIPLIER_LEVEL = 2;
 	private static final double CONSTANT_PROGRESSION = 1.2;
 	private static Hero hero;
-	private static final Weapon DEFAULT_WEAPON = new Fist();
+	//private static final Weapon DEFAULT_WEAPON = new Fist();
 
 	//attribute
-	private final String NAME;
 	private Location loc;
 	private Weapon weapon;
 	private Inventory inventory;
-	private int hp;
 	private int maxHp;
 	private int mp;
 	private int maxMp;
-	private int speed;
 	private int xp;
 	private int level;
 	private int xpNewLvl;
 
-	private Hero(String name, Location loc, int hp, int mp, int xp, int level, Weapon weapon) {
-		this.NAME = name;
+	private Hero(String name, Location loc, int hp, int mp, int xp, int level) {
+		super(name, hp, 0, 0, Hero.DEFAULT_SPEED);
 		this.loc = loc;
-
-		this.hp = hp;
 		this.maxHp = hp;
 
 		this.mp = mp;
 		this.maxMp = mp;
-
-		this.speed = Hero.DEFAULT_SPEED;
+		
 		this.xp = xp;
 		this.level = level;
 		this.xpNewLvl = 10;
 		this.inventory = new Inventory();
 
-		this.weapon = weapon;
 	}
 
 	private Hero(String name, Location loc) {
-		this(name, loc, Hero.DEFAULT_HP, Hero.DEFAULT_MP, Hero.DEFAULT_XP, Hero.DEFAULT_LEVEL, Hero.DEFAULT_WEAPON);
+		this(name, loc, Hero.DEFAULT_HP, Hero.DEFAULT_MP, Hero.DEFAULT_XP, Hero.DEFAULT_LEVEL);
 	}
 
 
@@ -118,22 +110,6 @@ public class Hero {
 	}
 
 	/**
-	 * Get the hero's name
-	 * @return hero's name
-	 */
-	public String getName() {
-		return this.NAME;
-	}
-
-	/**
-	 * Get the hero's health points
-	 * @return hero's health points
-	 */
-	public int getHp() {
-		return this.hp;
-	}
-
-	/**
 	 * Get the hero's max health points
 	 * @return hero's max health points
 	 */
@@ -155,14 +131,6 @@ public class Hero {
 	 */
 	public int getMaxMp() {
 		return this.maxMp;
-	}
-
-	/**
-	 * Get the hero's speed
-	 * @return hero's speed
-	 */
-	public int getSpeed() {
-		return this.speed;
 	}
 
 	/**
@@ -193,8 +161,14 @@ public class Hero {
 	 * Get the hero's damage
 	 * @return hero's damage
 	 */
+	@Override
 	public int getDamage() {
-		return this.weapon.getDamage();
+		if (this.weapon != null) {
+			return this.weapon.getDamage();
+		} else {
+			return this.getLevel();
+		}
+		
 	}
 
 	/**
@@ -399,8 +373,8 @@ public class Hero {
 	 * Attack a character with the hero's weapon
 	 * @param character (Character)
 	 */
-	public void attack(Character character) {
-		character.getAttacked(hero.getWeaponEquiped().getDamage());
+	public void attack(Fighter fighter) {
+		fighter.getAttacked(hero.getDamage());	
 	}
 
 	/**

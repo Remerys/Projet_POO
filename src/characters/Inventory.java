@@ -1,4 +1,4 @@
-package hero;
+package characters;
 
 import java.util.ArrayList;
 import java.util.Collections;

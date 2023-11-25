@@ -4,19 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import characters.*;
 import characters.Character;
-import characters.Diogene;
-import characters.Healer;
-import characters.NPC;
-import characters.Ork;
-import characters.RabbitOfCaerbannog;
-import characters.Talker;
-import characters.Villain;
-import hero.Hero;
 import items.Sword;
 import locations.Location;
 import quests.MainQuest;
-import quests.Quest;
+//import quests.Quest;
 
 /**
  * The principal game
@@ -25,11 +18,11 @@ import quests.Quest;
  * @author Lilian
  */
 public class Game {
-    private Hero hero;
+    public Hero hero;
     private List<Location> locations = new ArrayList<Location>();
     private List<Character> characters = new ArrayList<Character>();
+    private List<Fighter> fighters = new ArrayList<Fighter>();
     private List<NPC> npcs = new ArrayList<NPC>();
-    private List<Villain> villains = new ArrayList<Villain>();
     private MainQuest mainQuest;
     public static final String SEPARATION = "--------------------------------------------------------------------";
 
@@ -39,15 +32,28 @@ public class Game {
     }
 
     public void init() {
-    	Command.setGame(this);
+        Command.setGame(this);
 
-    	// String name = Command.getName();
+        // String name = Command.getName();
 
-    	this.hero = Hero.createHero("Player", null);
+        this.hero = Hero.createHero("Player", null);
+        Character.setHero(this.hero);
 
-    	this.mainQuest = new MainQuest();
+        this.mainQuest = new MainQuest();
 
-        Command.handleCommands();
+        // Command.handleCommands();
+    }
+
+    private Character getCharacter(String character) {// , Location loc) {
+        this.characters.add(Diogene.getDiogene());
+        this.characters.add(new Healer());
+
+        for (Character c : this.characters) {
+            if (c.getName().toUpperCase().equals(character.toUpperCase())) {
+                return c;
+            }
+        }
+        return null;
     }
 
     private void printSeparation() {
@@ -55,41 +61,44 @@ public class Game {
     }
 
     private NPC getCharacter(String npcName, Location loc) {
-        this.npcs.add(new Healer(loc));
-        this.npcs.add(Diogene.getDiogene(loc));
+        this.npcs.add(new Healer());
+        this.npcs.add(Diogene.getDiogene());
 
         for (NPC npc : this.npcs) {
             if (npc.getName().toUpperCase().equals(npcName.toUpperCase())) {
                 return npc;
+
             }
         }
         return null;
     }
 
-    private Villain getVillain(String villainName, Location loc) {
+    private Fighter getFighter(String enemyName, Location loc) {
         // TODO Initialisation des locs :
-        // il faudrait normalement le faire à chaque fois qu'on se déplace d'une map à une autre avec des fonctions du style
+        // il faudrait normalement le faire à chaque fois qu'on se déplace d'une map à
+        // une autre avec des fonctions du style
         // this.characters = loc.getCharacters();
-        // this.villains = this.characters.getVillains();
-        // this.npcs = this.characters.getNpcs();
+        // this.enemys = this.characters.getEnemys();
         // fin initialisation locs
 
-
         /* TEST VU QUE J'AI PAS LES LISTES POUR L'INSTANT */
-        this.villains.add(new Ork(loc));                   // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.villains.add(new RabbitOfCaerbannog(loc));      // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.villains.add(new Ork(loc));                     // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.villains.add(new RabbitOfCaerbannog(loc));      // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new Crab()); // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new RabbitOfCaerbannog()); // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new Crab()); // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new RabbitOfCaerbannog()); // A SUPPRIMER QUAND ON AURA LES LISTES
 
-        for (Villain villain : this.villains) {
-            if (villain.getName().toUpperCase().equals(villainName.toUpperCase())) {
-                return villain;
+        for (Fighter fighter : this.fighters) {
+            if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
+                return fighter;
             }
         }
         return null;
     }
 
-    /* --------------------------------------------------------------------------------------------------------------------------- */
+    /*
+     * -----------------------------------------------------------------------------
+     * ----------------------------------------------
+     */
     /* ALL COMMANDS */
 
     public void displayAvailableCommands() {
@@ -123,77 +132,78 @@ public class Game {
         System.out.println(hero.getName() + " go to " + location);
     }
 
-    public void attack(String villainName) {
-        Villain villainAttacked = this.getVillain(villainName, hero.getLocation());
+    public void attack(String enemyName) {
+        Fighter fighterAttacked = this.getFighter(enemyName, hero.getLocation());
 
-        if (villainAttacked != null) {
+        if (fighterAttacked != null) {
             int turnNumber = 0;
-            printSeparation();
-            System.out.println(hero.getName() + " attacks " + villainAttacked.getName() + ":");
+            System.out.println(hero.getName() + " attacks " + fighterAttacked.getName() + ":\n");
+            System.out.println("--------------------------------------------------------------------");
 
-            while (villainAttacked.getHp() != 0 & this.hero.getHp() != 0) {
-                printSeparation();
+            while (fighterAttacked.getHp() != 0 & this.hero.getHp() != 0) {
                 System.out.println("Turn " + turnNumber);
                 turnNumber++;
+                Fighter attacker;
+                Fighter attacked;
 
-                if (hero.getSpeed() > villainAttacked.getSpeed()) {
-                    System.out.println(hero.getName() + " attacks first :");
-
-                    System.out.print(villainAttacked.getName() + " takes " + hero.getDamage() + " damage ");
-                    this.hero.attack(villainAttacked);
-                    System.out.println("| HP remaining :" + villainAttacked.getHp());
-
-                    /* -------------------------------------------------------------------------------------------------------- */
-
-                    System.out.print(hero.getName() + " takes " + villainAttacked.getDamage() + " damage ");
-                    villainAttacked.attack(this.hero);
-                    System.out.println("| HP remaining :" + hero.getHp());
+                if (hero.getSpeed() > fighterAttacked.getSpeed()) {
+                    attacker = this.hero;
+                    attacked = fighterAttacked;
                 } else {
-                    System.out.println(villainAttacked.getName() + " attacks first :");
-
-                    System.out.println(hero.getName() + " takes " + villainAttacked.getDamage() + " damage ");
-                    this.hero.attack(villainAttacked);
-                    System.out.println("| HP remaining :" + hero.getHp());
-
-                    /* -------------------------------------------------------------------------------------------------------- */
-
-                    System.out.print(villainAttacked.getName() + " takes " + hero.getDamage() + " damage ");
-                    villainAttacked.attack(this.hero);
-                    System.out.println("| HP remaining :" + villainAttacked.getHp());
+                    attacker = fighterAttacked;
+                    attacked = this.hero;
                 }
 
+                System.out.println(attacker.getName() + " attacks first :");
+                attack_aux(attacker, attacked);
+
+                /*
+                 * -----------------------------------------------------------------------------
+                 * ---------------------------
+                 */
+                if (attacked.getHp() != 0) {
+                    attack_aux(attacked, attacker);
+                }
+                System.out.println("--------------------------------------------------------------------");
                 printSeparation();
             }
 
-            if (villainAttacked.getHp() != 0) {
-                villainAttacked.fullyHeals();
+            if (fighterAttacked.getHp() != 0) {
+                fighterAttacked.fullyHeals();
             }
         } else {
             System.out.println("This character doesn't exist");
         }
     }
 
-    public void talk(String character) {
-    	NPC npcTalked = this.getCharacter(character, hero.getLocation());
+    private void attack_aux(Fighter attacker, Fighter attacked) {
+        System.out.print(attacked.getName() + " takes " + attacker.getDamage() + " damage ");
+        attacker.attack(attacked);
+        System.out.println("| HP remaining :" + attacked.getHp());
+    }
 
-    	if (npcTalked != null) {
+    public void talk(String character) {
+        NPC npcTalked = this.getCharacter(character, hero.getLocation());
+
+        if (npcTalked != null) {
             npcTalked.startsTalking();
             printSeparation();
 
-    		Scanner scanner = new Scanner(System.in);
-    		System.out.println(hero.getName() + " talks to " + character);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(hero.getName() + " talks to " + character);
 
-    		System.out.println(npcTalked.talk(null));
+            System.out.println(npcTalked.talk(null));
 
-    		while (!npcTalked.hasFinishedTalking()) {
-    			System.out.print("What's your answer ? ");
+            while (!npcTalked.hasFinishedTalking()) {
+                System.out.print("What's your answer ? ");
                 String answer = scanner.nextLine();
                 System.out.println(npcTalked.talk(answer));
-    		}
+            }
+            scanner.close();
             printSeparation();
-    	} else {
-    		System.out.println("This character doesn't exist");
-    	}
+        } else {
+            System.out.println("This character doesn't exist");
+        }
     }
 
     public void stop() {
@@ -216,19 +226,19 @@ public class Game {
         System.out.println("Details of : " + questName);
     }
 
-    public void addXp(int xp) { //to test
-    	System.out.println("Gain d'xp :" + xp);
-    	System.out.println();
-    	this.hero.addXp(xp);
+    public void addXp(int xp) { // to test
+        System.out.println("Gain d'xp :" + xp);
+        System.out.println();
+        this.hero.addXp(xp);
     }
 
     public void addSword() {
-    	System.out.println("add Sword");
-    	try {
-			this.hero.addItem(new Sword());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        System.out.println("add Sword");
+        try {
+            this.hero.addItem(new Sword());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

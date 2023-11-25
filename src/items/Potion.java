@@ -1,6 +1,6 @@
 package items;
 
-import hero.Hero;
+import characters.Hero;
 
 public abstract class Potion extends Item implements Usable {
     private static final int WEIGHT = 1;

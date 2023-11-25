@@ -49,6 +49,8 @@ Le jeu se joue uniquement en interaction textuelle. Afin de jouer il est impéra
 
 ## Documentation
 
+
+### Documentation de classes
 La documentation complète de ce projet est disponible au format HTML dans le dossier `doc`. Pour accéder à la documentation, suivez ces étapes :
 
 1. Ouvrez le dossier `doc` dans votre explorateur de fichiers ou votre terminal.
@@ -56,6 +58,12 @@ La documentation complète de ce projet est disponible au format HTML dans le do
 2. Double-cliquez sur le fichier `index.html` ou ouvrez-le dans votre navigateur.
 
 3. La page d'accueil de la documentation devrait apparaître, vous permettant de naviguer à travers les différentes sections pour obtenir des informations détaillées sur les classes et méthodes de notre projet.
+
+### Documentation : Diagrammes de classes, d’états et de séquences
+Vous trouverez les diagrammes dans le dossiser `diagrammes`:
+1. Diagrammes de classes : 
+2. Diagrammes d'états : 
+3. Diagrammes de séquences : 
 
 
 ## Contacts

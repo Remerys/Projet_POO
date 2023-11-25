@@ -9,3 +9,5 @@ public class Fist extends Weapon {
         super(Fist.WEIGHT, Fist.DAMAGE, Fist.RANGE);
     }
 }
+
+//doesn't useful now
