@@ -101,7 +101,7 @@ public class Location {
         boolean hasCharacterBeenAdded = false;
 
         if (c instanceof Talker) {
-            this.talkers.add((Talker)c));
+            this.talkers.add((Talker)c);
             hasCharacterBeenAdded = true;
         }
 
