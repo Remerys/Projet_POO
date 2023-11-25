@@ -90,7 +90,7 @@ public class Inventory {
 	 */
 	public Item getItem(String itemType) {
 		for (Item item : this.items) {
-			if (item.getClass().getName() == itemType) {
+			if (item.toString().toUpperCase().equals(itemType.toUpperCase())) {
 				return item;
 			}
 		}

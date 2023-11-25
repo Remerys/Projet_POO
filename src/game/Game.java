@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import characters.*;
 import characters.Character;
+import items.Flute;
 import items.Item;
 import items.Sword;
 import locations.Location;
@@ -39,6 +40,13 @@ public class Game {
         // String name = Command.getName();
 
         this.hero = Hero.createHero("Player", null);
+        Item flute = new Flute();
+        try {
+            this.hero.addItem(flute);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         this.mainQuest = new MainQuest();
 
@@ -244,6 +252,7 @@ public class Game {
 
     public void use(String itemName) {
         System.out.println("Utilisation de : " + itemName);
+
         Item itemUsed = this.hero.getItem(itemName);
         try {
 			this.hero.useItem(itemUsed);
