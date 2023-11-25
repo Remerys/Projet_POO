@@ -14,11 +14,10 @@ public class Healer extends NPC {
 
 	@Override
 	public String talk(String choice) {
-		String string = "";
-
 		if (choice == null) {
 			return "Do you want to be healed ? (yes/no)";
 		} else {
+			this.stopsTalking();
 			if ("YES".equals(choice.toUpperCase())) {
 				this.heal();
 				return "I'm healing you";
@@ -27,10 +26,7 @@ public class Healer extends NPC {
 			} else {
 				return "What are you talking about ?";
 			}
-			super.stopsTalking();
 		}
-
-		return string;
 	}
 
 	public void heal() {

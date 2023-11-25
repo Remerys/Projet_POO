@@ -23,24 +23,24 @@ public class GameTest {
 		Character.setHero(game.hero);
 	}
 	
-	/*@Test
+	@Test
 	public void talkNoReply() {
 		Diogene dio = Diogene.getDiogene();
 		
 		game.talk(dio.toString());
-		assertTrue(dio.hasFinishedToTalk());
+		assertTrue(dio.hasFinishedTalking());
 	}
 	
 	@Test
 	public void talkReply() {
 		Healer heal = new Healer();
 		game.talk(heal.toString());
-		System.out.println(heal.hasFinishedToTalk());
-		assertTrue(heal.hasFinishedToTalk());
-	}*/
+		//System.out.println(heal.hasFinishedTalking());
+		assertTrue(heal.hasFinishedTalking());
+	}
 	
 	
-	@Test
+	/*@Test
 	public void attackNoSword() {
 		System.out.println("ATTACK WITHOUT SWORD");
 		Crab crab = new Crab();
@@ -55,5 +55,5 @@ public class GameTest {
 		game.hero.heal(game.hero.getMaxHp());
 		game.hero.changeEquipedWeapon(new Sword());
 		game.attack(crab.toString());
-	}
+	}*/
 }

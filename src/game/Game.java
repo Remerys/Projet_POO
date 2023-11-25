@@ -53,6 +53,7 @@ public class Game {
                 return c;
             }
         }
+        return null;
     }
 
     private void printSeparation() {
@@ -60,8 +61,8 @@ public class Game {
     }
 
     private NPC getCharacter(String npcName, Location loc) {
-        this.npcs.add(new Healer(loc));
-        this.npcs.add(Diogene.getDiogene(loc));
+        this.npcs.add(new Healer());
+        this.npcs.add(Diogene.getDiogene());
 
         for (NPC npc : this.npcs) {
             if (npc.getName().toUpperCase().equals(npcName.toUpperCase())) {
@@ -198,6 +199,7 @@ public class Game {
                 String answer = scanner.nextLine();
                 System.out.println(npcTalked.talk(answer));
             }
+            scanner.close();
             printSeparation();
         } else {
             System.out.println("This character doesn't exist");
