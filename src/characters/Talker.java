@@ -14,7 +14,6 @@ public interface Talker {
 	 * @return (String) : the text talked
 	 */
 	public String talk(); // Parler au départ
-	;
 
 	public String talk(String choice); // Apporter une réponse
 

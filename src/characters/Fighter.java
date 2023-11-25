@@ -107,7 +107,7 @@ public abstract class Fighter extends Character {
 	/**
 	 * In a fight, attack the player with fighter's damages
 	 * 
-	 * @param attacked (Hero)
+	 * @param attacked (Fighter)
 	 */
 	public void attack(Fighter attacked) {
 		attacked.getAttacked(this.getDamage());

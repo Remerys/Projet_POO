@@ -12,7 +12,6 @@ public class Healer extends NPC {
 		this.setDescription("A cute cosplayer with a wood stick.");
 	}
 	
-	@Override
 	public String talk() {
 		return "Do you want to be healed ? (yes/no)";
 	}

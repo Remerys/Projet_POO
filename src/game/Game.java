@@ -41,7 +41,7 @@ public class Game {
 
         this.mainQuest = new MainQuest();
 
-        // Command.handleCommands();
+        Command.handleCommands();
     }
 
     //To move in Location
@@ -193,7 +193,7 @@ public class Game {
             Scanner scanner = new Scanner(System.in);
             System.out.println(hero.getName() + " talks to " + character);
 
-            System.out.println(npcTalked.talk(null));
+            System.out.println(npcTalked.talk());
 
             while (!npcTalked.hasFinishedToTalk()) {
                 System.out.print("What's your answer ? ");

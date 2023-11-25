@@ -14,17 +14,19 @@ public class Command {
         // traitement spécifique
         // Sinon il faut les ajouter dans un else if de handleCommands() et dans une
         // méthode spécifique pour rendre le code plus lisible
-        /*commandMap.put("/help", game::displayAvailableCommands);
-        commandMap.put("/heal", game::heal);
-        commandMap.put("/inventory", game::displayInventory);
-        commandMap.put("/stop", game::stop);
-        commandMap.put("/stats", game::stats);
-        commandMap.put("/quests", game::quests);*/
+        /*
+         * commandMap.put("/help", game::displayAvailableCommands);
+         * commandMap.put("/heal", game::heal);
+         * commandMap.put("/inventory", game::displayInventory);
+         * commandMap.put("/stop", game::stop);
+         * commandMap.put("/stats", game::stats);
+         * commandMap.put("/quests", game::quests);
+         */
     }
 
     public static void setGame(Game game) {
-    	Command.game = game;
-    	commandMap.put("/help", game::displayAvailableCommands);
+        Command.game = game;
+        commandMap.put("/help", game::displayAvailableCommands);
         commandMap.put("/heal", game::heal);
         commandMap.put("/inventory", game::displayInventory);
         commandMap.put("/stop", game::stop);
@@ -43,30 +45,30 @@ public class Command {
 
                 // Vérifie la commande et exécute la méthode correspondante
 
-                 String start = command.split(" ")[0];
-                 //Pour gerer les arguments
-                 switch (start) {
-                 	case "/go":
-                 		handleGoCommand(command);
+                String start = command.split(" ")[0];
+                // Pour gerer les arguments
+                switch (start) {
+                    case "/go":
+                        handleGoCommand(command);
                         break;
-                 	case "/attack":
-                 		handleInteractionCommand(command);
+                    case "/attack":
+                        handleInteractionCommand(command);
                         break;
-                 	case "/talk":
-                 		handleInteractionCommand(command);
+                    case "/talk":
+                        handleInteractionCommand(command);
                         break;
-                 	case "/quest":
-                 		handleQuestCommand(command);
+                    case "/quest":
+                        handleQuestCommand(command);
                         break;
-                 	case "/addXp":
-                 		addXpCommand(command);
+                    case "/addXp":
+                        addXpCommand(command);
                         break;
-                 	case "/use":
-                 		handleItemCommand(command);
+                    case "/use":
+                        handleItemCommand(command);
                         break;
-                 	default:
-                 		handleGeneralCommand(command);
-                 }
+                    default:
+                        handleGeneralCommand(command);
+                }
             }
         }
     }
@@ -155,14 +157,14 @@ public class Command {
     }
 
     public static String getName() {
-    	String name = "";
+        String name = "";
         Scanner scanner = new Scanner(System.in);
 
         while (name == "") {
             System.out.print("Enter your name : ");
             name = scanner.nextLine();
         }
-
-    	return name;
+        scanner.close();
+        return name;
     }
 }

@@ -13,22 +13,18 @@ public abstract class NPC extends Character implements Talker {
 		super(name);
 	}
 
-	@Override
 	public boolean hasFinishedToTalk() {
 		return this.hasFinishedToTalk;
 	}
 
-	@Override
 	public void finishedToTalk() {
 		this.hasFinishedToTalk = true;
 	}
 
-	@Override
 	public void resetTalkState() {
 		this.hasFinishedToTalk = false;
 	}
 	
-	@Override
 	public String talk(String choice) {
 		return talk();
 	}

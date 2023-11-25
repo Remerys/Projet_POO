@@ -24,7 +24,7 @@ public class Diogene extends NPC {
 	
 	@Override
 	public String talk() {
-		super.finishedToTalk();
+		this.finishedToTalk();
 		return "Get out of my sun!";
 	}
 	
