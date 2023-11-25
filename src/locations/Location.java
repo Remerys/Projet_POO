@@ -4,15 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-// import characters.Character;
+import characters.Character;
+import characters.Talker;
+import characters.Fighter;
 import items.Item;
 
 public class Location {
+    // Constants declarations
     private final String NAME;
     private final String DESCRIPTION;
 
+
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
-    private List<Character> characters = new ArrayList<Character>();
+
+    // The characters ares stocked in two lists, because they are usedd in two ways
+    private List<Fighter> fighters = new ArrayList<Fighter>();
+    private List<Talker> talkers = new ArrayList<Talker>();
+
     private List<Item> items = new ArrayList<Item>();
     
     /**
@@ -89,16 +97,53 @@ public class Location {
     /**
      * Adds a given character to the location
      */
-    public void addCharacter(Character c) {
-        this.characters.add(c);
+    public void addCharacter(Character c) throws Exception {
+        boolean hasCharacterBeenAdded = false;
+
+        if (c instanceof Talker) {
+            this.talkers.add((Talker)c));
+            hasCharacterBeenAdded = true;
+        }
+
+        if (c instanceof Fighter) {
+            this.fighters.add((Fighter)c)
+            hasCharacterBeenAdded = true;
+        }
+
+        if (!hasCharacterBeenAdded) {
+            throw new Exception("The character can't be interacted with !");
+        }
     }
 
     /**
      * Removes a given character from the location
      */
-    public void removeCharacter(Character c) {
-        this.characters.remove(c);
+    public void removeCharacter(Character c) throws Exception {
+        if (c instanceof Talker) {
+            this.removeTalker((Talker)c);
+        }
+
+        if (c instanceof Fighter) {
+            this.removeFighter((Fighter)c);
+        }
     }
+
+    private void removeTalker(Talker c) throws Exception {
+        boolean res = this.talkers.remove(c);
+        
+        if (!res) {
+            throw new Exception("removeTalker : The character couldn't be removed !");
+        }
+    }
+
+    private void removeFighter(Fighter c) throws Exception {
+        boolean res = this.fighters.remove(c);
+        
+        if (!res) {
+            throw new Exception("removeFighters : The character couldn't be removed !");
+        }
+    }
+
 
      /**
      * Adds a given item to the location
@@ -130,17 +175,12 @@ public class Location {
     /**
      * Returns the characters
      */
-    public List<Character> getCharacters() {
-        return this.characters;
+    public List<Talker> getTalkers() {
+        return this.talkers;
     }
 
-    public List<Talker> getTalkers() {
-        List<Talker> res = new ArrayList<Talker>();
-        for (Character chara : characters) {
-            if (chara instanceof Talker) {
-                res.add(chara);
-            }
-        }
+    public List<Fighter> getFighters() {
+        return this.fighters;
     }
 
     /**
@@ -148,6 +188,20 @@ public class Location {
      */
     public String getDescription() {
         return this.DESCRIPTION;
+    }
+
+    public List<Item> getItems() {
+        return this.items;
+    }
+
+    public Item getItem(String itemName) {
+        for (Item i : this.items) {
+            if (i.toString() == itemName) {
+                return i;
+            }
+        }
+
+        return null;
     }
 
 
