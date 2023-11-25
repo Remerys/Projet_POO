@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import characters.*;
-import characters.Character;
 import items.Flute;
+import items.HealPotion;
 import items.Item;
 import items.Sword;
 import locations.Location;
@@ -14,17 +14,17 @@ import quests.MainQuest;
 //import quests.Quest;
 
 /**
- * The principal game
+ * The main game
  *
  * @author Romain
  * @author Lilian
  */
 public class Game {
     public Hero hero;
-    private List<Location> locations = new ArrayList<Location>(); //TODO remove
-    private List<Character> characters = new ArrayList<Character>(); //same
-    private List<Fighter> fighters = new ArrayList<Fighter>(); //Same
-    private List<NPC> npcs = new ArrayList<NPC>(); //same
+    private List<Location> locations = new ArrayList<Location>();
+    private List<Item> items = new ArrayList<Item>();
+    private List<Fighter> fighters = new ArrayList<Fighter>();
+    private List<Talker> talkers = new ArrayList<Talker>();
     private MainQuest mainQuest;
     public static final String SEPARATION = "--------------------------------------------------------------------";
     public static final Scanner SCANNER = new Scanner(System.in);
@@ -47,8 +47,7 @@ public class Game {
         try {
             this.hero.addItem(flute);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("ERROR addItem(flute)");
         }
 
         this.mainQuest = new MainQuest();
@@ -56,50 +55,20 @@ public class Game {
         Command.handleCommands();
     }
 
-    //To move in Location
-    private Character getCharacter(String character) {// , Location loc) {
-        this.characters.add(Diogene.getDiogene());
-        this.characters.add(new Healer());
-
-        for (Character c : this.characters) {
-            if (c.getName().toUpperCase().equals(character.toUpperCase())) {
-                return c;
-            }
-        }
-        return null;
-    }
-
     public static void printSeparation() {
         System.out.println(Game.SEPARATION);
     }
 
-    private NPC getNpc(String npcName, Location loc) {
-        this.npcs.add(new Healer());
-        this.npcs.add(Diogene.getDiogene());
-
-        for (NPC npc : this.npcs) {
-            if (npc.getName().toUpperCase().equals(npcName.toUpperCase())) {
-                return npc;
-
+    private Talker getTalker(String talkerName) {
+        for (Talker talker : this.talkers) {
+            if (talker.toString().toUpperCase().equals(talkerName.toUpperCase())) {
+                return talker;
             }
         }
         return null;
     }
 
-    private Fighter getFighter(String enemyName, Location loc) {
-        // TODO Initialisation des locs :
-        // il faudrait normalement le faire à chaque fois qu'on se déplace d'une map à
-        // une autre avec des fonctions du style
-        // this.characters = loc.getCharacters();
-        // this.enemys = this.characters.getEnemys();
-        // fin initialisation locs
-
-        /* TEST VU QUE J'AI PAS LES LISTES POUR L'INSTANT */
-        this.fighters.add(new Crab()); // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.fighters.add(new RabbitOfCaerbannog()); // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.fighters.add(new Crab()); // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.fighters.add(new RabbitOfCaerbannog()); // A SUPPRIMER QUAND ON AURA LES LISTES
-
+    private Fighter getFighter(String enemyName) {
         for (Fighter fighter : this.fighters) {
             if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
                 return fighter;
@@ -108,10 +77,7 @@ public class Game {
         return null;
     }
 
-    /*
-     * -----------------------------------------------------------------------------
-     * ----------------------------------------------
-     */
+    /* --------------------------------------------------------------------------------------------------------------------------- */
     /* ALL COMMANDS */
 
     public void displayAvailableCommands() {
@@ -148,14 +114,18 @@ public class Game {
         try {
             Location location = this.hero.getLocation().exitTo(locationName);
             System.out.println(hero.getName() + " go to " + locationName);
+
             this.hero.setLocation(location);
+            this.items = location.getItems();
+            this.fighters = location.getFighters();
+            this.talkers = location.getTalkers();
         } catch (Exception e) {
             System.out.println("You can't access this map OR it doesn't exist : " + locationName);
         }
     }
 
     public void attack(String enemyName) {
-        Fighter fighterAttacked = this.getFighter(enemyName, hero.getLocation());
+        Fighter fighterAttacked = this.getFighter(enemyName);
 
         if (fighterAttacked != null) {
             int turnNumber = 0;
@@ -202,7 +172,7 @@ public class Game {
     }
 
     public void talk(String character) {
-    	NPC npcTalked = this.getNpc(character, hero.getLocation());
+    	Talker npcTalked = this.getTalker(character);
 
         if (npcTalked != null) {
             npcTalked.resetTalkState();
@@ -280,9 +250,9 @@ public class Game {
         System.out.println("A short description : " + locationDescription + "\n");
 
         // printList("List of maps you can go :", location.getExits()); // TODO Remettre quand la fonction getExits existera
-        printList("List of items in this map :", location.getItems());
-        printList("List of mobs in this map :", location.getFighters());
-        printList("List of NPCs you can talk to in this map :", location.getTalkers());
+        printList("List of items in this map :", this.items);
+        printList("List of mobs in this map :", this.fighters);
+        printList("List of NPCs you can talk to in this map :", this.talkers);
 
     }
 

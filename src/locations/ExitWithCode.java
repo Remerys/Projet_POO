@@ -3,9 +3,9 @@ package locations;
 public class ExitWithCode extends ExitWithLock {
     private final String CODE;
     private final String CODE_MESSAGE_OK = "La sortie a été déverrouillée.";
-    private final String CODE_MESSAGE_WRONG = "Le code entré est mauvais.";        
+    private final String CODE_MESSAGE_WRONG = "Le code entré est mauvais.";
     private final String CODE_UNLOCK_UNAUTHORIZED = "La sortie n'est pas ouverte";
-    
+
     private boolean has_code_been_entered = false;
 
     public ExitWithCode(Location newLoc, String CODE, String description) {
@@ -24,9 +24,9 @@ public class ExitWithCode extends ExitWithLock {
 
     @Override
     public void unlock() throws Exception{
-        if (has_code_been_entered) 
+        if (has_code_been_entered)
             super.unlock();
-        else 
+        else
             throw new Exception(CODE_UNLOCK_UNAUTHORIZED);
     }
 }

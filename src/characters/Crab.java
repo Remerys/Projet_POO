@@ -3,7 +3,7 @@ package characters;
 /**
  * Crabs have eight legs and two claws, varying in size depending on the
  * species, two eyes and a carapace. They move by walking on their side.
- * 
+ *
  * @author Lilian
  */
 public class Crab extends Fighter {

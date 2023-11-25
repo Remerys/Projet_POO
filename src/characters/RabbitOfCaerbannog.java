@@ -6,7 +6,7 @@ package characters;
  * It's a cute rabbit, but very dangerous
  * <br>
  * Should be kill in the first turn, else the hero die
- * 
+ *
  * @author Lilian
  */
 public class RabbitOfCaerbannog extends Fighter {
