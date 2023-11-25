@@ -1,7 +1,5 @@
 package characters;
 
-import locations.Location;
-
 /**
  * A odd person in a barrel
  * @author Lilian
@@ -10,15 +8,15 @@ public class Diogene extends NPC {
 
 	private static Diogene instance = null;
 	
-	private Diogene(Location loc) {
-		super("Diogene", loc,  1);
+	private Diogene() {
+		super("Diogene");
 		this.setDescription("A odd person in a barrel.");
 	}
 
-	public static Diogene getDiogene(Location loc) {
+	public static Diogene getDiogene() {
 		//singleton
 		if (instance == null) {
-			instance = new Diogene(loc);
+			instance = new Diogene();
 		}
 		return instance;
 	}

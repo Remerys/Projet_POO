@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import characters.*;
 import characters.Character;
-import characters.Diogene;
-import characters.Ork;
-import characters.RabbitOfCaerbannog;
-import characters.Talker;
-import characters.Villain;
-import hero.Hero;
 import items.Sword;
 import locations.Location;
 import quests.MainQuest;
-import quests.Quest;
+//import quests.Quest;
 
 /**
  * The principal game
@@ -23,10 +18,10 @@ import quests.Quest;
  * @author Lilian
  */
 public class Game {
-    private Hero hero;
+    public Hero hero;
     private List<Location> locations = new ArrayList<Location>();
     private List<Character> characters = new ArrayList<Character>();
-    private List<Villain> villains = new ArrayList<Villain>();
+    private List<Fighter> fighters = new ArrayList<Fighter>();
     private MainQuest mainQuest;
 
     public Game() {
@@ -40,13 +35,17 @@ public class Game {
     	// String name = Command.getName();
 
     	this.hero = Hero.createHero("Player", null);
+    	Character.setHero(this.hero);
 
     	this.mainQuest = new MainQuest();
 
-        Command.handleCommands();
+        //Command.handleCommands();
     }
 
-    private Character getCharacter(String character, Location loc) {
+    private Character getCharacter(String character) {//, Location loc) {
+    	this.characters.add(Diogene.getDiogene());
+    	this.characters.add(new Healer());
+    	
         for (Character c : this.characters) {
             if (c.getName().toUpperCase().equals(character.toUpperCase())) {
                 return c;
@@ -55,23 +54,23 @@ public class Game {
         return null;
     }
 
-    private Villain getVillain(String villainName, Location loc) {
+    private Fighter getFighter(String enemyName, Location loc) {
         // TODO Initialisation des locs :
         // il faudrait normalement le faire à chaque fois qu'on se déplace d'une map à une autre avec des fonctions du style
         // this.characters = loc.getCharacters();
-        // this.villains = this.characters.getVillains();
+        // this.enemys = this.characters.getEnemys();
         // fin initialisation locs
 
 
         /* TEST VU QUE J'AI PAS LES LISTES POUR L'INSTANT */
-        this.villains.add(new Ork(loc));                   // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.villains.add(new RabbitOfCaerbannog(loc));      // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.villains.add(new Ork(loc));                     // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.villains.add(new RabbitOfCaerbannog(loc));      // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new Crab());                   // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new RabbitOfCaerbannog());      // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new Crab());                     // A SUPPRIMER QUAND ON AURA LES LISTES
+        this.fighters.add(new RabbitOfCaerbannog());      // A SUPPRIMER QUAND ON AURA LES LISTES
 
-        for (Villain villain : this.villains) {
-            if (villain.getName().toUpperCase().equals(villainName.toUpperCase())) {
-                return villain;
+        for (Fighter fighter : this.fighters) {
+            if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
+                return fighter;
             }
         }
         return null;
@@ -111,68 +110,67 @@ public class Game {
         System.out.println(hero.getName() + " go to " + location);
     }
 
-    public void attack(String villainName) {
-        Villain villainAttacked = this.getVillain(villainName, hero.getLocation());
+    public void attack(String enemyName) {
+        Fighter fighterAttacked = this.getFighter(enemyName, hero.getLocation());
 
-        if (villainAttacked != null) {
+        if (fighterAttacked != null) {
             int turnNumber = 0;
-            System.out.println(hero.getName() + " attacks " + villainAttacked.getName() + ":\n");
-            System.out.print("--------------------------------------------------------------------");
+            System.out.println(hero.getName() + " attacks " + fighterAttacked.getName() + ":\n");
+            System.out.println("--------------------------------------------------------------------");
 
-            while (villainAttacked.getHp() != 0 & this.hero.getHp() != 0) {
+            while (fighterAttacked.getHp() != 0 & this.hero.getHp() != 0) {
                 System.out.println("Turn " + turnNumber);
                 turnNumber++;
-
-                if (hero.getSpeed() > villainAttacked.getSpeed()) {
-                    System.out.println(hero.getName() + " attacks first :");
-
-                    System.out.print(villainAttacked.getName() + " takes " + hero.getDamage() + " damage ");
-                    this.hero.attack(villainAttacked);
-                    System.out.println("| HP remaining :" + villainAttacked.getHp());
-
-                    /* -------------------------------------------------------------------------------------------------------- */
-
-                    System.out.print(hero.getName() + " takes " + villainAttacked.getDamage() + " damage ");
-                    villainAttacked.attack(this.hero);
-                    System.out.println("| HP remaining :" + hero.getHp());
+                Fighter attacker;
+                Fighter attacked;
+                
+                if (hero.getSpeed() > fighterAttacked.getSpeed()) {
+                    attacker = this.hero;
+                    attacked = fighterAttacked;
                 } else {
-                    System.out.println(villainAttacked.getName() + " attacks first :");
-
-                    System.out.println(hero.getName() + " takes " + villainAttacked.getDamage() + " damage ");
-                    this.hero.attack(villainAttacked);
-                    System.out.println("| HP remaining :" + hero.getHp());
-
-                    /* -------------------------------------------------------------------------------------------------------- */
-
-                    System.out.print(villainAttacked.getName() + " takes " + hero.getDamage() + " damage ");
-                    villainAttacked.attack(this.hero);
-                    System.out.println("| HP remaining :" + villainAttacked.getHp());
+                	attacker = fighterAttacked;
+                    attacked = this.hero;
                 }
+                
+                System.out.println(attacker.getName() + " attacks first :");
+                attack_aux(attacker, attacked);
 
+                /* -------------------------------------------------------------------------------------------------------- */
+                if (attacked.getHp() != 0) {
+                	attack_aux(attacked, attacker);
+                }
                 System.out.println("--------------------------------------------------------------------");
             }
 
-            if (villainAttacked.getHp() != 0) {
-                villainAttacked.fullyHeals();
+            if (fighterAttacked.getHp() != 0) {
+                fighterAttacked.fullyHeals();
             }
         } else {
             System.out.println("This character doesn't exist");
         }
     }
+    
+    private void attack_aux(Fighter attacker, Fighter attacked) {
+    	System.out.print(attacked.getName() + " takes " + attacker.getDamage() + " damage ");
+        attacker.attack(attacked);
+        System.out.println("| HP remaining :" + attacked.getHp());
+    }
 
     public void talk(String character) {
-    	Character characterTalked = this.getCharacter(character, hero.getLocation());
+    	Character characterTalked = this.getCharacter(character);
     	if (characterTalked != null) {
     		Scanner scanner = new Scanner(System.in);
     		System.out.println(hero.getName() + " talk to " + character);
 
     		Talker talker = (Talker) characterTalked;
-    		talker.talk(null);
+    		System.out.println(talker.talk(null));
     		while (!talker.hasFinishedToTalk()) {
     			System.out.print("What's your answer ? ");
                 String answer = scanner.nextLine();
-                talker.talk(answer);
+                System.out.println(talker.talk(answer));
     		}
+    		System.out.println();
+    		scanner.close();
     		//Should put FinishedToTalk to false here
     	} else {
     		System.out.println("This character doesn't exist");

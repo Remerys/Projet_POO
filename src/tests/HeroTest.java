@@ -2,11 +2,9 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import hero.Hero;
-import items.*;
+import characters.Hero;
 import locations.Location;
 
 public class HeroTest {
@@ -32,8 +30,8 @@ public class HeroTest {
 	public void levelUp2() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.addXp(150);
-		System.out.println(hero.getHp());
-		System.out.println(hero.getMp());
+		//System.out.println(hero.getHp());
+		//System.out.println(hero.getMp());
 		assertEquals(5, hero.getLevel());
 		Hero.destroyHero();
 	}

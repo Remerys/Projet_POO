@@ -1,8 +1,5 @@
 package characters;
 
-import hero.Hero;
-import locations.Location;
-
 /**
  * An abstract class representing all the characters in the world except the hero
  * @author Lilian
@@ -13,28 +10,25 @@ public abstract class Character {
 	 */
 	public static final int DEFAULT_MAX_HP = 500;
 
-	private final String NAME;
+	protected final String NAME;
 	private String description;
-	private int hp;
-	private final int MAX_HP;
-	private int xpDropped;
-	private Location loc;
 	protected static Hero hero;
 
 	protected boolean hasFinishedToTalk;
 
-	public Character(String name, String description, Location loc, int maxHp, int xpDropped) {
+	public Character(String name, String description) {
 		this.NAME = name;
 		this.description = name;
-		this.loc = loc;
-		this.MAX_HP = maxHp;
-		this.hp = maxHp;
-		this.xpDropped = xpDropped;
 		this.hasFinishedToTalk = false;
 	}
 
-	public Character(String name, Location loc, int maxHp, int xpDropped) {
-		this(name, "", loc, maxHp, xpDropped);
+	public Character(String name) {
+		this(name, "");
+	}
+	
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
 	}
 
 
@@ -60,48 +54,7 @@ public abstract class Character {
 		return this.description;
 	}
 
-	/**
-	 * Give the character's location
-	 * @return location (Location)
-	 */
-	public Location getLocation() {
-		return this.loc;
-	}
-
-	/**
-	 * Give the character's health points
-	 * @return hp (int)
-	 */
-	public int getHp() {
-		return this.hp;
-	}
-
-	/**
-	 * Verify if the character is dead
-	 * @return isDead (boolean)
-	 */
-	public boolean isDead() {
-		return this.hp == 0;
-	}
-
-	/**
-	 * Changes the character's hp according to damage suffered
-	 * @param damage (int) : the number of damages suffered
-	 */
-	public void getAttacked(int damage) {
-		this.hp -= damage;
-		if (this.hp < 0) {
-			this.hp = 0;
-		}
-	}
-
-	/**
-	 * Return the experience obtain after kill this character
-	 * @return the experience obtain
-	 */
-	public int getXpDropped() {
-		return this.xpDropped;
-	}
+	
 
 	/*------------------------------------------------------------------------------------
 	 *
@@ -123,13 +76,5 @@ public abstract class Character {
 	 */
 	public static void setHero(Hero hero) {
 		Character.hero = hero;
-	}
-
-	/**
-	* Change the Character's health points to their maximum
-	* @param hp (int)
-	*/
-	public void fullyHeals() {
-		this.hp = this.MAX_HP;
 	}
 }
