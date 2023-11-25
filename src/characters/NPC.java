@@ -12,13 +12,19 @@ public abstract class NPC extends Character implements Talker{
 	}
 
 	@Override
-	public boolean hasFinishedToTalk() {
+	public boolean hasFinishedTalking() {
 		return this.hasFinishedToTalk;
 	}
 
 	@Override
-	public void finishedToTalk() {
+	public void stopsTalking() {
 		// TODO Auto-generated method stub
 		this.hasFinishedToTalk = true;
+	}
+
+	@Override
+	public void startsTalking() {
+		// TODO Auto-generated method stub
+		this.hasFinishedToTalk = false;
 	}
 }

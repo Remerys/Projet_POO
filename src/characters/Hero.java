@@ -388,23 +388,23 @@ public class Hero extends Fighter{
 	 * Print the hero's statistics
 	 */
 	public void printStats() {
-		System.out.println("Name : " + this.NAME);
+		System.out.println("Name  : " + this.NAME);
 		System.out.println("Level : " + this.level);
-		System.out.println(String.format("Xp : %d / %d", this.xp, this.xpNewLvl));
-		System.out.println(String.format("Hp : %d / %d", this.hp, this.maxHp));
-		System.out.println(String.format("Mp : %d / %d", this.mp, this.maxMp));
-		System.out.println(String.format("Inventory : %d / %d", this.inventory.getWeight(), this.inventory.getMaxWeight()));
+		System.out.println(String.format("XP : %d / %d", this.xp, this.xpNewLvl));
+		System.out.println(String.format("HP : %d / %d", this.hp, this.maxHp));
+		System.out.println(String.format("MP : %d / %d", this.mp, this.maxMp));
+		System.out.println(String.format("Inventory weight : %d / %d", this.inventory.getWeight(), this.inventory.getMaxWeight()));
 
 		if (this.weapon != null) {
 			System.out.println("Location : " + this.loc);
-			} else {
-				System.out.println("Location : None");
+		} else {
+			System.out.println("Location : None");
 		}
 
 		if (this.weapon != null) {
 			System.out.println("Weapon Equiped : " + this.weapon);
-			} else {
-				System.out.println("Weapon Equiped : None");
+		} else {
+			System.out.println("Weapon Equiped : None");
 		}
 		System.out.println();
 	}

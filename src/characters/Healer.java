@@ -1,6 +1,8 @@
 package characters;
+
 /**
  * A NPC who can heal the hero
+ * 
  * @author Lilian
  */
 public class Healer extends NPC {
@@ -12,10 +14,11 @@ public class Healer extends NPC {
 
 	@Override
 	public String talk(String choice) {
+		String string = "";
+
 		if (choice == null) {
 			return "Do you want to be healed ? (yes/no)";
 		} else {
-			this.finishedToTalk();
 			if ("YES".equals(choice.toUpperCase())) {
 				this.heal();
 				return "I'm healing you";
@@ -24,11 +27,19 @@ public class Healer extends NPC {
 			} else {
 				return "What are you talking about ?";
 			}
+			super.stopsTalking();
 		}
+
+		return string;
 	}
 
 	public void heal() {
-		Character.hero.heal(Character.hero.getMaxHp());
+		try {
+			hero = Hero.getHero();
+			hero.heal(hero.getMaxHp());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
