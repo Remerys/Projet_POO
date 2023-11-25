@@ -20,10 +20,10 @@ import quests.MainQuest;
  */
 public class Game {
     public Hero hero;
-    private List<Location> locations = new ArrayList<Location>();
-    private List<Character> characters = new ArrayList<Character>();
-    private List<Fighter> fighters = new ArrayList<Fighter>();
-    private List<NPC> npcs = new ArrayList<NPC>();
+    private List<Location> locations = new ArrayList<Location>(); //TODO remove
+    private List<Character> characters = new ArrayList<Character>(); //same
+    private List<Fighter> fighters = new ArrayList<Fighter>(); //Same
+    private List<NPC> npcs = new ArrayList<NPC>(); //same
     private MainQuest mainQuest;
     public static final String SEPARATION = "--------------------------------------------------------------------";
 
@@ -45,6 +45,7 @@ public class Game {
         // Command.handleCommands();
     }
 
+    //To move in Location
     private Character getCharacter(String character) {// , Location loc) {
         this.characters.add(Diogene.getDiogene());
         this.characters.add(new Healer());
@@ -238,14 +239,17 @@ public class Game {
         try {
             this.hero.addItem(new Sword());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     public void use(String itemName) {
         System.out.println("Utilisation de : " + itemName);
-        Item itemUsed = getItem(itemName);
-        Hero.useItem(itemUsed);
+        Item itemUsed = this.hero.getItem(itemName);
+        try {
+			this.hero.useItem(itemUsed);
+		} catch (Exception e) {
+			System.out.println("This item isn't usable.");
+		}
     }
 }

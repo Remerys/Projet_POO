@@ -81,6 +81,20 @@ public class Inventory {
 	public Item getItem(int index) {
 		return this.items.get(index);
 	}
+	
+	/**
+	 * Get an item with a string
+	 * @param itemType
+	 * @return
+	 */
+	public Item getItem(String itemType) {
+		for (Item item : this.items) {
+			if (item.getClass().getName() == itemType) {
+				return item;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Get the first item in the inventory

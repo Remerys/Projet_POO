@@ -7,7 +7,7 @@ import org.junit.Test;
 import characters.*;
 import characters.Character;
 import game.Game;
-import items.*;
+//import items.*;
 
 public class GameTest {
 	Game game;

@@ -178,6 +178,23 @@ public class Hero extends Fighter{
 	public int getRange() {
 		return this.weapon.getRange();
 	}
+	
+	/**
+	 * Get a hero's item
+	 * @param itemType
+	 * @return
+	 */
+	public Item getItem(String itemType) {
+		return this.inventory.getItem(itemType);
+	}
+	
+	/**
+	 * Get a hero's potion
+	 * @return a hero's potion
+	 */
+	public Potion getPotion() {
+		return this.inventory.getPotion();
+	}
 
 	/*------------------------------------------------------------------------------------
 	 *
@@ -335,12 +352,16 @@ public class Hero extends Fighter{
 	/**
 	 * Use the effect of the item and remove it from hero's inventory
 	 * @param item (Item)
-	 * @throws Exception : Cannot remove an item not present in the inventory
+	 * @throws Exception : This item isn't usable
 	 */
 	public void useItem(Item item) throws Exception {
 		if (this.hasItem(item)) {
-			//(Usable) item.use();
-			this.inventory.removeItem(item);
+			if (item instanceof Usable) {
+				((Usable)item).use();
+				this.inventory.removeItem(item);
+			} else {
+				throw new Exception("This item isn't usable");
+			}
 		}
 	}
 
@@ -359,14 +380,6 @@ public class Hero extends Fighter{
 	 */
 	public boolean hasPotion() {
 		return this.inventory.hasPotion();
-	}
-
-	/**
-	 * Get a hero's potion
-	 * @return a hero's potion
-	 */
-	public Potion getPotion() {
-		return this.inventory.getPotion();
 	}
 
 	/**
