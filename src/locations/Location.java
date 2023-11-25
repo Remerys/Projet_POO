@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// import characters.Character;
+import items.Item;
+
 public class Location {
     private final String NAME;
     private final String DESCRIPTION;
 
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
     private List<Character> characters = new ArrayList<Character>();
+    private List<Item> items = new ArrayList<Item>();
     
     /**
      * Returns a list of locations for the game
@@ -17,7 +21,7 @@ public class Location {
     public static ArrayList<Location> createGameLocations() {
         ArrayList<Location> locs = new ArrayList<Location>();
 
-        // TODO: Add characters to the locations, and mayber transfer them in the Game class
+        // TODO: Add characters to the locations
         // Creation of the locations
         locs.add(new Location("Le commencement", "Une île paisible loin de tout le reste du monde"));
         locs.add(new Location("Île n°1", "Une île inconnue située à une extrémité de l'archipel. Vous pouvez observer une autre île au loin."));
@@ -64,7 +68,7 @@ public class Location {
         this.exits.put(loc.getName(), exit);
     }
 
-    // TODO: ???
+    // TODO: Regarder avec enum
     public void addExitWithCode(Location loc, String code, String description) {
         Exit exit = new ExitWithCode(loc, code, description);
         this.exits.put(loc.getName(), exit);
@@ -96,6 +100,20 @@ public class Location {
         this.characters.remove(c);
     }
 
+     /**
+     * Adds a given item to the location
+     */
+    public void addItem(Item i) {
+        this.items.add(i);
+    }
+
+     /**
+     * Adds a given item to the location
+     */
+    public void removeItem(Item i) {
+        this.items.remove(i);
+    }
+
 
     /* --------------------*
      *       Getters       *
@@ -108,8 +126,21 @@ public class Location {
         return this.NAME;
     }
 
+    // TODO:
+    /**
+     * Returns the characters
+     */
     public List<Character> getCharacters() {
         return this.characters;
+    }
+
+    public List<Talker> getTalkers() {
+        List<Talker> res = new ArrayList<Talker>();
+        for (Character chara : characters) {
+            if (chara instanceof Talker) {
+                res.add(chara);
+            }
+        }
     }
 
     /**
@@ -130,6 +161,4 @@ public class Location {
     public Location exitTo(String exit) throws Exception {
         return this.exits.get(exit).exit();
     }
-
-    
 }
