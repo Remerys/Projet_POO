@@ -106,7 +106,7 @@ public class Location {
         }
 
         if (c instanceof Fighter) {
-            this.fighters.add((Fighter)c)
+            this.fighters.add((Fighter)c);
             hasCharacterBeenAdded = true;
         }
 
