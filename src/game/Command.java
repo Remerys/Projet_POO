@@ -78,16 +78,25 @@ public class Command {
         }
     }
 
-    // Traitement de la commande /go <Direction>
+    // Traitement de la commande /go <Map Name>
     private static void handleGoCommand(String command) {
         // Sépare la commande et la direction
         String[] parts = command.split(" ");
+        int partsLength = parts.length;
 
-        if (parts.length == 2) {
-            String direction = parts[1];
-            game.goTo(direction);
+        if (parts.length != 1) {
+            String mapName = "";
+            for (int i = 1; i < parts.length; i++) {
+                if (i < partsLength - 1) {
+                    mapName += parts[i] + " ";
+                } else {
+                    mapName += parts[i];
+                }
+            }
+
+            game.goTo(mapName);
         } else {
-            System.out.println("Incorrect command format. Usage : /go <Direction>");
+            System.out.println("Incorrect command format. Usage : /go <Map Name>");
         }
     }
 

@@ -97,7 +97,7 @@ public class Game {
         System.out.println("/help - Displays the list of available commands.");
         System.out.println("/heal - Heal the Hero.");
         System.out.println("/inventory - Display the inventory.");
-        System.out.println("/go <Direction> - Go to a direction (North, East, South, West).");
+        System.out.println("/go <Map Name> - Go to another map.");
         System.out.println("/attack <Character name> - Attack a character if possible.");
         System.out.println("/talk <Character name> - Talk to a character if possible.");
         System.out.println("/stop - Stop the game.");
@@ -106,6 +106,7 @@ public class Game {
         System.out.println("/quest <Quest name> - Display a specific quest with more information.");
         System.out.println("/use <item name> - Use an item.");
         System.out.println("/map - Displays information from the current map.");
+        System.out.println("/take <Item Name> - Take an item on the map");
     }
 
     public void displayInventory() {
@@ -264,7 +265,6 @@ public class Game {
         printList("List of items in this map :", this.items);
         printList("List of mobs in this map :", this.fighters);
         printList("List of NPCs you can talk to in this map :", this.talkers);
-
     }
 
     private void printList(String title, List<?> list) {
