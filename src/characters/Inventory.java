@@ -10,7 +10,7 @@ import items.*;
 /**
  * The inventory is a kind of bag, which can contain a certain number of items
  * and interact with
- * 
+ *
  * @author Lilian
  */
 public class Inventory {
@@ -27,7 +27,7 @@ public class Inventory {
 
 	/**
 	 * Add an item in the inventory
-	 * 
+	 *
 	 * @param item (Item)
 	 * @throws Exception : Cannot add another item
 	 */
@@ -43,7 +43,7 @@ public class Inventory {
 
 	/**
 	 * Remove an item in the inventory
-	 * 
+	 *
 	 * @param item (Item)
 	 * @throws Exception : Cannot remove an item not present in the inventory
 	 */
@@ -58,14 +58,14 @@ public class Inventory {
 	}
 
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Getters
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
 
 	/**
 	 * Get all items
-	 * 
+	 *
 	 * @return all items
 	 */
 	public List<Item> getItems() {
@@ -74,7 +74,7 @@ public class Inventory {
 
 	/**
 	 * Get an item in an specific index,
-	 * 
+	 *
 	 * @param index (int)
 	 * @return item
 	 */
@@ -84,7 +84,7 @@ public class Inventory {
 
 	/**
 	 * Get an item with a string
-	 * 
+	 *
 	 * @param itemType
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public class Inventory {
 
 	/**
 	 * Get the first item in the inventory
-	 * 
+	 *
 	 * @return first item
 	 */
 	public Item getFirstItem() {
@@ -108,7 +108,7 @@ public class Inventory {
 
 	/**
 	 * Get the number of items in the inventory
-	 * 
+	 *
 	 * @return the numbers of items
 	 */
 	public int getNbItems() {
@@ -117,7 +117,7 @@ public class Inventory {
 
 	/**
 	 * Return a list with a specific type of item
-	 * 
+	 *
 	 * @param itemType (Type) : the specific class
 	 * @return a list of this type of item
 	 */
@@ -133,7 +133,7 @@ public class Inventory {
 
 	/**
 	 * Return a list with all the potions in the inventory
-	 * 
+	 *
 	 * @return all potions
 	 */
 	public List<Potion> getPotions() {
@@ -142,7 +142,7 @@ public class Inventory {
 
 	/**
 	 * Return the first potion
-	 * 
+	 *
 	 * @return one potion
 	 */
 	public Potion getPotion() {
@@ -151,7 +151,7 @@ public class Inventory {
 
 	/**
 	 * Return a list with all the weapons in the inventory
-	 * 
+	 *
 	 * @return all weapons
 	 */
 	public List<Weapon> getWeapons() {
@@ -167,14 +167,14 @@ public class Inventory {
 	}
 
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Conditions
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
 
 	/**
 	 * Verify if there is a specific type of item in the inventory
-	 * 
+	 *
 	 * @param itemType (Type) : the specific type
 	 * @return if there is a specific type of item
 	 */
@@ -184,7 +184,7 @@ public class Inventory {
 
 	/**
 	 * Verify if there is a potion in the inventory
-	 * 
+	 *
 	 * @return if there is a potion
 	 */
 	public boolean hasPotion() {
@@ -193,7 +193,7 @@ public class Inventory {
 
 	/**
 	 * Verify if there is a weapon in the inventory
-	 * 
+	 *
 	 * @return if there is a weapon
 	 */
 	public boolean hasWeapon() {
@@ -202,7 +202,7 @@ public class Inventory {
 
 	/**
 	 * Verify if there is a item in the inventory
-	 * 
+	 *
 	 * @return if there is a item
 	 */
 	public boolean hasItem(Item item) {
@@ -210,9 +210,9 @@ public class Inventory {
 	}
 
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Prints
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
 
 	/*
@@ -230,7 +230,7 @@ public class Inventory {
 
 	/**
 	 * Get all non-specific items
-	 * 
+	 *
 	 * @return a list of items
 	 */
 	private List<Item> getOtherItems() {
@@ -242,7 +242,7 @@ public class Inventory {
 
 	/**
 	 * Print an item with the numbers of this items in front of this item
-	 * 
+	 *
 	 * @param item  (Item)
 	 * @param count (int)
 	 */
@@ -255,7 +255,7 @@ public class Inventory {
 
 	/**
 	 * Print all items with the numbers of this items in front of this item
-	 * 
+	 *
 	 * @param items (List<Item>)
 	 */
 	private <Type extends Item> void printItemsWithCount(List<Type> items) {
@@ -310,14 +310,14 @@ public class Inventory {
 	}
 
 	/*------------------------------------------------------------------------------------
-	 * 
+	 *
 	 * Utils
-	 * 
+	 *
 	 ------------------------------------------------------------------------------------*/
 
 	/**
 	 * Count the number of items of an specific item
-	 * 
+	 *
 	 * @param itemType (Type) : the specific item
 	 * @return count the number of items
 	 */

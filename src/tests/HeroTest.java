@@ -8,25 +8,25 @@ import characters.Hero;
 import locations.Location;
 
 public class HeroTest {
-	
-	private static Location loc = new Location();
-	
+
+	private static Location loc = new Location("test", "desc");
+
 	@Test
 	public void testtoString() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		assertEquals("Fabio :\n hp 10\n lvl 1 \n", hero.toString());
 		Hero.destroyHero();
 	}
-	
-	@Test 
+
+	@Test
 	public void levelUp1() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.addXp(10);
 		assertEquals(2, hero.getLevel());
 		Hero.destroyHero();
 	}
-	
-	@Test 
+
+	@Test
 	public void levelUp2() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.addXp(150);
@@ -35,14 +35,14 @@ public class HeroTest {
 		assertEquals(5, hero.getLevel());
 		Hero.destroyHero();
 	}
-	
+
 	/*@Test
 	public void printInventory1() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.printInventory();
 		Hero.destroyHero();
 	}
-	
+
 	@Test
 	public void printInventory2() throws Exception {
 		Hero hero = Hero.createHero("Fabio", loc);

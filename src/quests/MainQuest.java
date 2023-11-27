@@ -11,5 +11,4 @@ public class MainQuest extends Quest {
 		this.setDescription("Your goal is to ...");
 		this.addStep("Kill a rabbit");
 	}
-
 }

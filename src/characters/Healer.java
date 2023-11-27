@@ -2,7 +2,7 @@ package characters;
 
 /**
  * A NPC who can heal the hero
- * 
+ *
  * @author Lilian
  */
 public class Healer extends NPC {
@@ -11,11 +11,11 @@ public class Healer extends NPC {
 		super("Healer");
 		this.setDescription("A cute cosplayer with a wood stick.");
 	}
-	
+
 	public String talk() {
 		return "Do you want to be healed ? (yes/no)";
 	}
-	
+
 	@Override
 	public String talk(String choice) {
 		this.finishedToTalk();

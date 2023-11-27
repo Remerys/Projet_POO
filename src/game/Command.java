@@ -32,6 +32,7 @@ public class Command {
         commandMap.put("/stop", game::stop);
         commandMap.put("/stats", game::stats);
         commandMap.put("/quests", game::quests);
+        commandMap.put("/map", game::map);
         commandMap.put("/addSword", game::addSword);
     }
 
@@ -66,6 +67,9 @@ public class Command {
                 case "/use":
                     handleItemCommand(command);
                     break;
+                case "/take":
+                    handleItemCommand(command);
+                    break;
                 default:
                     handleGeneralCommand(command);
             }
@@ -74,16 +78,25 @@ public class Command {
         }
     }
 
-    // Traitement de la commande /go <Direction>
+    // Traitement de la commande /go <Map Name>
     private static void handleGoCommand(String command) {
         // Sépare la commande et la direction
         String[] parts = command.split(" ");
+        int partsLength = parts.length;
 
-        if (parts.length == 2) {
-            String direction = parts[1];
-            game.goTo(direction);
+        if (parts.length != 1) {
+            String mapName = "";
+            for (int i = 1; i < parts.length; i++) {
+                if (i < partsLength - 1) {
+                    mapName += parts[i] + " ";
+                } else {
+                    mapName += parts[i];
+                }
+            }
+
+            game.goTo(mapName);
         } else {
-            System.out.println("Incorrect command format. Usage : /go <Direction>");
+            System.out.println("Incorrect command format. Usage : /go <Map Name>");
         }
     }
 
@@ -120,16 +133,27 @@ public class Command {
         }
     }
 
-    // Traitement de la commande /use <Item Name>
+    // Traitement de la commande /use <Item Name> et /take <Item Name>
     private static void handleItemCommand(String command) {
         // Sépare la commande et le nom de l'item
         String[] parts = command.split(" ");
 
         if (parts.length == 2) {
             String itemName = parts[1];
-            game.use(itemName);
+
+            if (command.startsWith("/use")) {
+                game.use(itemName);
+            } else {
+                try {
+                    game.take(itemName);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         } else {
-            System.out.println("Incorrect command format. Usage : /use <Item Name>");
+            System.out.println("Incorrect command format. Usage : "
+                    + (command.startsWith("/use") ? "/use" : "/take") + " <Item Name>");
         }
     }
 

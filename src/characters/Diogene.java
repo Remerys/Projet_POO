@@ -2,7 +2,7 @@ package characters;
 
 /**
  * A odd person in a barrel
- * 
+ *
  * @author Lilian
  */
 public class Diogene extends NPC {
@@ -21,11 +21,11 @@ public class Diogene extends NPC {
 		}
 		return instance;
 	}
-	
+
 	@Override
 	public String talk() {
 		this.finishedToTalk();
 		return "Get out of my sun!";
 	}
-	
+
 }

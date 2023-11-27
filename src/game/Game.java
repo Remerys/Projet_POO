@@ -1,5 +1,6 @@
 package game;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,45 +8,48 @@ import java.util.Scanner;
 import characters.*;
 import characters.Character;
 import items.Flute;
+import items.HealPotion;
 import items.Item;
 import items.Sword;
 import locations.Location;
 import quests.MainQuest;
-//import quests.Quest;
+import quests.Quest;
 
 /**
- * The principal game
+ * The main game
  *
  * @author Romain
  * @author Lilian
  */
 public class Game {
     public Hero hero;
-    private List<Location> locations = new ArrayList<Location>(); //TODO remove
-    private List<Character> characters = new ArrayList<Character>(); //same
-    private List<Fighter> fighters = new ArrayList<Fighter>(); //Same
-    private List<NPC> npcs = new ArrayList<NPC>(); //same
+    private List<Location> locations = new ArrayList<Location>();
+    private List<Item> items = new ArrayList<Item>();
+    private List<Fighter> fighters = new ArrayList<Fighter>();
+    private List<Talker> talkers = new ArrayList<Talker>();
     private MainQuest mainQuest;
     public static final String SEPARATION = "--------------------------------------------------------------------";
     public static final Scanner SCANNER = new Scanner(System.in);
 
     public Game() {
-        // Location.createLocations();
         this.init();
     }
 
     public void init() {
         Command.setGame(this);
 
-        // String name = Command.getName();
+        this.locations = Location.createGameLocations();
+        Location startLocation = this.locations.get(0);
 
-        this.hero = Hero.createHero("Player", null);
+        // String playerName = Command.getName(); // TODO Remettre à la fin
+        // this.hero = Hero.createHero(playerName, startLocation); // TODO Remettre à la fin
+
+        this.hero = Hero.createHero("Player", startLocation); // TODO Enlever à la fin
         Item flute = new Flute();
         try {
             this.hero.addItem(flute);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("ERROR addItem(flute)");
         }
 
         this.mainQuest = new MainQuest();
@@ -53,50 +57,20 @@ public class Game {
         Command.handleCommands();
     }
 
-    //To move in Location
-    private Character getCharacter(String character) {// , Location loc) {
-        this.characters.add(Diogene.getDiogene());
-        this.characters.add(new Healer());
-
-        for (Character c : this.characters) {
-            if (c.getName().toUpperCase().equals(character.toUpperCase())) {
-                return c;
-            }
-        }
-        return null;
-    }
-
     public static void printSeparation() {
         System.out.println(Game.SEPARATION);
     }
 
-    private NPC getNpc(String npcName, Location loc) {
-        this.npcs.add(new Healer());
-        this.npcs.add(Diogene.getDiogene());
-
-        for (NPC npc : this.npcs) {
-            if (npc.getName().toUpperCase().equals(npcName.toUpperCase())) {
-                return npc;
-
+    private Talker getTalker(String talkerName) {
+        for (Talker talker : this.talkers) {
+            if (talker.toString().toUpperCase().equals(talkerName.toUpperCase())) {
+                return talker;
             }
         }
         return null;
     }
 
-    private Fighter getFighter(String enemyName, Location loc) {
-        // TODO Initialisation des locs :
-        // il faudrait normalement le faire à chaque fois qu'on se déplace d'une map à
-        // une autre avec des fonctions du style
-        // this.characters = loc.getCharacters();
-        // this.enemys = this.characters.getEnemys();
-        // fin initialisation locs
-
-        /* TEST VU QUE J'AI PAS LES LISTES POUR L'INSTANT */
-        this.fighters.add(new Crab()); // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.fighters.add(new RabbitOfCaerbannog()); // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.fighters.add(new Crab()); // A SUPPRIMER QUAND ON AURA LES LISTES
-        this.fighters.add(new RabbitOfCaerbannog()); // A SUPPRIMER QUAND ON AURA LES LISTES
-
+    private Fighter getFighter(String enemyName) {
         for (Fighter fighter : this.fighters) {
             if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
                 return fighter;
@@ -105,10 +79,16 @@ public class Game {
         return null;
     }
 
-    /*
-     * -----------------------------------------------------------------------------
-     * ----------------------------------------------
-     */
+    private Item getItem(String itemName) {
+        for (Item item : this.items) {
+            if (item.toString().toUpperCase().equals(itemName.toUpperCase())) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /* --------------------------------------------------------------------------------------------------------------------------- */
     /* ALL COMMANDS */
 
     public void displayAvailableCommands() {
@@ -117,14 +97,16 @@ public class Game {
         System.out.println("/help - Displays the list of available commands.");
         System.out.println("/heal - Heal the Hero.");
         System.out.println("/inventory - Display the inventory.");
-        System.out.println("/go <Direction> - Go to a direction (North, East, South, West).");
+        System.out.println("/go <Map Name> - Go to another map.");
         System.out.println("/attack <Character name> - Attack a character if possible.");
         System.out.println("/talk <Character name> - Talk to a character if possible.");
         System.out.println("/stop - Stop the game.");
         System.out.println("/stats - Display the statistics of the hero.");
         System.out.println("/quests - Display the list of available quests.");
         System.out.println("/quest <Quest name> - Display a specific quest with more information.");
-        System.out.println("/use <item name> - Display a specific quest with more information.");
+        System.out.println("/use <item name> - Use an item.");
+        System.out.println("/map - Displays information from the current map.");
+        System.out.println("/take <Item Name> - Take an item on the map");
     }
 
     public void displayInventory() {
@@ -140,12 +122,22 @@ public class Game {
         }
     }
 
-    public void goTo(String location) {
-        System.out.println(hero.getName() + " go to " + location);
+    public void goTo(String locationName) {
+        try {
+            Location location = this.hero.getLocation().exitTo(locationName);
+            System.out.println(hero.getName() + " go to " + locationName);
+
+            this.hero.setLocation(location);
+            this.items = location.getItems();
+            this.fighters = location.getFighters();
+            this.talkers = location.getTalkers();
+        } catch (Exception e) {
+            System.out.println("You can't access this map OR it doesn't exist : " + locationName);
+        }
     }
 
     public void attack(String enemyName) {
-        Fighter fighterAttacked = this.getFighter(enemyName, hero.getLocation());
+        Fighter fighterAttacked = this.getFighter(enemyName);
 
         if (fighterAttacked != null) {
             int turnNumber = 0;
@@ -192,7 +184,7 @@ public class Game {
     }
 
     public void talk(String character) {
-    	NPC npcTalked = this.getNpc(character, hero.getLocation());
+    	Talker npcTalked = this.getTalker(character);
 
         if (npcTalked != null) {
             npcTalked.resetTalkState();
@@ -260,5 +252,43 @@ public class Game {
 		} catch (Exception e) {
 			System.out.println("This item isn't usable.");
 		}
+    }
+
+    public void map() {
+        Location location = this.hero.getLocation();
+        System.out.println("Map : " + location.getName());
+
+        String locationDescription = location.getDescription();
+        System.out.println("A short description : " + locationDescription + "\n");
+
+        // printList("List of maps you can go :", location.getExits()); // TODO Remettre quand la fonction getExits existera
+        printList("List of items in this map :", this.items);
+        printList("List of mobs in this map :", this.fighters);
+        printList("List of NPCs you can talk to in this map :", this.talkers);
+    }
+
+    private void printList(String title, List<?> list) {
+        System.out.println(title);
+
+        if (list.isEmpty()) {
+            System.out.println("\t" + "None");
+        } else {
+            list.forEach(object -> System.out.println("\t" + object));
+        }
+    }
+
+    public void take(String itemName) throws Exception {
+        System.out.println("Take : " + itemName);
+
+        Location location = this.hero.getLocation();
+        Item item = this.getItem(itemName);
+
+        if (item != null) {
+            this.hero.addItem(item);
+            location.removeItem(item);
+            System.out.println("Item taken successfully");
+        } else {
+            System.out.println("This item doesn't exist");
+        }
     }
 }

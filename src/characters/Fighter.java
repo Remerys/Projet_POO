@@ -2,7 +2,7 @@ package characters;
 
 /**
  * An abstract class representing all the characters that can attack
- * 
+ *
  * @author Lilian
  */
 public abstract class Fighter extends Character {
@@ -49,7 +49,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Give the fighter's damage
-	 * 
+	 *
 	 * @return damage (int)
 	 */
 	public int getDamage() {
@@ -58,7 +58,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Give the fighter's speed
-	 * 
+	 *
 	 * @return speed (int)
 	 */
 	public int getSpeed() {
@@ -67,7 +67,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Give the fighter's health points
-	 * 
+	 *
 	 * @return hp (int)
 	 */
 	public int getHp() {
@@ -76,7 +76,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Verify if the fighter is dead
-	 * 
+	 *
 	 * @return isDead (boolean)
 	 */
 	public boolean isDead() {
@@ -85,7 +85,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Changes the fighter's hp according to damage suffered
-	 * 
+	 *
 	 * @param damage (int) : the number of damages suffered
 	 */
 	public void getAttacked(int damage) {
@@ -97,7 +97,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Return the experience obtain after kill this fighter
-	 * 
+	 *
 	 * @return the experience obtain
 	 */
 	public int getXpDropped() {
@@ -106,7 +106,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * In a fight, attack the player with fighter's damages
-	 * 
+	 *
 	 * @param attacked (Fighter)
 	 */
 	public void attack(Fighter attacked) {
@@ -115,7 +115,7 @@ public abstract class Fighter extends Character {
 
 	/**
 	 * Change the fighter's health points to their maximum
-	 * 
+	 *
 	 * @param hp (int)
 	 */
 	public void fullyHeals() {

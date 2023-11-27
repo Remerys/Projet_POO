@@ -5,7 +5,7 @@ import locations.Location;
 
 /**
  * Principal player of the history
- * 
+ *
  * @author Lilian
  */
 public class Hero extends Fighter {
@@ -64,7 +64,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * When the hero exist
-	 * 
+	 *
 	 * @return the hero
 	 * @throws Exception no hero has been created
 	 */
@@ -96,7 +96,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's location
-	 * 
+	 *
 	 * @return hero's location
 	 */
 	public Location getLocation() {
@@ -105,7 +105,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's weapon equiped
-	 * 
+	 *
 	 * @return hero's weapon
 	 */
 	public Weapon getWeaponEquiped() {
@@ -114,7 +114,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's max health points
-	 * 
+	 *
 	 * @return hero's max health points
 	 */
 	public int getMaxHp() {
@@ -123,7 +123,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's magic points
-	 * 
+	 *
 	 * @return hero's magic points
 	 */
 	public int getMp() {
@@ -132,7 +132,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's max magic points
-	 * 
+	 *
 	 * @return hero's max magic points
 	 */
 	public int getMaxMp() {
@@ -141,7 +141,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's level
-	 * 
+	 *
 	 * @return hero's level
 	 */
 	public int getLevel() {
@@ -150,7 +150,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's experience
-	 * 
+	 *
 	 * @return hero's current experience
 	 */
 	public int getXp() {
@@ -159,7 +159,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's xp to next level
-	 * 
+	 *
 	 * @return experiences to obtain to level up
 	 */
 	public int getXpNewLevel() {
@@ -168,7 +168,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's damage
-	 * 
+	 *
 	 * @return hero's damage
 	 */
 	@Override
@@ -183,7 +183,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get the hero's range
-	 * 
+	 *
 	 * @return hero's range
 	 */
 	public int getRange() {
@@ -192,7 +192,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get a hero's item
-	 * 
+	 *
 	 * @param itemType
 	 * @return
 	 */
@@ -202,7 +202,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Get a hero's potion
-	 * 
+	 *
 	 * @return a hero's potion
 	 */
 	public Potion getPotion() {
@@ -217,7 +217,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Change the hero's health points
-	 * 
+	 *
 	 * @param hp (int)
 	 */
 	public void setHp(int hp) {
@@ -232,7 +232,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Add to the hero's health points, a number of health points
-	 * 
+	 *
 	 * @param hp (int)
 	 */
 	public void heal(int hp) {
@@ -241,7 +241,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Remove to the hero's health points, a number of health points
-	 * 
+	 *
 	 * @param damage (int)
 	 */
 	public void getAttacked(int damage) {
@@ -250,7 +250,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Change the hero's magic points
-	 * 
+	 *
 	 * @param mp
 	 */
 	public void setMp(int mp) {
@@ -265,7 +265,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Add to the hero's magic points, a number of magic points
-	 * 
+	 *
 	 * @param mp (int)
 	 */
 	public void gainMp(int mp) {
@@ -274,7 +274,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Remove to the hero's magic points, a number of magic points
-	 * 
+	 *
 	 * @param mp (int)
 	 */
 	public void useMp(int mp) {
@@ -304,7 +304,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Add experience and level up if there is enough xp
-	 * 
+	 *
 	 * @param xp (int)
 	 */
 	public void addXp(int xp) {
@@ -331,7 +331,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Change hero's location
-	 * 
+	 *
 	 * @param loc (Location)
 	 */
 	public void setLocation(Location loc) {
@@ -347,7 +347,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Add an item in hero's inventory
-	 * 
+	 *
 	 * @param item (Item)
 	 * @throws Exception : Cannot add another item
 	 */
@@ -357,7 +357,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Remove an item in hero's inventory
-	 * 
+	 *
 	 * @param item (Item)
 	 * @throws Exception : Cannot remove an item not present in the inventory
 	 */
@@ -373,7 +373,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Use the effect of the item and remove it from hero's inventory
-	 * 
+	 *
 	 * @param item (Item)
 	 * @throws Exception : This item isn't usable
 	 */
@@ -390,7 +390,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Verify there an item in the inventory
-	 * 
+	 *
 	 * @param item (Item)
 	 * @return if there is the item
 	 */
@@ -400,7 +400,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Verify there a potion in the inventory
-	 * 
+	 *
 	 * @return if there is a potion
 	 */
 	public boolean hasPotion() {
@@ -409,7 +409,7 @@ public class Hero extends Fighter {
 
 	/**
 	 * Attack a character with the hero's weapon
-	 * 
+	 *
 	 * @param character (Character)
 	 */
 	public void attack(Fighter fighter) {
@@ -435,8 +435,8 @@ public class Hero extends Fighter {
 		System.out.println(String.format("Inventory Capacity : %d / %d", this.inventory.getWeight(),
 				this.inventory.getMaxWeight()));
 
-		if (this.weapon != null) {
-			System.out.println("Location : " + this.loc);
+		if (this.loc != null) {
+			System.out.println("Location : " + this.loc.getName());
 		} else {
 			System.out.println("Location : None");
 		}

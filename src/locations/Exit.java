@@ -14,6 +14,6 @@ public class Exit {
     }
 
     public Location exit() throws Exception {
-        return NEW_LOC;
+        return this.NEW_LOC;
     }
 }

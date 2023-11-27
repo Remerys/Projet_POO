@@ -22,7 +22,7 @@ public class Location {
     private List<Talker> talkers = new ArrayList<Talker>();
 
     private List<Item> items = new ArrayList<Item>();
-    
+
     /**
      * Returns a list of locations for the game
      */
@@ -31,21 +31,21 @@ public class Location {
 
         // TODO: Add characters to the locations
         // Creation of the locations
-        locs.add(new Location("Le commencement", "Une île paisible loin de tout le reste du monde"));
-        locs.add(new Location("Île n°1", "Une île inconnue située à une extrémité de l'archipel. Vous pouvez observer une autre île au loin."));
-        locs.add(new Location("Île n°2", "L'île principale de l'archipel."));
-        locs.add(new Location("Île de la quête", "Une île perdue presque hors de l'archipel. L'ambiance y est hostile."));
+        locs.add(new Location("Starting Island", "A peaceful island far from the rest of the world."));
+        locs.add(new Location("Island #1", "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
+        locs.add(new Location("Island #2", "The main island of the archipelago."));
+        locs.add(new Location("Quest Island", "A lost island almost outside the archipelago. The atmosphere there is hostile."));
 
         // Exits for the 1st island
-        locs.get(1).addExit(locs.get(2), "L'île au loin semble atteignable en nageant grâce au courant.");
-        locs.get(1).addExit(locs.get(1), "Vous observez une grotte sur l'île, et des symboles semblent indiquer qu'un code est nécessaire afin d'y pénetrer");
+        locs.get(1).addExit(locs.get(2), "The island in the distance appears reachable by swimming with the help of the current.");
+        locs.get(1).addExit(locs.get(1), "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
         // Exits for the 2nd island
-        locs.get(2).addExit(locs.get(3), "En observant l'horizon, vous distinguez aisément une immense île. Elle semble habitée. S'y rendre à la nage semble possible");
-        
+        locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
+
         // Exits for the 3rd island
-        locs.get(3).addExit(locs.get(1), "Vous semblez pouvoir vous rendre à la première île visitée à la nage.");
-        locs.get(3).addExit(locs.get(2), "L'île principale semble aussi atteignable aisément.");       
+        locs.get(3).addExit(locs.get(1), "It seems like you can swim to the first visited island.");
+        locs.get(3).addExit(locs.get(2), "The main island also seems easily reachable.");
 
         return locs;
     }
@@ -88,7 +88,7 @@ public class Location {
     public void removeExit(String exitName) throws Exception {
         if (this.exits.containsKey(exitName)){
             this.exits.remove(exitName);
-        } 
+        }
         else {
             throw new Exception("removeExit : The exit doesn't exist !");
         }
@@ -130,7 +130,7 @@ public class Location {
 
     private void removeTalker(Talker c) throws Exception {
         boolean res = this.talkers.remove(c);
-        
+
         if (!res) {
             throw new Exception("removeTalker : The character couldn't be removed !");
         }
@@ -138,7 +138,7 @@ public class Location {
 
     private void removeFighter(Fighter c) throws Exception {
         boolean res = this.fighters.remove(c);
-        
+
         if (!res) {
             throw new Exception("removeFighters : The character couldn't be removed !");
         }
