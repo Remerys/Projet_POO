@@ -13,8 +13,8 @@ public class ExitWithCode extends ExitWithLock {
         this.CODE = CODE;
     }
 
-    public String enterCODE(String CODE) {
-        if (CODE == this.CODE) {
+    public String enterCode(String code) {
+        if (code == this.CODE) {
             this.has_code_been_entered = true;
             return this.CODE_MESSAGE_OK;
         } else {

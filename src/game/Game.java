@@ -39,7 +39,7 @@ public class Game {
         Command.setGame(this);
 
         this.locations = Location.createGameLocations();
-        Location startLocation = this.locations.get(0);
+        Location startLocation = this.locations.get(1);
 
         // String playerName = Command.getName(); // TODO Remettre à la fin
         // this.hero = Hero.createHero(playerName, startLocation); // TODO Remettre à la fin
@@ -262,6 +262,7 @@ public class Game {
         System.out.println("A short description : " + locationDescription + "\n");
 
         // printList("List of maps you can go :", location.getExits()); // TODO Remettre quand la fonction getExits existera
+        printList("Looking for exits, ", location.getExitDescriptions());
         printList("List of items in this map :", this.items);
         printList("List of mobs in this map :", this.fighters);
         printList("List of NPCs you can talk to in this map :", this.talkers);

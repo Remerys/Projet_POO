@@ -14,6 +14,8 @@ public class Location {
     private final String NAME;
     private final String DESCRIPTION;
 
+    private String 
+
 
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
 
@@ -38,7 +40,7 @@ public class Location {
 
         // Exits for the 1st island
         locs.get(1).addExit(locs.get(2), "The island in the distance appears reachable by swimming with the help of the current.");
-        locs.get(1).addExit(locs.get(1), "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
+        locs.get(1).addExitWithCode(locs.get(0), "coucou", "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
@@ -144,7 +146,6 @@ public class Location {
         }
     }
 
-
      /**
      * Adds a given item to the location
      */
@@ -159,6 +160,17 @@ public class Location {
         this.items.remove(i);
     }
 
+    public String enterExitCode(String exitName, String code) {
+        if (this.exits.containsKey(exitName)) {
+            Exit exit = this.exits.get(exitName);
+            if (exit instanceof ExitWithCode) {
+                ((ExitWithCode)exit).enterCode(code);
+            } else {
+                return 
+            }
+        }
+    }
+
 
     /* --------------------*
      *       Getters       *
@@ -171,7 +183,6 @@ public class Location {
         return this.NAME;
     }
 
-    // TODO:
     /**
      * Returns the characters
      */
@@ -202,6 +213,19 @@ public class Location {
         }
 
         return null;
+    }
+
+    /**
+     * Returns a list of couples of (descriptions)
+     */
+    public List<String> getExitDescriptions() {
+        List<String> descriptions = new ArrayList<String>();
+
+        this.exits.forEach((key, value) -> {
+            descriptions.add(key + ": " + value.getDescription());
+        });
+
+        return descriptions;
     }
 
 
