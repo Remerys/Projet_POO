@@ -1,17 +1,19 @@
 package game;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import characters.*;
+import characters.Character;
 import items.Flute;
 import items.HealPotion;
 import items.Item;
 import items.Sword;
 import locations.Location;
 import quests.MainQuest;
-//import quests.Quest;
+import quests.Quest;
 
 /**
  * The main game
@@ -72,6 +74,15 @@ public class Game {
         for (Fighter fighter : this.fighters) {
             if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
                 return fighter;
+            }
+        }
+        return null;
+    }
+
+    private Item getItem(String itemName) {
+        for (Item item : this.items) {
+            if (item.toString().toUpperCase().equals(itemName.toUpperCase())) {
+                return item;
             }
         }
         return null;
@@ -263,6 +274,21 @@ public class Game {
             System.out.println("\t" + "None");
         } else {
             list.forEach(object -> System.out.println("\t" + object));
+        }
+    }
+
+    public void take(String itemName) throws Exception {
+        System.out.println("Take : " + itemName);
+
+        Location location = this.hero.getLocation();
+        Item item = this.getItem(itemName);
+
+        if (item != null) {
+            this.hero.addItem(item);
+            location.removeItem(item);
+            System.out.println("Item taken successfully");
+        } else {
+            System.out.println("This item doesn't exist");
         }
     }
 }

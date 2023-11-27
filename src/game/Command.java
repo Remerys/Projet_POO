@@ -67,6 +67,9 @@ public class Command {
                 case "/use":
                     handleItemCommand(command);
                     break;
+                case "/take":
+                    handleItemCommand(command);
+                    break;
                 default:
                     handleGeneralCommand(command);
             }
@@ -121,16 +124,27 @@ public class Command {
         }
     }
 
-    // Traitement de la commande /use <Item Name>
+    // Traitement de la commande /use <Item Name> et /take <Item Name>
     private static void handleItemCommand(String command) {
         // Sépare la commande et le nom de l'item
         String[] parts = command.split(" ");
 
         if (parts.length == 2) {
             String itemName = parts[1];
-            game.use(itemName);
+
+            if (command.startsWith("/use")) {
+                game.use(itemName);
+            } else {
+                try {
+                    game.take(itemName);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         } else {
-            System.out.println("Incorrect command format. Usage : /use <Item Name>");
+            System.out.println("Incorrect command format. Usage : "
+                    + (command.startsWith("/use") ? "/use" : "/take") + " <Item Name>");
         }
     }
 
