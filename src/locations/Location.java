@@ -15,6 +15,7 @@ import characters.NPC;
 import characters.Crab;
 
 import items.Item;
+import items.Sword;
 
 public class Location {
     // Constants declarations
@@ -53,14 +54,18 @@ public class Location {
         locs.get(1).addExitWithCode(locs.get(0), "coucou", "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
         locs.get(1).addCharacter(Diogene.getDiogene());
+        locs.get(1).addItem(new Sword());
         
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
-        locs.get(1).addCharacter(new Healer());
+        locs.get(2).addCharacter(new Healer());
+        for (int i = 0; i < 100; i++)
+        	locs.get(2).addCharacter(new Crab());
 
         // Exits for the 3rd island
         locs.get(3).addExit(locs.get(1), "It seems like you can swim to the first visited island.");
         locs.get(3).addExit(locs.get(2), "The main island also seems easily reachable.");
+        locs.get(3).addExit(locs.get(0), "STOP THIS"); //TODO Enlever
 
         return locs;
     }
