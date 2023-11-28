@@ -73,6 +73,8 @@ public class Command {
 
             Game.printSeparation();
         }
+
+        Game.stop();
     }
 
     /**

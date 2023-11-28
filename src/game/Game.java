@@ -104,8 +104,6 @@ public class Game {
      * @return Talker | null
      */
     private Talker getTalker(String talkerName) {
-        this.talkers.add(Diogene.getDiogene());
-        this.talkers.add(new Healer());
         for (Talker talker : this.talkers) {
             if (talker.toString().toUpperCase().equals(talkerName.toUpperCase())) {
                 return talker;
@@ -199,7 +197,7 @@ public class Game {
             this.items = location.getItems();
             this.fighters = location.getFighters();
             this.talkers = location.getTalkers();
-            
+
             this.mainQuest.updateQuest();
         } catch (Exception e) {
             System.out.println("You can't access this map OR it doesn't exist : " + locationName);
