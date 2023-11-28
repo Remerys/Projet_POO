@@ -67,7 +67,7 @@ public class Game {
             System.out.println("ERROR addItem(flute)");
         }
 
-        this.mainQuest = new MainQuest();
+        this.mainQuest = new MainQuest(this.locations.get(0));
     }
 
     public static void start() {
@@ -194,6 +194,8 @@ public class Game {
             this.items = location.getItems();
             this.fighters = location.getFighters();
             this.talkers = location.getTalkers();
+            
+            this.mainQuest.updateQuest();
         } catch (Exception e) {
             System.out.println("You can't access this map OR it doesn't exist : " + locationName);
         }
@@ -405,5 +407,9 @@ public class Game {
         } else {
             System.out.println("This item doesn't exist");
         }
+    }
+    
+    public boolean isMainQuestFinished() {
+    	return this.mainQuest.isQuestFinished();
     }
 }
