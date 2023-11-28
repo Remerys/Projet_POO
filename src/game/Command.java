@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Command {
-    private static final Map<String, Runnable> commandMap = new HashMap<>();
+    private static final Map<String, Runnable> COMMAND_MAP = new HashMap<>();
     private static Game game;
 
     /**
@@ -16,14 +16,14 @@ public class Command {
      */
     public static void setGame(Game game) {
         Command.game = game;
-        commandMap.put("/help", game::displayAvailableCommands);
-        commandMap.put("/heal", game::heal);
-        commandMap.put("/inventory", game::displayInventory);
-        commandMap.put("/stop", game::stop);
-        commandMap.put("/stats", game::stats);
-        commandMap.put("/quests", game::quests);
-        commandMap.put("/map", game::map);
-        commandMap.put("/addSword", game::addSword);
+        COMMAND_MAP.put("/help", Game::displayAvailableCommands);
+        COMMAND_MAP.put("/heal", game::heal);
+        COMMAND_MAP.put("/inventory", game::displayInventory);
+        COMMAND_MAP.put("/stop", game::stop);
+        COMMAND_MAP.put("/stats", game::stats);
+        COMMAND_MAP.put("/quests", game::quests);
+        COMMAND_MAP.put("/map", game::map);
+        COMMAND_MAP.put("/addSword", game::addSword);
     }
 
     /**
@@ -55,7 +55,7 @@ public class Command {
                     handleQuestCommand(command);
                     break;
                 case "/addXp":
-                    addXpCommand(command);
+                    handleXpCommand(command);
                     break;
                 case "/use":
                     handleItemCommand(command);
@@ -82,6 +82,7 @@ public class Command {
 
         if (parts.length != 1) {
             String mapName = "";
+
             for (int i = 1; i < parts.length; i++) {
                 if (i < partsLength - 1) {
                     mapName += parts[i] + " ";
@@ -168,7 +169,7 @@ public class Command {
      */
     private static void handleGeneralCommand(String command) {
         // Vérifie la commande générale et exécute la méthode correspondante
-        Runnable runnable = commandMap.get(command);
+        Runnable runnable = COMMAND_MAP.get(command);
 
         if (runnable != null) {
             runnable.run();
@@ -181,7 +182,7 @@ public class Command {
      * Traitement de la commande /addXp <amount>
      * @param command
      */
-    private static void addXpCommand(String command) {
+    private static void handleXpCommand(String command) {
         // Sépare la commande et le nom de la quête
         String[] parts = command.split(" ");
 

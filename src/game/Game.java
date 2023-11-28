@@ -50,7 +50,7 @@ public class Game {
         this.init();
     }
 
-    public void init() {
+    private void init() {
         Command.setGame(this);
 
         this.locations = Location.createGameLocations();
@@ -141,7 +141,7 @@ public class Game {
     /**
      * Affichage de toutes les commandes disponibles grâce à /help
      */
-    public void displayAvailableCommands() {
+    public static void displayAvailableCommands() {
         System.out.println("List of available commands :");
         Game.printSeparation();
         System.out.println("/help - Displays the list of available commands.");
@@ -245,25 +245,25 @@ public class Game {
     /**
      * Méthode auxiliaire à la méthode attack permettant un affichage plus concis
      * @param attacker
-     * @param attacked
+     * @param target
      */
-    private void attack_aux(Fighter attacker, Fighter attacked) {
-        System.out.print(attacked.getName() + " takes " + attacker.getDamage() + " damage ");
-        attacker.attack(attacked);
-        System.out.println("| HP remaining :" + attacked.getHp());
+    private void attack_aux(Fighter attacker, Fighter target) {
+        System.out.print(target.getName() + " takes " + attacker.getDamage() + " damage ");
+        attacker.attack(target);
+        System.out.println("| HP remaining :" + target.getHp());
     }
 
     /**
      * Permet au joueur de parler à un PNJ grâce à la commande /talk <Character Name>
-     * @param character
+     * @param characterName
      */
-    public void talk(String character) {
-    	Talker npcTalked = this.getTalker(character);
+    public void talk(String characterName) {
+    	Talker npcTalked = this.getTalker(characterName);
 
         if (npcTalked != null) {
             npcTalked.resetTalkState();
 
-            System.out.println(hero.getName() + " talks to " + character);
+            System.out.println(hero.getName() + " talks to " + characterName);
 
             Game.printSeparation();
 
