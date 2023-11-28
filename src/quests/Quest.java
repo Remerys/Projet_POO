@@ -10,7 +10,10 @@ public abstract class Quest {
 	private String description;
 	private HashMap <String, QuestStatus> steps = new HashMap <String, QuestStatus>();
 	private QuestStatus state;
+	protected boolean isQuestFinished = false;
 
+	public abstract void updateQuest() throws Exception;;
+	
 	public Quest(String name, String description) {
 		this.NAME = name;
 		this.description = description;
@@ -19,6 +22,10 @@ public abstract class Quest {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public boolean isQuestFinished() {
+		return this.isQuestFinished;
 	}
 
 	private String printState(QuestStatus state) {

@@ -11,7 +11,6 @@ module poo {
 	// exports
 	exports game;
 	exports characters;
-	//exports hero;
 	exports items;
 	exports locations;
 	exports quests;

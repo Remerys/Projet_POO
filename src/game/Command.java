@@ -3,6 +3,8 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
+import characters.Hero;
+
 public class Command {
     private static final Map<String, Runnable> COMMAND_MAP = new HashMap<>();
     private static Game game;
@@ -29,7 +31,7 @@ public class Command {
      * Gestionnaire des commandes
      */
     public static void handleCommands() {
-        while (true) {
+        while (!game.isMainQuestFinished() && !game.hero.isDead()) {
             // Attend la commande de l'utilisateur
             System.out.print("Enter a command : ");
             String command = Game.SCANNER.nextLine();
