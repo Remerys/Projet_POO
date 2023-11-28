@@ -54,7 +54,7 @@ public class Game {
         Command.setGame(this);
 
         this.locations = Location.createGameLocations();
-        Location startLocation = this.locations.get(0);
+        Location startLocation = this.locations.get(1);
 
         // String playerName = Game.getName(); // TODO Remettre à la fin
         // this.hero = Hero.createHero(playerName, startLocation); // TODO Remettre à la fin
@@ -115,6 +115,7 @@ public class Game {
      * @return Fighter | null
      */
     private Fighter getFighter(String enemyName) {
+        this.fighters.add(new Crab());
         for (Fighter fighter : this.fighters) {
             if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
                 return fighter;
@@ -240,7 +241,10 @@ public class Game {
 
             if (fighterAttacked.getHp() != 0) {
                 fighterAttacked.fullyHeals();
+            } else {
+                this.hero.addXp(fighterAttacked.getXpDropped());
             }
+
         } else {
             System.out.println("This character doesn't exist");
         }
