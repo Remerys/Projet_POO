@@ -14,7 +14,7 @@ public class Location {
     private final String NAME;
     private final String DESCRIPTION;
 
-    private String 
+    private final String ERROR_EXIT_HAS_NO_CODE = "The exit doesn't have a code";
 
 
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
@@ -160,15 +160,17 @@ public class Location {
         this.items.remove(i);
     }
 
-    public String enterExitCode(String exitName, String code) {
+    public String enterExitCode(String exitName, String code) throws Exception {
         if (this.exits.containsKey(exitName)) {
             Exit exit = this.exits.get(exitName);
             if (exit instanceof ExitWithCode) {
-                ((ExitWithCode)exit).enterCode(code);
+                return ((ExitWithCode)exit).enterCode(code);
             } else {
-                return 
+                return ERROR_EXIT_HAS_NO_CODE;
             }
         }
+
+        throw new Exception("enterExitCode : the location doesn't exist !");
     }
 
 
