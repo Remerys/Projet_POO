@@ -3,11 +3,17 @@ package locations;
 public abstract class ExitWithLock extends Exit {
     private boolean is_locked ;
 
+    /**
+     * Constructor for exitWithLock
+     */
     public ExitWithLock(Location newLoc, String description) {
         super(newLoc, description);
         this.is_locked = true;
     }
 
+    /**
+     * Unlocks the door
+     */
     public void unlock() throws Exception {
         this.is_locked = false;
     }

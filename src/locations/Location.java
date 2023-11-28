@@ -7,6 +7,13 @@ import java.util.List;
 import characters.Character;
 import characters.Talker;
 import characters.Fighter;
+
+import characters.Healer;
+import characters.Diogene;
+import characters.RabbitOfCaerbannog;
+import characters.NPC;
+import characters.Crab;
+
 import items.Item;
 
 public class Location {
@@ -14,7 +21,8 @@ public class Location {
     private final String NAME;
     private final String DESCRIPTION;
 
-    private final String ERROR_EXIT_HAS_NO_CODE = "The exit doesn't have a code";
+    private static final String ERROR_EXIT_HAS_NO_CODE = "The exit doesn't have a code";
+    private static final String ERROR_EXIT_HAS_NO_LOCK = "The exit doesn't have a lock";
 
 
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
@@ -41,14 +49,14 @@ public class Location {
 
         // 1st Island
         // Exits for the 1st island
-        // Location island = locs. 
         locs.get(1).addExit(locs.get(2), "The island in the distance appears reachable by swimming with the help of the current.");
         locs.get(1).addExitWithCode(locs.get(0), "coucou", "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
-        // locs.get(1).
-
+        locs.get(1).addCharacter(Diogene.getDiogene());
+        
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
+        locs.get(1).addCharacter(new Healer());
 
         // Exits for the 3rd island
         locs.get(3).addExit(locs.get(1), "It seems like you can swim to the first visited island.");
@@ -106,7 +114,7 @@ public class Location {
     /**
      * Adds a given character to the location
      */
-    public void addCharacter(Character c) throws Exception {
+    public void addCharacter(Character c) {
         boolean hasCharacterBeenAdded = false;
 
         if (c instanceof Talker) {
@@ -120,7 +128,7 @@ public class Location {
         }
 
         if (!hasCharacterBeenAdded) {
-            throw new Exception("The character can't be interacted with !");
+            System.out.println("Warning addCharacter : the character hasn't been added to the game !");
         }
     }
 
@@ -182,7 +190,24 @@ public class Location {
             if (exit instanceof ExitWithCode) {
                 return ((ExitWithCode)exit).enterCode(code);
             } else {
-                return ERROR_EXIT_HAS_NO_CODE;
+                return Location.ERROR_EXIT_HAS_NO_CODE;
+            }
+        }
+
+        throw new Exception("enterExitCode : the location doesn't exist !");
+    }
+
+    /**
+     * Unlocks the door
+     */
+    public String unlock(String exitName) throws Exception {
+        if (this.exits.containsKey(exitName)) {
+            Exit exit = this.exits.get(exitName);
+            if (exit instanceof ExitWithLock) {
+                ((ExitWithLock)exit).unlock();
+                return "The exit has been unlocked";
+            } else {
+                throw new Exception(Location.ERROR_EXIT_HAS_NO_LOCK);
             }
         }
 
