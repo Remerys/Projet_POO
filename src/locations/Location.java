@@ -7,12 +7,22 @@ import java.util.List;
 import characters.Character;
 import characters.Talker;
 import characters.Fighter;
+
+import characters.Healer;
+import characters.Diogene;
+import characters.RabbitOfCaerbannog;
+import characters.NPC;
+import characters.Crab;
+
 import items.Item;
 
 public class Location {
     // Constants declarations
     private final String NAME;
     private final String DESCRIPTION;
+
+    private static final String ERROR_EXIT_HAS_NO_CODE = "The exit doesn't have a code";
+    private static final String ERROR_EXIT_HAS_NO_LOCK = "The exit doesn't have a lock";
 
 
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
@@ -24,7 +34,8 @@ public class Location {
     private List<Item> items = new ArrayList<Item>();
 
     /**
-     * Returns a list of locations for the game
+     * Returns a list of locations for the game. 
+     * This function might become large if the project growws anymore and might have to be split, maybe in different classes
      */
     public static ArrayList<Location> createGameLocations() {
         ArrayList<Location> locs = new ArrayList<Location>();
@@ -36,12 +47,16 @@ public class Location {
         locs.add(new Location("Island #2", "The main island of the archipelago."));
         locs.add(new Location("Quest Island", "A lost island almost outside the archipelago. The atmosphere there is hostile."));
 
+        // 1st Island
         // Exits for the 1st island
         locs.get(1).addExit(locs.get(2), "The island in the distance appears reachable by swimming with the help of the current.");
-        locs.get(1).addExit(locs.get(1), "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
+        locs.get(1).addExitWithCode(locs.get(0), "coucou", "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
+        locs.get(1).addCharacter(Diogene.getDiogene());
+        
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
+        locs.get(1).addCharacter(new Healer());
 
         // Exits for the 3rd island
         locs.get(3).addExit(locs.get(1), "It seems like you can swim to the first visited island.");
@@ -76,7 +91,9 @@ public class Location {
         this.exits.put(loc.getName(), exit);
     }
 
-    // TODO: Regarder avec enum
+    /**
+     * Adds an exit locked with a code to the location. If the projet grows, having more than one function may become a problem.
+     */
     public void addExitWithCode(Location loc, String code, String description) {
         Exit exit = new ExitWithCode(loc, code, description);
         this.exits.put(loc.getName(), exit);
@@ -97,7 +114,7 @@ public class Location {
     /**
      * Adds a given character to the location
      */
-    public void addCharacter(Character c) throws Exception {
+    public void addCharacter(Character c) {
         boolean hasCharacterBeenAdded = false;
 
         if (c instanceof Talker) {
@@ -111,7 +128,7 @@ public class Location {
         }
 
         if (!hasCharacterBeenAdded) {
-            throw new Exception("The character can't be interacted with !");
+            System.out.println("Warning addCharacter : the character hasn't been added to the game !");
         }
     }
 
@@ -128,6 +145,9 @@ public class Location {
         }
     }
 
+    /**
+     * Removes a Talker pnj from the characters. This method is private, and should never be used outside of removeCharacter
+     */
     private void removeTalker(Talker c) throws Exception {
         boolean res = this.talkers.remove(c);
 
@@ -136,6 +156,9 @@ public class Location {
         }
     }
 
+    /**
+     * Removes a Fighter from the characters. This method is private, and should never be used outside of removeCharacter
+     */
     private void removeFighter(Fighter c) throws Exception {
         boolean res = this.fighters.remove(c);
 
@@ -143,7 +166,6 @@ public class Location {
             throw new Exception("removeFighters : The character couldn't be removed !");
         }
     }
-
 
      /**
      * Adds a given item to the location
@@ -159,6 +181,39 @@ public class Location {
         this.items.remove(i);
     }
 
+    /**
+     * Tries to enter a code for an exit.
+     */
+    public String enterExitCode(String exitName, String code) throws Exception {
+        if (this.exits.containsKey(exitName)) {
+            Exit exit = this.exits.get(exitName);
+            if (exit instanceof ExitWithCode) {
+                return ((ExitWithCode)exit).enterCode(code);
+            } else {
+                return Location.ERROR_EXIT_HAS_NO_CODE;
+            }
+        }
+
+        throw new Exception("enterExitCode : the location doesn't exist !");
+    }
+
+    /**
+     * Unlocks the door
+     */
+    public String unlock(String exitName) throws Exception {
+        if (this.exits.containsKey(exitName)) {
+            Exit exit = this.exits.get(exitName);
+            if (exit instanceof ExitWithLock) {
+                ((ExitWithLock)exit).unlock();
+                return "The exit has been unlocked";
+            } else {
+                throw new Exception(Location.ERROR_EXIT_HAS_NO_LOCK);
+            }
+        }
+
+        throw new Exception("enterExitCode : the location doesn't exist !");
+    }
+
 
     /* --------------------*
      *       Getters       *
@@ -171,14 +226,16 @@ public class Location {
         return this.NAME;
     }
 
-    // TODO:
     /**
-     * Returns the characters
+     * Returns the talkers
      */
     public List<Talker> getTalkers() {
         return this.talkers;
     }
 
+    /**
+     * Returns the fighters
+     */
     public List<Fighter> getFighters() {
         return this.fighters;
     }
@@ -190,10 +247,16 @@ public class Location {
         return this.DESCRIPTION;
     }
 
+    /**
+     * Returns the list of items contained in the location
+     */
     public List<Item> getItems() {
         return this.items;
     }
 
+    /**
+     * Returns a specified item from the location
+     */
     public Item getItem(String itemName) {
         for (Item i : this.items) {
             if (i.toString() == itemName) {
@@ -202,6 +265,19 @@ public class Location {
         }
 
         return null;
+    }
+
+    /**
+     * Returns a list of couples of (descriptions)
+     */
+    public List<String> getExitDescriptions() {
+        List<String> descriptions = new ArrayList<String>();
+
+        this.exits.forEach((key, value) -> {
+            descriptions.add(key + ": " + value.getDescription());
+        });
+
+        return descriptions;
     }
 
 

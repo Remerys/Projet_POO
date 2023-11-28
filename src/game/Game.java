@@ -372,6 +372,7 @@ public class Game {
         System.out.println("A short description : " + locationDescription + "\n");
 
         // printList("List of maps you can go :", location.getExits()); // TODO Remettre quand la fonction getExits existera
+        printList("Looking for exits, ", location.getExitDescriptions());
         printList("List of items in this map :", this.items);
         printList("List of mobs in this map :", this.fighters);
         printList("List of NPCs you can talk to in this map :", this.talkers);
