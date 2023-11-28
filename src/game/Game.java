@@ -1,14 +1,11 @@
 package game;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import characters.*;
-import characters.Character;
 import items.Flute;
-import items.HealPotion;
 import items.Item;
 import items.Sword;
 import locations.Location;
@@ -22,13 +19,31 @@ import quests.Quest;
  * @author Lilian
  */
 public class Game {
+    /**
+     * Le joueur
+     */
     public Hero hero;
+    /**
+     * Liste des maps
+     */
     private List<Location> locations = new ArrayList<Location>();
+    /**
+     * Liste des items de la map actuelle
+     */
     private List<Item> items = new ArrayList<Item>();
+    /**
+     * Liste des fighters de la map actuelle
+     */
     private List<Fighter> fighters = new ArrayList<Fighter>();
+    /**
+     * Liste des talkers de la map actuelle
+     */
     private List<Talker> talkers = new ArrayList<Talker>();
     private MainQuest mainQuest;
     public static final String SEPARATION = "--------------------------------------------------------------------";
+    /**
+     * Seul scanner permettant de récupérer ce que le joueur écrit
+     */
     public static final Scanner SCANNER = new Scanner(System.in);
 
     public Game() {
@@ -41,7 +56,7 @@ public class Game {
         this.locations = Location.createGameLocations();
         Location startLocation = this.locations.get(0);
 
-        // String playerName = Command.getName(); // TODO Remettre à la fin
+        // String playerName = Game.getName(); // TODO Remettre à la fin
         // this.hero = Hero.createHero(playerName, startLocation); // TODO Remettre à la fin
 
         this.hero = Hero.createHero("Player", startLocation); // TODO Enlever à la fin
@@ -57,10 +72,32 @@ public class Game {
         Command.handleCommands();
     }
 
+    /**
+     * Permet au joueur d'entrer son nom de personnage
+     */
+    private static String getName() {
+        String name = "";
+
+        while (name == "") {
+            System.out.print("Enter your name : ");
+            name = Game.SCANNER.nextLine();
+        }
+
+        return name;
+    }
+
+    /**
+     * Affichage de séparation
+     */
     public static void printSeparation() {
         System.out.println(Game.SEPARATION);
     }
 
+    /**
+     * Permet d'obtenir un Talker selon son nom s'il n'existe pas alors la méthode renvoie null
+     * @param talkerName
+     * @return Talker | null
+     */
     private Talker getTalker(String talkerName) {
         for (Talker talker : this.talkers) {
             if (talker.toString().toUpperCase().equals(talkerName.toUpperCase())) {
@@ -70,6 +107,11 @@ public class Game {
         return null;
     }
 
+    /**
+     * Permet d'obtenir un Fighter selon son nom s'il n'existe pas alors la méthode renvoie null
+     * @param enemyName
+     * @return Fighter | null
+     */
     private Fighter getFighter(String enemyName) {
         for (Fighter fighter : this.fighters) {
             if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
@@ -79,6 +121,11 @@ public class Game {
         return null;
     }
 
+    /**
+     * Permet d'obtenir un Item selon son nom s'il n'existe pas alors la méthode renvoie null
+     * @param itemName
+     * @return Item | null
+     */
     private Item getItem(String itemName) {
         for (Item item : this.items) {
             if (item.toString().toUpperCase().equals(itemName.toUpperCase())) {
@@ -91,6 +138,9 @@ public class Game {
     /* --------------------------------------------------------------------------------------------------------------------------- */
     /* ALL COMMANDS */
 
+    /**
+     * Affichage de toutes les commandes disponibles grâce à /help
+     */
     public void displayAvailableCommands() {
         System.out.println("List of available commands :");
         Game.printSeparation();
@@ -109,10 +159,16 @@ public class Game {
         System.out.println("/take <Item Name> - Take an item on the map");
     }
 
+    /**
+     * Affichage de l'inventaire grâce à /inventory
+     */
     public void displayInventory() {
         this.hero.printInventory();
     }
 
+    /**
+     * Soigne le personnage avec à une potion s'il en a une grâce à la commande /heal
+     */
     public void heal() {
         if (hero.hasPotion()) {
             System.out.println(hero.getName() + " heals himself");
@@ -122,11 +178,16 @@ public class Game {
         }
     }
 
+    /**
+     * Permet au joueur de se déplacer d'une map à une autre grâce à la commande /go <Map Name>
+     * @param locationName
+     */
     public void goTo(String locationName) {
         try {
             Location location = this.hero.getLocation().exitTo(locationName);
             System.out.println(hero.getName() + " go to " + locationName);
 
+            // Met à jour la map et tout ce qu'il y a dedans
             this.hero.setLocation(location);
             this.items = location.getItems();
             this.fighters = location.getFighters();
@@ -136,6 +197,10 @@ public class Game {
         }
     }
 
+    /**
+     * Permet au joueur d'attaquer un ennemie grâce à la commande /attack <Character Name>
+     * @param enemyName
+     */
     public void attack(String enemyName) {
         Fighter fighterAttacked = this.getFighter(enemyName);
 
@@ -177,12 +242,21 @@ public class Game {
         }
     }
 
+    /**
+     * Méthode auxiliaire à la méthode attack permettant un affichage plus concis
+     * @param attacker
+     * @param attacked
+     */
     private void attack_aux(Fighter attacker, Fighter attacked) {
         System.out.print(attacked.getName() + " takes " + attacker.getDamage() + " damage ");
         attacker.attack(attacked);
         System.out.println("| HP remaining :" + attacked.getHp());
     }
 
+    /**
+     * Permet au joueur de parler à un PNJ grâce à la commande /talk <Character Name>
+     * @param character
+     */
     public void talk(String character) {
     	Talker npcTalked = this.getTalker(character);
 
@@ -206,36 +280,57 @@ public class Game {
         }
     }
 
+    /**
+     * Permet d'arrêter la partie grâce à la commande /stop
+     */
     public void stop() {
         System.out.println("GAME STOP");
         Game.SCANNER.close();
         System.exit(0);
     }
 
+    /**
+     * Permet au joueur d'afficher ses statistiques grâce à la commande /stats
+     */
     public void stats() {
         System.out.println("STATISTICS :");
         Game.printSeparation();
         this.hero.printStats();
     }
 
+    /**
+     * Permet au joueur de voir la liste des quêtes qu'il peut faire grâce à la commande /quests
+     */
     public void quests() {
         System.out.println("List of available quests :");
         Game.printSeparation();
         this.mainQuest.printQuest();
     }
 
+    /**
+     * Permet au joueur de voir une quête plus en détails
+     * @param questName
+     */
     public void quest(String questName) {
         System.out.println("Details of : " + questName);
     }
 
+    /**
+     * Permet au joueur de se donner de l'xp grâce à la commande /addXp <amount>
+     * @param xp
+     */
     public void addXp(int xp) { // to test
         System.out.println("Gain d'xp :" + xp);
-        System.out.println();
+
         this.hero.addXp(xp);
     }
 
+    /**
+     * Permet au joueur de se donner une épée grâce à la commande /addSword
+     */
     public void addSword() {
         System.out.println("add Sword");
+
         try {
             this.hero.addItem(new Sword());
         } catch (Exception e) {
@@ -243,6 +338,10 @@ public class Game {
         }
     }
 
+    /**
+     * Permet au joueur d'utiliser un item grâce à la commande /use <Item Name>
+     * @param itemName
+     */
     public void use(String itemName) {
         System.out.println("Use of : " + itemName);
 
@@ -254,6 +353,9 @@ public class Game {
 		}
     }
 
+    /**
+     * Permet au joueur d'afficher les détails de la map sur laquelle il se trouve grâce à la commande /map
+     */
     public void map() {
         Location location = this.hero.getLocation();
         System.out.println("Map : " + location.getName());
@@ -267,6 +369,11 @@ public class Game {
         printList("List of NPCs you can talk to in this map :", this.talkers);
     }
 
+    /**
+     * Méthode auxiliaire à la méthode map permettant un affichage plus concis
+     * @param title
+     * @param list
+     */
     private void printList(String title, List<?> list) {
         System.out.println(title);
 
@@ -277,6 +384,11 @@ public class Game {
         }
     }
 
+    /**
+     * Permet au joueur de prendre un item sur la map actuelle grâce à la commande /take <Item Name>
+     * @param itemName
+     * @throws Exception
+     */
     public void take(String itemName) throws Exception {
         System.out.println("Take : " + itemName);
 
@@ -284,6 +396,7 @@ public class Game {
         Item item = this.getItem(itemName);
 
         if (item != null) {
+            // Si l'item est présent sur la map on l'ajoute à l'inventaire et on le retire de la map
             this.hero.addItem(item);
             location.removeItem(item);
             System.out.println("Item taken successfully");
