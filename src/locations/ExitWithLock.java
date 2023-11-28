@@ -14,7 +14,7 @@ public abstract class ExitWithLock extends Exit {
 
     @Override
     public Location exit() throws Exception {
-        if (this.is_locked) {
+        if (!this.is_locked) {
             return super.exit();
         } else {
             throw new Exception("exit : The door is locked !");
