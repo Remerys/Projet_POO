@@ -2,7 +2,6 @@ package game;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Command {
     private static final Map<String, Runnable> COMMAND_MAP = new HashMap<>();
@@ -63,6 +62,9 @@ public class Command {
                 case "/take":
                     handleItemCommand(command);
                     break;
+                case "/equip":
+                    handleItemCommand(command);
+                    break;
                 default:
                     handleGeneralCommand(command);
             }
@@ -93,7 +95,7 @@ public class Command {
 
             game.goTo(mapName);
         } else {
-            System.out.println("Incorrect command format. Usage : /go <Map Name>");
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Map Name>");
         }
     }
 
@@ -114,8 +116,7 @@ public class Command {
                 game.talk(characterName);
             }
         } else {
-            System.out.println("Incorrect command format. Usage : "
-                    + (command.startsWith("/attack") ? "/attack" : "/talk") + " <Character Name>");
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Character Name>");
         }
 
     }
@@ -132,7 +133,7 @@ public class Command {
             String questName = parts[1];
             game.quest(questName);
         } else {
-            System.out.println("Incorrect command format. Usage : /quest <Quest Name>");
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Quest Name>");
         }
     }
 
@@ -149,17 +150,18 @@ public class Command {
 
             if (command.startsWith("/use")) {
                 game.use(itemName);
-            } else {
+            } else if (command.startsWith("/take")) {
                 try {
                     game.take(itemName);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+            } else {
+                game.equip(itemName);
             }
         } else {
-            System.out.println("Incorrect command format. Usage : "
-                    + (command.startsWith("/use") ? "/use" : "/take") + " <Item Name>");
+            System.out.println("Incorrect command format. Usage : " + parts[0] + " <Item Name>");
         }
     }
 
@@ -190,7 +192,7 @@ public class Command {
             int xp = Integer.valueOf(parts[1]);
             game.addXp(xp);
         } else {
-            System.out.println("Incorrect command format. Usage : /addXp <Number>");
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Amount>");
         }
     }
 }

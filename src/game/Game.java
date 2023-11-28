@@ -8,6 +8,7 @@ import characters.*;
 import items.Flute;
 import items.Item;
 import items.Sword;
+import items.Weapon;
 import locations.Location;
 import quests.MainQuest;
 import quests.Quest;
@@ -61,8 +62,10 @@ public class Game {
 
         this.hero = Hero.createHero("Player", startLocation); // TODO Enlever à la fin
         Item flute = new Flute();
+        Weapon sword = new Sword();
         try {
             this.hero.addItem(flute);
+            this.hero.addItem(sword);
         } catch (Exception e) {
             System.out.println("ERROR addItem(flute)");
         }
@@ -101,6 +104,8 @@ public class Game {
      * @return Talker | null
      */
     private Talker getTalker(String talkerName) {
+        this.talkers.add(Diogene.getDiogene());
+        this.talkers.add(new Healer());
         for (Talker talker : this.talkers) {
             if (talker.toString().toUpperCase().equals(talkerName.toUpperCase())) {
                 return talker;
@@ -115,7 +120,6 @@ public class Game {
      * @return Fighter | null
      */
     private Fighter getFighter(String enemyName) {
-        this.fighters.add(new Crab());
         for (Fighter fighter : this.fighters) {
             if (fighter.getName().toUpperCase().equals(enemyName.toUpperCase())) {
                 return fighter;
@@ -408,6 +412,21 @@ public class Game {
             System.out.println("Item taken successfully");
         } else {
             System.out.println("This item doesn't exist");
+        }
+    }
+
+    /**
+     * Permet au joueur d'équiper une arme
+     * @param weaponName
+     */
+    public void equip(String weaponName) {
+        Weapon weapon = (Weapon)this.hero.getItem(weaponName);
+
+        if (weapon != null) {
+            this.hero.changeEquipedWeapon(weapon);
+            System.out.println("Weapon changed successfully");
+        } else {
+            System.out.println("You don't have this weapon");
         }
     }
 }

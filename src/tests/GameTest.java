@@ -2,9 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,13 +23,17 @@ import quests.Quest;
 
 public class GameTest {
 	Game game;
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
 	@Before
 	public void init() {
 		this.game = new Game();
 	}
+
+    @After
+    public void restoreStreams() {
+        System.setOut(originalOut);
+    }
 
 	/**
 	 * Soigne quand plus de potions
@@ -151,10 +158,133 @@ public class GameTest {
         assertTrue(this.game.hero.getXp() != heroXPBefore || this.game.hero.getLevel() != heroLVBefore);
     }
 
+	/**
+	 * Parle à un PNJ qui n'existe pas
+	 */
+	@Test
+    public void testTalk1() {
+		// Rediriger la sortie standard pour capturer la sortie de la méthode
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        // Appeler la méthode talk avec le personnage inexistant
+        game.talk("nonExistingCharacter");
+
+        // Récupérer la sortie de la méthode
+        String actualOutput = outputStream.toString().trim();
+
+        // Ajouter une assertion pour vérifier le comportement attendu
+        assertEquals("This character doesn't exist", actualOutput);
+
+        // Rétablir la sortie standard
+        System.setOut(System.out);
+    }
+
+	/**
+	 * Parle à un PNJ qui existe (Diogene)
+	 */
+	@Test
+    public void testTalk2() {
+        // Rediriger la sortie standard pour capturer la sortie de la méthode
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        // Appeler la méthode talk avec le personnage inexistant
+        game.talk("Diogene");
+
+        // Récupérer la sortie de la méthode
+        String actualOutput = outputStream.toString().trim();
+
+        // Ajouter une assertion pour vérifier le comportement attendu
+        assertEquals("Player talks to Diogene\r\n" +
+        		     "--------------------------------------------------------------------\r\n" +
+					 "Get out of my sun!", actualOutput);
+
+        // Rétablir la sortie standard
+        System.setOut(System.out);
+    }
+
+	/**
+	 * Parle à un PNJ qui existe en disant no
+	 */
+	@Test
+    public void testTalk3() {
+        // Rediriger la sortie standard pour capturer la sortie de la méthode
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+		// Simule les entrées utilisateur
+        InputStream mockInput = new ByteArrayInputStream("no\n".getBytes());
+        System.setIn(mockInput);
+
+        // Appeler la méthode talk avec le personnage existant
+        game.talk("Healer");
+
+        // Récupérer la sortie de la méthode
+        String actualOutput = outputStream.toString().trim();
+
+        // Ajouter une assertion pour vérifier le comportement attendu
+        assertEquals("Oh ... ok", actualOutput);
+
+        // Rétablir la sortie standard et les entrées utilisateur
+        System.setOut(System.out);
+        System.setIn(System.in);
+    }
 
 
+	/**
+	 * Parle à un PNJ qui existe en disant yes
+	 */
+	@Test
+    public void testTalk4() {
+        // Rediriger la sortie standard pour capturer la sortie de la méthode
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
 
+		// Simule les entrées utilisateur
+        InputStream mockInput = new ByteArrayInputStream("yes\n".getBytes());
+        System.setIn(mockInput);
 
+        // Appeler la méthode talk avec le personnage existant
+        game.talk("Healer");
+
+        // Récupérer la sortie de la méthode
+        String actualOutput = outputStream.toString().trim();
+
+        // Ajouter une assertion pour vérifier le comportement attendu
+        assertEquals("I'm healing you", actualOutput);
+
+        // Rétablir la sortie standard et les entrées utilisateur
+        System.setOut(System.out);
+        System.setIn(System.in);
+    }
+
+	/**
+	 * Parle à un PNJ qui existe en disant n'importe quoi
+	 */
+	@Test
+    public void testTalk5() {
+        // Rediriger la sortie standard pour capturer la sortie de la méthode
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+		// Simule les entrées utilisateur
+        InputStream mockInput = new ByteArrayInputStream("azdzadazgrh\n".getBytes());
+        System.setIn(mockInput);
+
+        // Appeler la méthode talk avec le personnage existant
+        game.talk("Healer");
+
+        // Récupérer la sortie de la méthode
+        String actualOutput = outputStream.toString().trim();
+
+        // Ajouter une assertion pour vérifier le comportement attendu
+        assertEquals("What are you talking about ?", actualOutput);
+
+        // Rétablir la sortie standard et les entrées utilisateur
+        System.setOut(System.out);
+        System.setIn(System.in);
+    }
 
 
 
