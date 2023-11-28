@@ -5,38 +5,30 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Command {
-    private static final Map<String, Runnable> commandMap = new HashMap<>();
+    private static final Map<String, Runnable> COMMAND_MAP = new HashMap<>();
     private static Game game;
 
-    static {
-        // Initialise la map des commandes
-        // Ici qu'il faut ajouter les commandes générales qui ne demandent pas de
-        // traitement spécifique
-        // Sinon il faut les ajouter dans un else if de handleCommands() et dans une
-        // méthode spécifique pour rendre le code plus lisible
-        /*
-         * commandMap.put("/help", game::displayAvailableCommands);
-         * commandMap.put("/heal", game::heal);
-         * commandMap.put("/inventory", game::displayInventory);
-         * commandMap.put("/stop", game::stop);
-         * commandMap.put("/stats", game::stats);
-         * commandMap.put("/quests", game::quests);
-         */
-    }
-
+    /**
+     * Initialise la map des commandes.
+     * C'est ici qu'il faut ajouter les commandes générales qui ne demandent pas de traitement spécifique.
+     * Sinon il faut les ajouter dans le switch de handleCommands() et dans une méthode spécifique pour rendre le code plus lisible.
+     * @param game
+     */
     public static void setGame(Game game) {
         Command.game = game;
-        commandMap.put("/help", game::displayAvailableCommands);
-        commandMap.put("/heal", game::heal);
-        commandMap.put("/inventory", game::displayInventory);
-        commandMap.put("/stop", game::stop);
-        commandMap.put("/stats", game::stats);
-        commandMap.put("/quests", game::quests);
-        commandMap.put("/map", game::map);
-        commandMap.put("/addSword", game::addSword);
+        COMMAND_MAP.put("/help", Game::displayAvailableCommands);
+        COMMAND_MAP.put("/heal", game::heal);
+        COMMAND_MAP.put("/inventory", game::displayInventory);
+        COMMAND_MAP.put("/stop", game::stop);
+        COMMAND_MAP.put("/stats", game::stats);
+        COMMAND_MAP.put("/quests", game::quests);
+        COMMAND_MAP.put("/map", game::map);
+        COMMAND_MAP.put("/addSword", game::addSword);
     }
 
-    // Gestionnaire des commandes
+    /**
+     * Gestionnaire des commandes
+     */
     public static void handleCommands() {
         while (true) {
             // Attend la commande de l'utilisateur
@@ -47,7 +39,8 @@ public class Command {
 
             // Vérifie la commande et exécute la méthode correspondante
             String start = command.split(" ")[0];
-            // Pour gerer les arguments
+
+            // Commandes qui demandent un traitement spécifique
             switch (start) {
                 case "/go":
                     handleGoCommand(command);
@@ -62,7 +55,7 @@ public class Command {
                     handleQuestCommand(command);
                     break;
                 case "/addXp":
-                    addXpCommand(command);
+                    handleXpCommand(command);
                     break;
                 case "/use":
                     handleItemCommand(command);
@@ -78,14 +71,18 @@ public class Command {
         }
     }
 
-    // Traitement de la commande /go <Map Name>
+    /**
+     * Traitement de la commande /go <Map Name>
+     * @param command
+     */
     private static void handleGoCommand(String command) {
-        // Sépare la commande et la direction
+        // Sépare la commande et le nom de la map
         String[] parts = command.split(" ");
         int partsLength = parts.length;
 
         if (parts.length != 1) {
             String mapName = "";
+
             for (int i = 1; i < parts.length; i++) {
                 if (i < partsLength - 1) {
                     mapName += parts[i] + " ";
@@ -100,7 +97,10 @@ public class Command {
         }
     }
 
-    // Traitement des commandes /attack <Character Name> et /talk <Character Name>
+    /**
+     * Traitement des commandes /attack <Character Name> et /talk <Character Name>
+     * @param command
+     */
     private static void handleInteractionCommand(String command) {
         // Sépare la commande et le nom du personnage
         String[] parts = command.split(" ");
@@ -120,7 +120,10 @@ public class Command {
 
     }
 
-    // Traitement de la commande /quest <Quest Name>
+    /**
+     * Traitement de la commande /quest <Quest Name>
+     * @param command
+     */
     private static void handleQuestCommand(String command) {
         // Sépare la commande et le nom de la quête
         String[] parts = command.split(" ");
@@ -133,7 +136,10 @@ public class Command {
         }
     }
 
-    // Traitement de la commande /use <Item Name> et /take <Item Name>
+    /**
+     * Traitement de la commande /use <Item Name> et /take <Item Name>
+     * @param command
+     */
     private static void handleItemCommand(String command) {
         // Sépare la commande et le nom de l'item
         String[] parts = command.split(" ");
@@ -157,10 +163,13 @@ public class Command {
         }
     }
 
-    // Traitement des commandes générales
+    /**
+     * Traitement des commandes générales
+     * @param command
+     */
     private static void handleGeneralCommand(String command) {
         // Vérifie la commande générale et exécute la méthode correspondante
-        Runnable runnable = commandMap.get(command);
+        Runnable runnable = COMMAND_MAP.get(command);
 
         if (runnable != null) {
             runnable.run();
@@ -169,7 +178,11 @@ public class Command {
         }
     }
 
-    private static void addXpCommand(String command) {
+    /**
+     * Traitement de la commande /addXp <amount>
+     * @param command
+     */
+    private static void handleXpCommand(String command) {
         // Sépare la commande et le nom de la quête
         String[] parts = command.split(" ");
 
@@ -179,16 +192,5 @@ public class Command {
         } else {
             System.out.println("Incorrect command format. Usage : /addXp <Number>");
         }
-    }
-
-    public static String getName() {
-        String name = "";
-
-        while (name == "") {
-            System.out.print("Enter your name : ");
-            name = Game.SCANNER.nextLine();
-        }
-
-        return name;
     }
 }
