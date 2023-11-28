@@ -6,7 +6,8 @@ public class Main {
 		Game.printSeparation();
 		System.out.println("GAME START");
 		Game.printSeparation();
-		new Game();
+		Game game = new Game();
+		game.start();
 		//Command.handleCommands();
 	}
 

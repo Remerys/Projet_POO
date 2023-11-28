@@ -2,6 +2,9 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,16 +15,19 @@ import game.Game;
 
 public class GameTest {
 	Game game;
-
-	@Test
-	public void testTrue() {
-		assertTrue(true);
-	}
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
 	@Before
 	public void init() {
 		game = new Game();
 	}
+
+	@Test
+    public void testDisplayAvailableCommands() {
+        Game.displayAvailableCommands();
+        assertTrue(outContent.toString().contains("List of available commands :"));
+    }
 
 	@Test
 	public void talkNoReply() {

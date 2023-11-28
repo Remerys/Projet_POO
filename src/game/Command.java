@@ -19,7 +19,7 @@ public class Command {
         COMMAND_MAP.put("/help", Game::displayAvailableCommands);
         COMMAND_MAP.put("/heal", game::heal);
         COMMAND_MAP.put("/inventory", game::displayInventory);
-        COMMAND_MAP.put("/stop", game::stop);
+        COMMAND_MAP.put("/stop", Game::stop);
         COMMAND_MAP.put("/stats", game::stats);
         COMMAND_MAP.put("/quests", game::quests);
         COMMAND_MAP.put("/map", game::map);

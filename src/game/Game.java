@@ -68,7 +68,9 @@ public class Game {
         }
 
         this.mainQuest = new MainQuest();
+    }
 
+    public static void start() {
         Command.handleCommands();
     }
 
@@ -145,18 +147,18 @@ public class Game {
         System.out.println("List of available commands :");
         Game.printSeparation();
         System.out.println("/help - Displays the list of available commands.");
-        System.out.println("/heal - Heal the Hero.");
         System.out.println("/inventory - Display the inventory.");
+        System.out.println("/stats - Display the statistics of the hero.");
         System.out.println("/go <Map Name> - Go to another map.");
+        System.out.println("/heal - Heal the Hero.");
         System.out.println("/attack <Character name> - Attack a character if possible.");
         System.out.println("/talk <Character name> - Talk to a character if possible.");
-        System.out.println("/stop - Stop the game.");
-        System.out.println("/stats - Display the statistics of the hero.");
         System.out.println("/quests - Display the list of available quests.");
         System.out.println("/quest <Quest name> - Display a specific quest with more information.");
         System.out.println("/use <item name> - Use an item.");
         System.out.println("/map - Displays information from the current map.");
         System.out.println("/take <Item Name> - Take an item on the map");
+        System.out.println("/stop - Stop the game.");
     }
 
     /**
@@ -283,7 +285,7 @@ public class Game {
     /**
      * Permet d'arrêter la partie grâce à la commande /stop
      */
-    public void stop() {
+    public static void stop() {
         System.out.println("GAME STOP");
         Game.SCANNER.close();
         System.exit(0);
