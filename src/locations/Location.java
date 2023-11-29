@@ -68,7 +68,7 @@ public class Location {
         locs.get(3).addCharacter(new Crab());
         locs.get(3).addCharacter(new Crab());
         locs.get(3).addCharacter(new Crab());
-        locs.get(3).addCharacter(new Crab());
+        locs.get(3).addCharacter(new RabbitOfCaerbannog());
 
         return locs;
     }
