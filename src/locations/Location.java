@@ -56,11 +56,19 @@ public class Location {
         
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
-        locs.get(1).addCharacter(new Healer());
+        
+        locs.get(2).addCharacter(Diogene.getDiogene());
+        locs.get(2).addCharacter(new Healer());
+        locs.get(2).addCharacter(new Crab());
 
         // Exits for the 3rd island
         locs.get(3).addExit(locs.get(1), "It seems like you can swim to the first visited island.");
         locs.get(3).addExit(locs.get(2), "The main island also seems easily reachable.");
+
+        locs.get(3).addCharacter(new Crab());
+        locs.get(3).addCharacter(new Crab());
+        locs.get(3).addCharacter(new Crab());
+        locs.get(3).addCharacter(new Crab());
 
         return locs;
     }
