@@ -196,7 +196,7 @@ public class Location {
 
     public Item getItem(String itemName) {
         for (Item i : this.items) {
-            if (i.toString() == itemName) {
+            if (i.toString().equals(itemName)) {
                 return i;
             }
         }

@@ -330,7 +330,7 @@ public class Game {
      * @param xp
      */
     public void addXp(int xp) { // to test
-        System.out.println("Gain d'xp :" + xp);
+        System.out.println("Gain d'xp : " + xp);
 
         this.hero.addXp(xp);
     }
