@@ -63,6 +63,9 @@ public class Command {
                 case "/take":
                     handleItemCommand(command);
                     break;
+                case "/unlock":
+                    handleUnlockCodeCommand(command);
+                    break;
                 default:
                     handleGeneralCommand(command);
             }
@@ -191,6 +194,33 @@ public class Command {
             game.addXp(xp);
         } else {
             System.out.println("Incorrect command format. Usage : /addXp <Number>");
+        }
+    }
+
+    /**
+     * Traitement de la commande /unlock <exit>
+     * @param command
+     */
+    private static void handleUnlockCodeCommand(String command) {
+        // Sépare la commande et le nom de la quête
+        String[] parts = command.split(" ");
+    
+        
+        if (parts.length != 1) {
+            String code = parts[1];
+            String mapName = "";
+
+            for (int i = 2; i < parts.length; i++) {
+                if (i < parts.length - 1) {
+                    mapName += parts[i] + " ";
+                } else {
+                    mapName += parts[i];
+                }
+            }
+
+            game.unlockExitWithCode(mapName, code);
+        } else {
+            System.out.println("Incorrect command format. Usage : /unlock <Code> <Location name>");
         }
     }
 }

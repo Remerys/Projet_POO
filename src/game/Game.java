@@ -405,4 +405,15 @@ public class Game {
             System.out.println("This item doesn't exist");
         }
     }
+
+    public void unlockExitWithCode(String exit, String code) {
+        Location loc = hero.getLocation();
+
+        try {
+            System.out.println(loc.enterExitCode(exit, code));
+            System.out.println(loc.unlock(exit));
+        } catch (Exception e) {
+            System.out.println("The exit is locked !");
+        }
+    }
 }

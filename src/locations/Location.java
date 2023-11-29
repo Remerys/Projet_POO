@@ -42,7 +42,7 @@ public class Location {
 
         // TODO: Add characters to the locations
         // Creation of the locations
-        locs.add(new Location("Starting Island", "A peaceful island far from the rest of the world."));
+        locs.add(new Location("Origin", "A peaceful island far from the rest of the world."));
         locs.add(new Location("Island #1", "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
         locs.add(new Location("Island #2", "The main island of the archipelago."));
         locs.add(new Location("Quest Island", "A lost island almost outside the archipelago. The atmosphere there is hostile."));
