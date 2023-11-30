@@ -7,10 +7,6 @@ package characters;
  * @author Lilian
  */
 public abstract class Character {
-	/**
-	 * DEFAULT_MAX_HP (int) : 500
-	 */
-	public static final int DEFAULT_MAX_HP = 500;
 
 	protected final String NAME;
 	private String description;
