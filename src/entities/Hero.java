@@ -428,7 +428,7 @@ public class Hero extends Fighter {
 	/**
 	 * Attack a character with the hero's weapon
 	 *
-	 * @param character (Character)
+	 * @param fighter (Fighter)
 	 */
 	public void attack(Fighter fighter) {
 		fighter.getAttacked(hero.getDamage());

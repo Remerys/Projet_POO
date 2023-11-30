@@ -30,31 +30,31 @@ public class HeroTest {
 	public void levelUp2() {
 		Hero hero = Hero.createHero("Fabio", loc);
 		hero.addXp(150);
-		//System.out.println(hero.getHp());
-		//System.out.println(hero.getMp());
 		assertEquals(5, hero.getLevel());
 		Hero.destroyHero();
 	}
 
-	/*@Test
-	public void printInventory1() {
-		Hero hero = Hero.createHero("Fabio", loc);
-		hero.printInventory();
-		Hero.destroyHero();
-	}
-
-	@Test
-	public void printInventory2() throws Exception {
-		Hero hero = Hero.createHero("Fabio", loc);
-		Bow bow = new Bow();
-		Bow bow2 = new Bow();
-		Sword s = new Sword();
-		HealPotion p = new HealPotion();
-		hero.addItem(bow);
-		hero.addItem(s);
-		hero.addItem(bow2);
-		hero.addItem(p);
-		hero.printInventory();
-		Hero.destroyHero();
-	}*/
+	/*
+	 * @Test
+	 * public void printInventory1() {
+	 * Hero hero = Hero.createHero("Fabio", loc);
+	 * hero.printInventory();
+	 * Hero.destroyHero();
+	 * }
+	 * 
+	 * @Test
+	 * public void printInventory2() throws Exception {
+	 * Hero hero = Hero.createHero("Fabio", loc);
+	 * Bow bow = new Bow();
+	 * Bow bow2 = new Bow();
+	 * Sword s = new Sword();
+	 * HealPotion p = new HealPotion();
+	 * hero.addItem(bow);
+	 * hero.addItem(s);
+	 * hero.addItem(bow2);
+	 * hero.addItem(p);
+	 * hero.printInventory();
+	 * Hero.destroyHero();
+	 * }
+	 */
 }

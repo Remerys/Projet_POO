@@ -1,7 +1,6 @@
 module:poo
-characters
+entities
 game
-hero
 items
 locations
 quests

@@ -30,15 +30,19 @@ public abstract class Quest {
 	}
 
 	/**
-	 * Verify
+	 * Verify if the quest is finised
 	 *
-	 * @param choice (String)
-	 * @return (String) : the text talked
+	 * @return (boolean) : if the quest is finished
 	 */
 	public boolean isQuestFinished() {
 		return this.isQuestFinished;
 	}
 
+	/**
+	 * Add a step quest
+	 *
+	 * @param quest (Quest)
+	 */
 	public void addStep(Quest quest) {
 		this.hasSteps = true;
 		this.steps.put(quest.getName(), quest);
