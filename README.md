@@ -26,6 +26,10 @@ Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textu
 ## Installation
 
 1. Clonez le dépot : `https://github.com/Remerys/Projet_POO`
+2. Compilez avec la commande : javac -d bin src/*.java src/characters/*.java src/game/*.java src/items/*.java src/locations/*.java src/quests/*.java
+3. Créez l'exécutable avec la commande : jar cfe IslandGame.jar game.Main -C bin .
+3. Lancez le jeu avec : java -jar IslandGame.jar
+
 
 ## Lancement
 1. Accédez au répertoire `cd Projet_POO/src`
