@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import hero.Hero;
+import characters.Hero;
 import items.*;
 
 public class ItemTest {
@@ -27,7 +27,7 @@ public class ItemTest {
 
     @Test
     public void testHealPotion() {
-        HealPotion healPotion = new HealPotion();
+        HealthPotion healPotion = new HealthPotion();
         assertEquals(1, healPotion.getWeight()); // Potion a le poids correct
         testHero.setHp(2);
         healPotion.setHero(testHero);
@@ -53,7 +53,7 @@ public class ItemTest {
 
     @Test
     public void testPotionWeight() {
-        Potion potion = new HealPotion();
+        Potion potion = new HealthPotion();
         assertEquals(1, potion.getWeight());
     }
 
