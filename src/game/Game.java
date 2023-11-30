@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import characters.*;
+import characters.Fighter;
+import characters.Hero;
+import characters.Talker;
 import items.Flute;
 import items.Item;
 import items.Sword;
 import locations.Location;
 import quests.MainQuest;
-import quests.Quest;
 
 /**
  * The main game
@@ -157,6 +158,7 @@ public class Game {
         System.out.println("/use <item name> - Use an item.");
         System.out.println("/map - Displays information from the current map.");
         System.out.println("/take <Item Name> - Take an item on the map");
+        System.out.println("/unlock <Code> <Location name> - Unlock a locked exit");
     }
 
     /**
