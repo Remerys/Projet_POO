@@ -12,7 +12,8 @@ public class Crab extends Fighter {
 
 	public Crab() {
 		super("Crab", Fighter.DEFAULT_MAX_HP / 50, Crab.XP_DROPPED, Fighter.MAX_DAMAGE / 200, 2);
-		this.setDescription("Crabs have eight legs and two claws, varying in size depending on the species, two eyes and a carapace. They move by walking on their side.");
+		this.setDescription(
+				"Crabs have eight legs and two claws, varying in size depending on the species, two eyes and a carapace. They move by walking on their side.");
 	}
 
 }

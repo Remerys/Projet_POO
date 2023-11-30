@@ -9,7 +9,6 @@ import entities.Hero;
 import entities.NPC;
 import entities.Talker;
 import items.Flute;
-import items.HealthPotion;
 import items.Item;
 import items.Sword;
 import items.Weapon;
@@ -98,7 +97,9 @@ public class Game {
     }
 
     /**
-     * Permet d'obtenir un Talker selon son nom s'il n'existe pas alors la méthode renvoie null
+     * Permet d'obtenir un Talker selon son nom s'il n'existe pas alors la méthode
+     * renvoie null
+     * 
      * @param talkerName
      * @return Talker | null
      */
@@ -112,7 +113,9 @@ public class Game {
     }
 
     /**
-     * Permet d'obtenir un Fighter selon son nom s'il n'existe pas alors la méthode renvoie null
+     * Permet d'obtenir un Fighter selon son nom s'il n'existe pas alors la méthode
+     * renvoie null
+     * 
      * @param enemyName
      * @return Fighter | null
      */
@@ -126,7 +129,9 @@ public class Game {
     }
 
     /**
-     * Permet d'obtenir un Item selon son nom s'il n'existe pas alors la méthode renvoie null
+     * Permet d'obtenir un Item selon son nom s'il n'existe pas alors la méthode
+     * renvoie null
+     * 
      * @param itemName
      * @return Item | null
      */
@@ -139,7 +144,10 @@ public class Game {
         return null;
     }
 
-    /* --------------------------------------------------------------------------------------------------------------------------- */
+    /*
+     * -----------------------------------------------------------------------------
+     * ----------------------------------------------
+     */
     /* ALL COMMANDS */
 
     /**
@@ -174,7 +182,8 @@ public class Game {
     }
 
     /**
-     * Soigne le personnage avec à une potion s'il en a une grâce à la commande /heal
+     * Soigne le personnage avec à une potion s'il en a une grâce à la commande
+     * /heal
      */
     public void heal() {
         if (hero.hasPotion()) {
@@ -186,7 +195,9 @@ public class Game {
     }
 
     /**
-     * Permet au joueur de se déplacer d'une map à une autre grâce à la commande /go <Map Name>
+     * Permet au joueur de se déplacer d'une map à une autre grâce à la commande /go
+     * <Map Name>
+     * 
      * @param locationName
      */
     public void goTo(String locationName) {
@@ -207,7 +218,9 @@ public class Game {
     }
 
     /**
-     * Permet au joueur d'attaquer un ennemie grâce à la commande /attack <Character Name>
+     * Permet au joueur d'attaquer un ennemie grâce à la commande /attack <Character
+     * Name>
+     * 
      * @param enemyName
      */
     public void attack(String enemyName) {
@@ -236,7 +249,10 @@ public class Game {
                 System.out.println(attacker.getName() + " attacks first :");
                 attack_aux(attacker, attacked);
 
-                /* -------------------------------------------------------------------------------------------------------- */
+                /*
+                 * -----------------------------------------------------------------------------
+                 * ---------------------------
+                 */
 
                 if (attacked.getHp() != 0) {
                     attack_aux(attacked, attacker);
@@ -261,6 +277,7 @@ public class Game {
 
     /**
      * Méthode auxiliaire à la méthode attack permettant un affichage plus concis
+     * 
      * @param attacker
      * @param target
      */
@@ -271,11 +288,13 @@ public class Game {
     }
 
     /**
-     * Permet au joueur de parler à un PNJ grâce à la commande /talk <Character Name>
+     * Permet au joueur de parler à un PNJ grâce à la commande /talk <Character
+     * Name>
+     * 
      * @param characterName
      */
     public void talk(String characterName) {
-    	Talker npcTalked = this.getTalker(characterName);
+        Talker npcTalked = this.getTalker(characterName);
 
         if (npcTalked != null) {
             npcTalked.resetTalkState();
@@ -316,7 +335,8 @@ public class Game {
     }
 
     /**
-     * Permet au joueur de voir la liste des quêtes qu'il peut faire grâce à la commande /quests
+     * Permet au joueur de voir la liste des quêtes qu'il peut faire grâce à la
+     * commande /quests
      */
     public void quests() {
         System.out.println("List of available quests :");
@@ -326,6 +346,7 @@ public class Game {
 
     /**
      * Permet au joueur de voir une quête plus en détails
+     * 
      * @param questName
      */
     public void quest(String questName) {
@@ -334,6 +355,7 @@ public class Game {
 
     /**
      * Permet au joueur de se donner de l'xp grâce à la commande /addXp <amount>
+     * 
      * @param xp
      */
     public void addXp(int xp) { // to test
@@ -357,6 +379,7 @@ public class Game {
 
     /**
      * Permet au joueur d'utiliser un item grâce à la commande /use <Item Name>
+     * 
      * @param itemName
      */
     public void use(String itemName) {
@@ -364,14 +387,15 @@ public class Game {
 
         Item itemUsed = this.hero.getItem(itemName);
         try {
-			this.hero.useItem(itemUsed);
-		} catch (Exception e) {
-			System.out.println("This item isn't usable.");
-		}
+            this.hero.useItem(itemUsed);
+        } catch (Exception e) {
+            System.out.println("This item isn't usable.");
+        }
     }
 
     /**
-     * Permet au joueur d'afficher les détails de la map sur laquelle il se trouve grâce à la commande /map
+     * Permet au joueur d'afficher les détails de la map sur laquelle il se trouve
+     * grâce à la commande /map
      */
     public void map() {
         Location location = this.hero.getLocation();
@@ -388,6 +412,7 @@ public class Game {
 
     /**
      * Méthode auxiliaire à la méthode map permettant un affichage plus concis
+     * 
      * @param title
      * @param list
      */
@@ -402,7 +427,9 @@ public class Game {
     }
 
     /**
-     * Permet au joueur de prendre un item sur la map actuelle grâce à la commande /take <Item Name>
+     * Permet au joueur de prendre un item sur la map actuelle grâce à la commande
+     * /take <Item Name>
+     * 
      * @param itemName
      * @throws Exception
      */
@@ -413,7 +440,8 @@ public class Game {
         Item item = this.getItem(itemName);
 
         if (item != null) {
-            // Si l'item est présent sur la map on l'ajoute à l'inventaire et on le retire de la map
+            // Si l'item est présent sur la map on l'ajoute à l'inventaire et on le retire
+            // de la map
             this.hero.addItem(item);
             location.removeItem(item);
             System.out.println("Item taken successfully");
@@ -424,10 +452,11 @@ public class Game {
 
     /**
      * Permet au joueur d'équiper une arme
+     * 
      * @param weaponName
      */
     public void equip(String weaponName) {
-        Weapon weapon = (Weapon)this.hero.getItem(weaponName);
+        Weapon weapon = (Weapon) this.hero.getItem(weaponName);
 
         if (weapon != null) {
             this.hero.changeEquipedWeapon(weapon);
@@ -438,7 +467,7 @@ public class Game {
     }
 
     public boolean isMainQuestFinished() {
-    	return this.mainQuest.isQuestFinished();
+        return this.mainQuest.isQuestFinished();
     }
 
     public void unlockExitWithCode(String exit, String code) {
@@ -458,7 +487,7 @@ public class Game {
             testItem = this.hero.getItem(objectName);
         }
         Fighter testFighter = this.getFighter(objectName);
-        NPC testTalker = (NPC)this.getTalker(objectName);
+        NPC testTalker = (NPC) this.getTalker(objectName);
 
         if (testItem != null) {
             System.out.println(testItem.getDescription());

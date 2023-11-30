@@ -11,7 +11,7 @@ import entities.Fighter;
 import entities.Healer;
 import entities.RabbitOfCaerbannog;
 import entities.Talker;
-import items.Item;
+import items.*;
 
 public class Location {
     // Constants declarations
@@ -20,7 +20,6 @@ public class Location {
 
     public static final String ERROR_EXIT_HAS_NO_CODE = "The exit doesn't have a code";
     public static final String ERROR_EXIT_HAS_NO_LOCK = "The exit doesn't have a lock";
-
 
     private HashMap<String, Exit> exits = new HashMap<String, Exit>();
 
@@ -32,30 +31,39 @@ public class Location {
 
     /**
      * Returns a list of locations for the game.
-     * This function might become large if the project growws anymore and might have to be split, maybe in different classes
+     * This function might become large if the project growws anymore and might have
+     * to be split, maybe in different classes
      */
     public static ArrayList<Location> createGameLocations() {
         ArrayList<Location> locs = new ArrayList<Location>();
 
         // Creation of the locations
         locs.add(new Location("Origin", "A peaceful island far from the rest of the world."));
-             locs.add(new Location("Island 1", "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
-        locs.add(new Location("Island 2", "The main island of the archipelago."));
-        locs.add(new Location("Quest Island", "A lost island almost outside the archipelago. The atmosphere there is hostile."));
+        locs.add(new Location("Island #1",
+                "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
+        locs.add(new Location("Island #2", "The main island of the archipelago."));
+        locs.add(new Location("Quest Island",
+                "A lost island almost outside the archipelago. The atmosphere there is hostile."));
 
         // 1st Island
         // Exits for the 1st island
-        locs.get(1).addExit(locs.get(2), "The island in the distance appears reachable by swimming with the help of the current.");
-        locs.get(1).addExitWithCode(locs.get(0), "coucou", "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
+        locs.get(1).addExit(locs.get(2),
+                "The island in the distance appears reachable by swimming with the help of the current.");
+        locs.get(1).addExitWithCode(locs.get(0), "coucou",
+                "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
         locs.get(1).addCharacter(Diogene.getDiogene());
 
         // Exits for the 2nd island
-        locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
+        locs.get(2).addExit(locs.get(3),
+                "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
 
         locs.get(2).addCharacter(Diogene.getDiogene());
         locs.get(2).addCharacter(new Healer());
         locs.get(2).addCharacter(new Crab());
+        locs.get(2).addItem(new Sword());
+        locs.get(2).addItem(new Sword());
+        locs.get(2).addItem(new HealthPotion());
 
         // Exits for the 3rd island
         locs.get(3).addExit(locs.get(1), "It seems like you can swim to the first visited island.");
@@ -69,10 +77,11 @@ public class Location {
         return locs;
     }
 
-
-    /* --------------------*
-     *    Constructors     *
-     * --------------------*/
+    /*
+     * --------------------*
+     * Constructors *
+     * --------------------
+     */
 
     /**
      * Creates a new location from its name and its description
@@ -82,10 +91,11 @@ public class Location {
         this.DESCRIPTION = description;
     }
 
-
-    /* --------------------*
-     *       Setters       *
-     * --------------------*/
+    /*
+     * --------------------*
+     * Setters *
+     * --------------------
+     */
 
     /**
      * Adds an exit to the location
@@ -96,7 +106,8 @@ public class Location {
     }
 
     /**
-     * Adds an exit locked with a code to the location. If the projet grows, having more than one function may become a problem.
+     * Adds an exit locked with a code to the location. If the projet grows, having
+     * more than one function may become a problem.
      */
     public void addExitWithCode(Location loc, String code, String description) {
         Exit exit = new ExitWithCode(loc, code, description);
@@ -107,10 +118,9 @@ public class Location {
      * Removes the exit from the location if it exists. Else throws an error.
      */
     public void removeExit(String exitName) throws Exception {
-        if (this.exits.containsKey(exitName)){
+        if (this.exits.containsKey(exitName)) {
             this.exits.remove(exitName);
-        }
-        else {
+        } else {
             throw new Exception("removeExit : The exit doesn't exist !");
         }
     }
@@ -122,12 +132,12 @@ public class Location {
         boolean hasCharacterBeenAdded = false;
 
         if (c instanceof Talker) {
-            this.talkers.add((Talker)c);
+            this.talkers.add((Talker) c);
             hasCharacterBeenAdded = true;
         }
 
         if (c instanceof Fighter) {
-            this.fighters.add((Fighter)c);
+            this.fighters.add((Fighter) c);
             hasCharacterBeenAdded = true;
         }
 
@@ -141,16 +151,17 @@ public class Location {
      */
     public void removeCharacter(Entity c) throws Exception {
         if (c instanceof Talker) {
-            this.removeTalker((Talker)c);
+            this.removeTalker((Talker) c);
         }
 
         if (c instanceof Fighter) {
-            this.removeFighter((Fighter)c);
+            this.removeFighter((Fighter) c);
         }
     }
 
     /**
-     * Removes a Talker pnj from the characters. This method is private, and should never be used outside of removeCharacter
+     * Removes a Talker pnj from the characters. This method is private, and should
+     * never be used outside of removeCharacter
      */
     private void removeTalker(Talker c) throws Exception {
         boolean res = this.talkers.remove(c);
@@ -161,7 +172,8 @@ public class Location {
     }
 
     /**
-     * Removes a Fighter from the characters. This method is private, and should never be used outside of removeCharacter
+     * Removes a Fighter from the characters. This method is private, and should
+     * never be used outside of removeCharacter
      */
     private void removeFighter(Fighter c) throws Exception {
         boolean res = this.fighters.remove(c);
@@ -171,14 +183,14 @@ public class Location {
         }
     }
 
-     /**
+    /**
      * Adds a given item to the location
      */
     public void addItem(Item i) {
         this.items.add(i);
     }
 
-     /**
+    /**
      * Adds a given item to the location
      */
     public void removeItem(Item i) {
@@ -192,7 +204,7 @@ public class Location {
         if (this.exits.containsKey(exitName)) {
             Exit exit = this.exits.get(exitName);
             if (exit instanceof ExitWithCode) {
-                return ((ExitWithCode)exit).enterCode(code);
+                return ((ExitWithCode) exit).enterCode(code);
             } else {
                 return Location.ERROR_EXIT_HAS_NO_CODE;
             }
@@ -208,7 +220,7 @@ public class Location {
         if (this.exits.containsKey(exitName)) {
             Exit exit = this.exits.get(exitName);
             if (exit instanceof ExitWithLock) {
-                ((ExitWithLock)exit).unlock();
+                ((ExitWithLock) exit).unlock();
                 return "The exit has been unlocked";
             } else {
                 throw new Exception(Location.ERROR_EXIT_HAS_NO_LOCK);
@@ -218,10 +230,11 @@ public class Location {
         throw new Exception("enterExitCode : the location doesn't exist !");
     }
 
-
-    /* --------------------*
-     *       Getters       *
-     * --------------------*/
+    /*
+     * --------------------*
+     * Getters *
+     * --------------------
+     */
 
     /**
      * Returns the name of the location
@@ -284,10 +297,11 @@ public class Location {
         return descriptions;
     }
 
-
-    /* --------------------*
-     *    Other Methods    *
-     * --------------------*/
+    /*
+     * --------------------*
+     * Other Methods *
+     * --------------------
+     */
 
     /**
      * Returns the new location associated to the string

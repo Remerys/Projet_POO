@@ -7,10 +7,6 @@ package entities;
  */
 public abstract class Fighter extends Entity {
 
-	protected int hp;
-	private final int MAX_HP;
-	private int xpDropped;
-
 	/**
 	 * DEFAULT_MAX_HP (int) : 500
 	 */
@@ -24,14 +20,11 @@ public abstract class Fighter extends Entity {
 	 */
 	public static int MAX_SPEED = 10;
 
-	/**
-	 * damage (int) : Damages that can be inflict
-	 */
+	private final int MAX_HP;
+	protected int hp;
 	protected int damage;
-	/**
-	 * speed (int) : Determine the first attacker in a fight
-	 */
 	protected int speed;
+	private int xpDropped;
 
 	private Fighter(String name, String description, int maxHp, int xpDropped, int damage, int speed) {
 		super(name);
@@ -134,7 +127,8 @@ public abstract class Fighter extends Entity {
 	 */
 	@Override
 	public String getDescription() {
-		String description = super.getDescription() + "\nHP : " + this.hp + "\nDAMAGE : " + this.damage + "\nSPEED : " + this.speed;
+		String description = super.getDescription() + "\nHP : " + this.hp + "\nDAMAGE : " + this.damage + "\nSPEED : "
+				+ this.speed;
 		return description;
 	}
 }

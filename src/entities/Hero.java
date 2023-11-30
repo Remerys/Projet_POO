@@ -209,10 +209,20 @@ public class Hero extends Fighter {
 		return this.inventory.getPotion();
 	}
 
+	/**
+	 * Get inventory's max weight
+	 *
+	 * @return inventory's max weight
+	 */
 	public int getInventoryMaxWeight() {
 		return this.inventory.getMaxWeight();
 	}
 
+	/**
+	 * Get inventory's weight
+	 *
+	 * @return inventory's weight
+	 */
 	public int getInventoryWeight() {
 		return this.inventory.getWeight();
 	}

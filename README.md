@@ -56,10 +56,7 @@ Le jeu adopte exclusivement une interface textuelle pour les interactions. Il es
 - `/stop` : Met fin au jeu.
 
 
-## Documentation
-
-
-### Documentation de classes
+## Documentation de classes
 La documentation complète de ce projet est disponible au format HTML dans le dossier `doc`. Pour accéder à la documentation, suivez ces étapes :
 
 1. Ouvrez le dossier `doc` dans votre explorateur de fichiers ou votre terminal.
@@ -67,6 +64,7 @@ La documentation complète de ce projet est disponible au format HTML dans le do
 2. Double-cliquez sur le fichier `index.html` ou ouvrez-le dans votre navigateur.
 
 3. La page d'accueil de la documentation devrait s'afficher, vous permettant de naviguer à travers les différentes sections pour obtenir des informations détaillées sur les classes et méthodes de notre projet.
+
 
 ## Contacts
 Pour des questions ou des commentaires, veuillez contacter :

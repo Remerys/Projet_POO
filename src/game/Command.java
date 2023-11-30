@@ -9,8 +9,11 @@ public class Command {
 
     /**
      * Initialise la map des commandes.
-     * C'est ici qu'il faut ajouter les commandes générales qui ne demandent pas de traitement spécifique.
-     * Sinon il faut les ajouter dans le switch de handleCommands() et dans une méthode spécifique pour rendre le code plus lisible.
+     * C'est ici qu'il faut ajouter les commandes générales qui ne demandent pas de
+     * traitement spécifique.
+     * Sinon il faut les ajouter dans le switch de handleCommands() et dans une
+     * méthode spécifique pour rendre le code plus lisible.
+     * 
      * @param game
      */
     public static void setGame(Game game) {
@@ -80,6 +83,7 @@ public class Command {
 
     /**
      * Traitement de la commande /go <Map Name>
+     * 
      * @param command
      */
     private static void handleGoCommand(String command) {
@@ -106,6 +110,7 @@ public class Command {
 
     /**
      * Traitement des commandes /attack <Character Name> et /talk <Character Name>
+     * 
      * @param command
      */
     private static void handleInteractionCommand(String command) {
@@ -128,6 +133,7 @@ public class Command {
 
     /**
      * Traitement de la commande /use <Item Name> et /take <Item Name>
+     * 
      * @param command
      */
     private static void handleItemCommand(String command) {
@@ -143,7 +149,6 @@ public class Command {
                 try {
                     game.take(itemName);
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             } else {
@@ -156,6 +161,7 @@ public class Command {
 
     /**
      * Traitement de la commande /look <Object Name>
+     * 
      * @param command
      */
     private static void handleLookCommand(String command) {
@@ -172,6 +178,7 @@ public class Command {
 
     /**
      * Traitement des commandes générales
+     * 
      * @param command
      */
     private static void handleGeneralCommand(String command) {
@@ -187,6 +194,7 @@ public class Command {
 
     /**
      * Traitement de la commande /addXp <amount>
+     * 
      * @param command
      */
     private static void handleXpCommand(String command) {
@@ -203,12 +211,12 @@ public class Command {
 
     /**
      * Traitement de la commande /unlock <exit>
+     * 
      * @param command
      */
     private static void handleUnlockCodeCommand(String command) {
         // Sépare la commande et le nom de la quête
         String[] parts = command.split(" ");
-
 
         if (parts.length != 1) {
             String code = parts[1];

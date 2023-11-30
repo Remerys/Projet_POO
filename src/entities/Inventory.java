@@ -158,10 +158,20 @@ public class Inventory {
 		return getItemsOfType(Weapon.class);
 	}
 
+	/**
+	 * Get inventory's weight
+	 *
+	 * @return inventory's weight
+	 */
 	public int getWeight() {
 		return this.weight;
 	}
 
+	/**
+	 * Get inventory's max weight
+	 *
+	 * @return inventory's max weight
+	 */
 	public int getMaxWeight() {
 		return Inventory.MAX_WEIGHT;
 	}
@@ -215,19 +225,6 @@ public class Inventory {
 	 *
 	 ------------------------------------------------------------------------------------*/
 
-	/*
-	 * private <Type extends Item> void printItems(List<Type> items) {
-	 * Iterator<Type> iterator = items.iterator();
-	 * while (iterator.hasNext()) {
-	 * System.out.print(iterator.next());
-	 * if (iterator.hasNext()) {
-	 * System.out.print(", ");
-	 * }
-	 * }
-	 * System.out.println();
-	 * }
-	 */
-
 	/**
 	 * Get all non-specific items
 	 *
@@ -259,10 +256,10 @@ public class Inventory {
 	 * @param items (List<Item>)
 	 */
 	private <Type extends Item> void printItemsWithCount(List<Type> items) {
-		// we sort the items
 		List<Type> sortedItems = new ArrayList<>(items);
 		Collections.sort(sortedItems,
-				(item1, item2) -> item1.getClass().getName().compareTo(item2.getClass().getName()));
+				(item1, item2) -> item1.getClass().getName().compareTo(item2.getClass().getName())); // we sort the
+																										// items
 
 		if (!items.isEmpty()) {
 			Iterator<Type> iterator = sortedItems.iterator();
