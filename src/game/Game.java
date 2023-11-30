@@ -57,12 +57,10 @@ public class Game {
 
         this.locations = Location.createGameLocations();
         Location startLocation = this.locations.get(1);
-        Location startLocation = this.locations.get(1);
 
-        // String playerName = Game.getName(); // TODO Remettre à la fin
-        // this.hero = Hero.createHero(playerName, startLocation); // TODO Remettre à la fin
+        String playerName = Game.getName();
+        this.hero = Hero.createHero(playerName, startLocation);
 
-        this.hero = Hero.createHero("Player", startLocation); // TODO Enlever à la fin
         Item flute = new Flute();
         Weapon sword = new Sword();
         try {
