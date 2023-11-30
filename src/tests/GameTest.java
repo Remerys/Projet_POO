@@ -46,7 +46,6 @@ public class GameTest {
 		this.game.goTo("Island #2");
 		this.game.goTo("Quest Island");
 		this.game.goTo("Island #1");
-
 	}
 
 	/**

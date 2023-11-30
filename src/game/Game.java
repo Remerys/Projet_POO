@@ -246,6 +246,11 @@ public class Game {
                 fighterAttacked.fullyHeals();
             } else {
                 this.hero.addXp(fighterAttacked.getXpDropped());
+                try {
+                    this.hero.getLocation().removeCharacter(fighterAttacked);
+                } catch (Exception e) {
+                    System.out.println("Attack : Problème au niveau de la suppression du character");
+                }
             }
 
         } else {
