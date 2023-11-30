@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import org.junit.Before;
@@ -32,8 +31,9 @@ public class GameTest {
 	@Before
 	public void init() throws Exception {
 		Hero.destroyHero();
+        
 		// Simule les entrées utilisateur
-        ByteArrayInputStream input = new ByteArrayInputStream("Player\n".getBytes());
+        ByteArrayInputStream input = new ByteArrayInputStream("Player".getBytes());
         System.setIn(input);
 
 		this.game = new Game();
