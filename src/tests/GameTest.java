@@ -32,6 +32,10 @@ public class GameTest {
 	@Before
 	public void init() throws Exception {
 		Hero.destroyHero();
+		// Simule les entrées utilisateur
+        ByteArrayInputStream input = new ByteArrayInputStream("Player\n".getBytes());
+        System.setIn(input);
+
 		this.game = new Game();
 		this.game.hero.getLocation().addCharacter(Diogene.getDiogene());
 		this.game.hero.getLocation().addCharacter(new Crab());
@@ -39,7 +43,10 @@ public class GameTest {
 		this.game.hero.getLocation().addCharacter(new RabbitOfCaerbannog());
 		this.game.hero.getLocation().addItem(new Bow());
 		this.game.hero.addItem(new Sword());
+		this.game.goTo("Island #2");
+		this.game.goTo("Quest Island");
 		this.game.goTo("Island #1");
+
 	}
 
 	/**
