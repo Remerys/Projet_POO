@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import characters.*;
+import characters.Fighter;
+import characters.Hero;
+import characters.Talker;
 import items.Flute;
 import items.Item;
 import items.Sword;
 import items.Weapon;
 import locations.Location;
 import quests.MainQuest;
-import quests.Quest;
 
 /**
  * The main game
@@ -55,6 +56,7 @@ public class Game {
         Command.setGame(this);
 
         this.locations = Location.createGameLocations();
+        Location startLocation = this.locations.get(1);
         Location startLocation = this.locations.get(1);
 
         // String playerName = Game.getName(); // TODO Remettre à la fin
@@ -161,6 +163,7 @@ public class Game {
         System.out.println("/use <item name> - Use an item.");
         System.out.println("/map - Displays information from the current map.");
         System.out.println("/take <Item Name> - Take an item on the map");
+        System.out.println("/unlock <Code> <Location name> - Unlock a locked exit");
         System.out.println("/stop - Stop the game.");
     }
 
@@ -374,6 +377,7 @@ public class Game {
         System.out.println("A short description : " + locationDescription + "\n");
 
         // printList("List of maps you can go :", location.getExits()); // TODO Remettre quand la fonction getExits existera
+        printList("Looking for exits, ", location.getExitDescriptions());
         printList("List of items in this map :", this.items);
         printList("List of mobs in this map :", this.fighters);
         printList("List of NPCs you can talk to in this map :", this.talkers);
@@ -432,5 +436,16 @@ public class Game {
 
     public boolean isMainQuestFinished() {
     	return this.mainQuest.isQuestFinished();
+    }
+
+    public void unlockExitWithCode(String exit, String code) {
+        Location loc = hero.getLocation();
+
+        try {
+            System.out.println(loc.enterExitCode(exit, code));
+            System.out.println(loc.unlock(exit));
+        } catch (Exception e) {
+            System.out.println("The exit is locked !");
+        }
     }
 }
