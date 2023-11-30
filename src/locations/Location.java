@@ -13,6 +13,9 @@ import entities.RabbitOfCaerbannog;
 import entities.Talker;
 import items.*;
 
+/**
+ * Class Location : represents a map in the game
+ */
 public class Location {
     // Constants declarations
     private final String NAME;
@@ -109,6 +112,8 @@ public class Location {
 
     /**
      * Adds an exit to the location
+     * @param loc
+     * @param description
      */
     public void addExit(Location loc, String description) {
         Exit exit = new Exit(loc, description);
@@ -118,6 +123,9 @@ public class Location {
     /**
      * Adds an exit locked with a code to the location. If the projet grows, having
      * more than one function may become a problem.
+     * @param loc
+     * @param code
+     * @param description
      */
     public void addExitWithCode(Location loc, String code, String description) {
         Exit exit = new ExitWithCode(loc, code, description);
@@ -126,6 +134,8 @@ public class Location {
 
     /**
      * Removes the exit from the location if it exists. Else throws an error.
+     * @param exitName
+     * @throws Exception
      */
     public void removeExit(String exitName) throws Exception {
         if (this.exits.containsKey(exitName)) {
@@ -137,6 +147,7 @@ public class Location {
 
     /**
      * Adds a given character to the location
+     * @param c
      */
     public void addCharacter(Entity c) {
         boolean hasCharacterBeenAdded = false;
@@ -158,6 +169,8 @@ public class Location {
 
     /**
      * Removes a given character from the location
+     * @param c
+     * @throws Exception
      */
     public void removeCharacter(Entity c) throws Exception {
         if (c instanceof Talker) {
@@ -172,6 +185,8 @@ public class Location {
     /**
      * Removes a Talker pnj from the characters. This method is private, and should
      * never be used outside of removeCharacter
+     * @param c
+     * @throws Exception
      */
     private void removeTalker(Talker c) throws Exception {
         boolean res = this.talkers.remove(c);
@@ -184,6 +199,8 @@ public class Location {
     /**
      * Removes a Fighter from the characters. This method is private, and should
      * never be used outside of removeCharacter
+     * @param c
+     * @throws Exception
      */
     private void removeFighter(Fighter c) throws Exception {
         boolean res = this.fighters.remove(c);
@@ -195,6 +212,7 @@ public class Location {
 
     /**
      * Adds a given item to the location
+     * @param i
      */
     public void addItem(Item i) {
         this.items.add(i);
@@ -202,6 +220,7 @@ public class Location {
 
     /**
      * Adds a given item to the location
+     * @param i
      */
     public void removeItem(Item i) {
         this.items.remove(i);
@@ -209,6 +228,10 @@ public class Location {
 
     /**
      * Tries to enter a code for an exit.
+     * @param exitName
+     * @param code
+     * @return
+     * @throws Exception
      */
     public String enterExitCode(String exitName, String code) throws Exception {
         if (this.exits.containsKey(exitName)) {
@@ -225,6 +248,9 @@ public class Location {
 
     /**
      * Unlocks the door
+     * @param exitName
+     * @return
+     * @throws Exception
      */
     public String unlock(String exitName) throws Exception {
         if (this.exits.containsKey(exitName)) {
@@ -283,6 +309,8 @@ public class Location {
 
     /**
      * Returns a specified item from the location
+     * @param itemName
+     * @return
      */
     public Item getItem(String itemName) {
         for (Item i : this.items) {
@@ -315,6 +343,9 @@ public class Location {
 
     /**
      * Returns the new location associated to the string
+     * @param exit
+     * @return
+     * @throws Exception
      */
     public Location exitTo(String exit) throws Exception {
         return this.exits.get(exit).exit();

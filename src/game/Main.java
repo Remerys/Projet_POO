@@ -8,7 +8,6 @@ public class Main {
 		Game.printSeparation();
 		new Game();
 		Game.start();
-		//Command.handleCommands();
 	}
 
 }

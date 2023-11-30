@@ -1,5 +1,8 @@
 package locations;
 
+/**
+ * Class ExitWIthCode : an exit locked with a code
+ */
 public class ExitWithCode extends ExitWithLock {
     private final String CODE;
     private static final String CODE_MESSAGE_OK = "The code is good !";
@@ -8,11 +11,22 @@ public class ExitWithCode extends ExitWithLock {
 
     private boolean has_code_been_entered = false;
 
+    /**
+     * Constructor for ExitWithCode
+     * @param newLoc
+     * @param CODE
+     * @param description
+     */
     public ExitWithCode(Location newLoc, String CODE, String description) {
         super(newLoc, description);
         this.CODE = CODE;
     }
 
+    /**
+     * Tries to enter the code. Returns a string to be displayed in any case.
+     * @param code
+     * @return
+     */
     public String enterCode(String code) {
         if (code.equals(this.CODE)) {
             this.has_code_been_entered = true;
@@ -22,6 +36,9 @@ public class ExitWithCode extends ExitWithLock {
         }
     }
 
+    /**
+     * Unlocks the exit
+     */
     @Override
     public void unlock() throws Exception{
         if (this.has_code_been_entered)
