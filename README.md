@@ -31,19 +31,22 @@ Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textu
 
 ## Utilisation
 
-Le jeu se joue uniquement en interaction textuelle. Afin de jouer il est impératif d'utiliser les commandes disponibles.
-1. Une fois sur le jeu, vous pouvez executer la commande `/help` afin d'avoir toutes les commandes disponibles du jeu.
+Le jeu adopte exclusivement une interface textuelle pour les interactions. Il est impératif d'utiliser les commandes disponibles pour participer au jeu.
+1. À l'entrée dans le jeu, l'utilisateur est invité à exécuter la commande /help pour accéder à la liste complète des commandes disponibles, fournissant ainsi une orientation complète sur les possibilités d'interaction.
 2. Commandes disponibles :
 - `/help` : Affiche la liste des commandes disponibles.
-- `/stop` : Arrête le jeu.
-- `/go <Localisation>` : Votre personnage se déplace à la localisation indiquée uniquement si la localisation est voisine de l'actuelle, et si elle est accessible.
 - `/inventory` : Affiche les objets de l'inventaire de votre personnage.
 - `/stats` : Affiche les statistiques de votre personnage.
+- `/go <Localisation>` : Votre personnage se déplace vers la localisation indiquée uniquement si elle est voisine de l'actuelle et accessible.
 - `/heal` : Soigne votre personnage si vous avez une potion de soin dans votre inventaire.
-- `/attack <Personnage>` : Lance un combat avec un personnage de votre localisation si c'est possible.
-- `/talk <Personnage>` : Lance un dialogue avec un personnage de votre localisation si c'est possible.
+- `/attack <Personnage>` : Déclenche un combat avec un personnage de votre localisation si possible.
+- `/talk <Personnage>` : Démarre un dialogue avec un personnage de votre localisation si possible.
 - `/quests` : Affiche la liste des quêtes disponibles.
-- `/quest <Nom de la quête>` : Affiche les informations de la quête selectionnée.
+- `/quest <Nom de la quête>` : Affiche les informations de la quête sélectionnée.
+- `/use <Nom de l'item>` : Utiliser un item de l’inventaire si l’item est utilisable.
+- `/map` : Affiche les informations de la carte actuelle.
+- `/take <Nom de l'item>` : Prend un item de la carte actuelle.
+- `/stop` : Met fin au jeu.
 
 
 ## Documentation
@@ -56,7 +59,7 @@ La documentation complète de ce projet est disponible au format HTML dans le do
 
 2. Double-cliquez sur le fichier `index.html` ou ouvrez-le dans votre navigateur.
 
-3. La page d'accueil de la documentation devrait apparaître, vous permettant de naviguer à travers les différentes sections pour obtenir des informations détaillées sur les classes et méthodes de notre projet.
+3. La page d'accueil de la documentation devrait s'afficher, vous permettant de naviguer à travers les différentes sections pour obtenir des informations détaillées sur les classes et méthodes de notre projet.
 
 ### Documentation : Diagrammes de classes, d’états et de séquences
 Vous trouverez les diagrammes dans le dossiser `diagrammes`:
