@@ -31,7 +31,7 @@ public class GameTest {
 	@Before
 	public void init() throws Exception {
 		Hero.destroyHero();
-        
+
 		// Simule les entrées utilisateur
         ByteArrayInputStream input = new ByteArrayInputStream("Player".getBytes());
         System.setIn(input);
@@ -308,7 +308,7 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Call the stats method
+        // Appeler la méthode stats
         game.stats();
 
         // Récupérer la sortie de la méthode
@@ -326,7 +326,7 @@ public class GameTest {
 					 		"Location : Island #1\n" +
 					 		"Equipped Weapon : None", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -339,7 +339,7 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Call the stats method
+        // Appeler la méthode quests
         game.quests();
 
         // Récupérer la sortie de la méthode
@@ -353,7 +353,7 @@ public class GameTest {
 					 		"Steps : \n" +
 					 		"\t- Kill a rabbit : Todo", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -366,20 +366,17 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Call the addXp method
+        // Appeler la méthode addXp
         int xpToAdd = 13;
         game.addXp(xpToAdd);
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Gain d'xp : 13", actualOutput);
-
-        // Assert that the hero's XP is updated correctly
         assertEquals(3, game.hero.getXp());
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -393,21 +390,20 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Add an item to the hero's inventory
+        // Ajoute une épée à l'inventaire du héros
         Sword sword = new Sword();
         game.hero.addItem(sword);
 
-        // Call the use method
+        // Appeler la méthode use avec un item qui n'est pas utilisable
         game.use("Sword");
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Use of : Sword\n" +
 					 "This item isn't usable.", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -421,21 +417,20 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Add an item to the hero's inventory
+        // Ajoute une flute à l'inventaire du héros
         Flute flute = new Flute();
         game.hero.addItem(flute);
 
-        // Call the use method
+        // Appeler la méthode use avec un item qui est utilisable
         game.use("Flute");
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Use of : Flute\n" +
 					 "tututu.. tutu.. tu.. tu.. tu.. tutututututututututututututu..", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -452,16 +447,15 @@ public class GameTest {
         Location location = new Location("Test Location", "This is a test location.");
 		this.game.hero.getLocation().addExit(location, "Wow, a new island");
 
-        // Set the hero's location (assuming you have a method to set the hero's location)
+        // Déplace le héro dans une location de test
         game.goTo("Test Location");
 
-        // Call the map method
+        // Appeler la méthode map
         game.map();
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Player go to Test Location\n" +
 					 "Map : Test Location\n" +
         			 "A short description : This is a test location.\n\n" +
@@ -472,7 +466,7 @@ public class GameTest {
         			 "List of NPCs you can talk to in this map :\n" +
         				"\tNone", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -486,13 +480,12 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Call the map method
+        // Appeler la méthode map
         game.map();
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Map : Island #1\n" +
         			 "A short description : An unknown island located at one end of the archipelago. You can observe another island in the distance.\n\n" +
         			 "List of items in this map :\n" +
@@ -504,11 +497,9 @@ public class GameTest {
         				"\tDiogene\n" +
 						"\tHealer", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
-
-
 
 	/**
 	 * Prends un item de la map qui existe
@@ -522,22 +513,17 @@ public class GameTest {
 
 		Item bow = this.game.hero.getLocation().getItem("Bow");
 
-        // Call the take method
+        // Appeler la méthode take avec un item qui existe
         game.take("Bow");
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Take : Bow\nItem taken successfully", actualOutput);
-
-        // Assert that the item is added to the hero's inventory
         assertTrue(this.game.hero.hasItem(bow));
-
-        // Assert that the item is removed from the location's items
         assertFalse(this.game.hero.getLocation().getItems().contains(bow));
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -551,16 +537,15 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Call the take method
+        // Appeler la méthode take avec un item qui n'existe pas
         game.take("nonExistingItem");
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Take : nonExistingItem\nThis item doesn't exist", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -575,19 +560,16 @@ public class GameTest {
 
 		Item sword = this.game.hero.getItem("sword");
 
-        // Call the equip method
+        // Appeler la méthode equip avec une arme qui existe
         game.equip("sword");
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("Weapon changed successfully", actualOutput);
-
-        // Assert that the weapon is equipped by the hero
         assertEquals(sword, this.game.hero.getWeaponEquiped());
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 
@@ -600,16 +582,15 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        // Call the equip method
+        // Appeler la méthode equip avec une arme qui n'existe pas
         game.equip("nonExistingWeapon");
 
         // Récupérer la sortie de la méthode
         String actualOutput = outputStream.toString().trim().replaceAll("\r", "");
 
-        // Assert that the expected output is printed
         assertEquals("You don't have this weapon", actualOutput);
 
-        // Reset System.out to prevent interference with subsequent tests
+        // Rétablir la sortie standard
         System.setOut(System.out);
     }
 }
