@@ -53,7 +53,8 @@ public abstract class Character {
 	 * @return description (String)
 	 */
 	public String getDescription() {
-		return this.description;
+		String description = "NAME : " + this.NAME + "\nDESCRIPTION : " + this.description;
+		return description;
 	}
 
 	/*------------------------------------------------------------------------------------

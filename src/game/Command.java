@@ -68,6 +68,9 @@ public class Command {
                 case "/unlock":
                     handleUnlockCodeCommand(command);
                     break;
+                case "/look":
+                    handleLookCommand(command);
+                    break;
                 default:
                     handleGeneralCommand(command);
             }
@@ -171,6 +174,22 @@ public class Command {
     }
 
     /**
+     * Traitement de la commande /look <Object Name>
+     * @param command
+     */
+    private static void handleLookCommand(String command) {
+        // Sépare la commande et le nom de la quête
+        String[] parts = command.split(" ");
+
+        if (parts.length == 2) {
+            String objectName = parts[1];
+            game.look(objectName);
+        } else {
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Item Name> | <Quest Name> | <Map Name> | <Character Name>");
+        }
+    }
+
+    /**
      * Traitement des commandes générales
      * @param command
      */
@@ -224,7 +243,7 @@ public class Command {
 
             game.unlockExitWithCode(mapName, code);
         } else {
-            System.out.println("Incorrect command format. Usage " + parts[0] + " <Code> <Location name>");
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Code> <Map name>");
         }
     }
 }

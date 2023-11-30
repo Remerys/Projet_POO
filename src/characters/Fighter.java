@@ -122,4 +122,14 @@ public abstract class Fighter extends Character {
 		this.hp = this.MAX_HP;
 	}
 
+	/**
+	 * Give the Figther's description/history
+	 *
+	 * @return description (String)
+	 */
+	@Override
+	public String getDescription() {
+		String description = super.getDescription() + "\nHP : " + this.hp + "\nDAMAGE : " + this.damage + "\nSPEED : " + this.speed;
+		return description;
+	}
 }

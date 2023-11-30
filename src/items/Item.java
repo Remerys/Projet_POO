@@ -18,4 +18,6 @@ public abstract class Item {
     public int getWeight() {
         return this.WEIGHT;
     }
+
+    public abstract String getDescription();
 }

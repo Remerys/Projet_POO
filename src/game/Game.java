@@ -6,8 +6,10 @@ import java.util.Scanner;
 
 import characters.Fighter;
 import characters.Hero;
+import characters.NPC;
 import characters.Talker;
 import items.Flute;
+import items.HealthPotion;
 import items.Item;
 import items.Sword;
 import items.Weapon;
@@ -42,7 +44,6 @@ public class Game {
      */
     private List<Talker> talkers = new ArrayList<Talker>();
     private MainQuest mainQuest;
-    public static final String SEPARATION = "--------------------------------------------------------------------";
     /**
      * Seul scanner permettant de récupérer ce que le joueur écrit
      */
@@ -58,14 +59,16 @@ public class Game {
         this.locations = Location.createGameLocations();
         Location startLocation = this.locations.get(1);
 
-        String playerName = Game.getName();
+        String playerName = Game.setPseudo();
         this.hero = Hero.createHero(playerName, startLocation);
 
         Item flute = new Flute();
         Weapon sword = new Sword();
+        HealthPotion healthPotion = new HealthPotion();
         try {
             this.hero.addItem(flute);
             this.hero.addItem(sword);
+            this.hero.addItem(healthPotion);
         } catch (Exception e) {
             System.out.println("ERROR addItem(flute)");
         }
@@ -80,7 +83,7 @@ public class Game {
     /**
      * Permet au joueur d'entrer son nom de personnage
      */
-    private static String getName() {
+    private static String setPseudo() {
         String name = "";
 
         while (name == "") {
@@ -95,7 +98,7 @@ public class Game {
      * Affichage de séparation
      */
     public static void printSeparation() {
-        System.out.println(Game.SEPARATION);
+        System.out.println("--------------------------------------------------------------------");
     }
 
     /**
@@ -449,6 +452,25 @@ public class Game {
             System.out.println(loc.unlock(exit));
         } catch (Exception e) {
             System.out.println("The exit is locked !");
+        }
+    }
+
+    public void look(String objectName) {
+        Item testItem = this.getItem(objectName);
+        if (testItem == null) {
+            testItem = this.hero.getItem(objectName);
+        }
+        Fighter testFighter = this.getFighter(objectName);
+        NPC testTalker = (NPC)this.getTalker(objectName);
+
+        if (testItem != null) {
+            System.out.println(testItem.getDescription());
+        } else if (testFighter != null) {
+            System.out.println(testFighter.getDescription());
+        } else if (testTalker != null) {
+            System.out.println(testTalker.getDescription());
+        } else {
+            System.out.println(objectName + " not found");
         }
     }
 }
