@@ -437,10 +437,19 @@ public class Game {
         }
     }
 
+    /**
+     * Retourne si la quête principale est terminée
+     * @return isQuestFinished
+     */
     public boolean isMainQuestFinished() {
     	return this.mainQuest.isQuestFinished();
     }
 
+    /**
+     * Ouvre une exit verrouillée
+     * @param exit
+     * @param code
+     */
     public void unlockExitWithCode(String exit, String code) {
         Location loc = hero.getLocation();
 
@@ -452,6 +461,10 @@ public class Game {
         }
     }
 
+    /**
+     * Affiche la description d'une entity ou d'un item
+     * @param objectName
+     */
     public void look(String objectName) {
         Item testItem = this.getItem(objectName);
         if (testItem == null) {
