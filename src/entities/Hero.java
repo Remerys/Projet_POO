@@ -174,7 +174,7 @@ public class Hero extends Fighter {
 	@Override
 	public int getDamage() {
 		if (this.weapon != null) {
-			return this.weapon.getDamage();
+			return this.weapon.getDamage() + this.getLevel();
 		} else {
 			return this.getLevel();
 		}
