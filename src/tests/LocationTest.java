@@ -223,4 +223,23 @@ public class LocationTest {
 		}
 		}
 	}
+
+	@Test
+	public void unlockExitFromLocStructTest3Success() throws Exception{
+		Location loc = new Location("", "");
+		Location end = new Location("c", "");
+		loc.addExitWithCode(end, "code", "");
+		loc.enterExitCode("c", "code"); // We consider here that unlock works 
+		try {
+			loc.unlock("c");
+			assertTrue(true);
+		} catch (Exception e) {
+			if (e.getMessage().equals(Location.ERROR_EXIT_HAS_NO_LOCK)) {
+				assertTrue("The exit has no lock", false);
+			} else {
+				assertTrue("The exit has not been found", false);
+			}
+		}
+	}
 }
+
