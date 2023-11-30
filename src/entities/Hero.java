@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 import items.*;
 import locations.Location;

@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import characters.*;
+import entities.*;
 //import characters.Character;
 import game.Game;
 import items.Bow;

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import characters.Hero;
+import entities.Hero;
 import locations.Location;
 
 public class HeroTest {

@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * A NPC who can heal the hero

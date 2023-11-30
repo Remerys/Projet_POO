@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import characters.Fighter;
-import characters.Hero;
-import characters.NPC;
-import characters.Talker;
+import entities.Fighter;
+import entities.Hero;
+import entities.NPC;
+import entities.Talker;
 import items.Flute;
 import items.HealthPotion;
 import items.Item;

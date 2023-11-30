@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * An abstract class representing all the characters that can't attack the
@@ -7,7 +7,7 @@ package characters;
  *
  * @author Lilian
  */
-public abstract class NPC extends Character implements Talker {
+public abstract class NPC extends Entity implements Talker {
 
 	public NPC(String name) {
 		super(name);

@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 import java.util.ArrayList;
 import java.util.Collections;

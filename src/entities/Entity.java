@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * An abstract class representing all the characters in the world except the
@@ -6,20 +6,20 @@ package characters;
  *
  * @author Lilian
  */
-public abstract class Character {
+public abstract class Entity {
 
 	protected final String NAME;
 	private String description;
 
 	protected boolean hasFinishedToTalk;
 
-	public Character(String name, String description) {
+	public Entity(String name, String description) {
 		this.NAME = name;
 		this.description = name;
 		this.hasFinishedToTalk = false;
 	}
 
-	public Character(String name) {
+	public Entity(String name) {
 		this(name, "");
 	}
 

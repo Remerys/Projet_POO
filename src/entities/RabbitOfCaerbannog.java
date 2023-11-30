@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * RabbitOfCaerbannog is a reference to The Holy Grail by Monty Python

@@ -10,7 +10,7 @@ module poo {
 
 	// exports
 	exports game;
-	exports characters;
+	exports entities;
 	exports items;
 	exports locations;
 	exports quests;

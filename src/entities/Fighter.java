@@ -1,11 +1,11 @@
-package characters;
+package entities;
 
 /**
  * An abstract class representing all the characters that can attack
  *
  * @author Lilian
  */
-public abstract class Fighter extends Character {
+public abstract class Fighter extends Entity {
 
 	protected int hp;
 	private final int MAX_HP;

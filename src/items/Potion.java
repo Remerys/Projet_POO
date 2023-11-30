@@ -1,6 +1,6 @@
 package items;
 
-import characters.Hero;
+import entities.Hero;
 
 public abstract class Potion extends Item implements Usable {
     private final String DESCRIPTION;

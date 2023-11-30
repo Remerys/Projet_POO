@@ -1,6 +1,6 @@
 package quests;
 
-import characters.Hero;
+import entities.Hero;
 import locations.Location;
 
 /**

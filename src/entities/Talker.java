@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * An interface allowing the characters to talk

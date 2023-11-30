@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * Crabs have eight legs and two claws, varying in size depending on the

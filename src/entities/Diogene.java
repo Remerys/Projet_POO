@@ -1,4 +1,4 @@
-package characters;
+package entities;
 
 /**
  * A odd person in a barrel

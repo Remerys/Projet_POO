@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import characters.Character;
-import characters.Talker;
-import characters.Fighter;
-
-import characters.Healer;
-import characters.Diogene;
-import characters.RabbitOfCaerbannog;
-import characters.Crab;
-
+import entities.Crab;
+import entities.Diogene;
+import entities.Entity;
+import entities.Fighter;
+import entities.Healer;
+import entities.RabbitOfCaerbannog;
+import entities.Talker;
 import items.Item;
 
 public class Location {
@@ -120,7 +118,7 @@ public class Location {
     /**
      * Adds a given character to the location
      */
-    public void addCharacter(Character c) {
+    public void addCharacter(Entity c) {
         boolean hasCharacterBeenAdded = false;
 
         if (c instanceof Talker) {
@@ -141,7 +139,7 @@ public class Location {
     /**
      * Removes a given character from the location
      */
-    public void removeCharacter(Character c) throws Exception {
+    public void removeCharacter(Entity c) throws Exception {
         if (c instanceof Talker) {
             this.removeTalker((Talker)c);
         }
