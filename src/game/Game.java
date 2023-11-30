@@ -165,6 +165,7 @@ public class Game {
         System.out.println("/map - Displays information from the current map.");
         System.out.println("/take <Item Name> - Take an item on the map");
         System.out.println("/unlock <Code> <Location name> - Unlock a locked exit");
+        System.out.println("/look <Item Name> | <Character Name> - Display de description of the item");
         System.out.println("/stop - Stop the game.");
     }
 

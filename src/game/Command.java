@@ -50,9 +50,6 @@ public class Command {
                 case "/talk":
                     handleInteractionCommand(command);
                     break;
-                case "/quest":
-                    handleQuestCommand(command);
-                    break;
                 case "/addXp":
                     handleXpCommand(command);
                     break;
@@ -130,22 +127,6 @@ public class Command {
     }
 
     /**
-     * Traitement de la commande /quest <Quest Name>
-     * @param command
-     */
-    private static void handleQuestCommand(String command) {
-        // Sépare la commande et le nom de la quête
-        String[] parts = command.split(" ");
-
-        if (parts.length == 2) {
-            String questName = parts[1];
-            game.quest(questName);
-        } else {
-            System.out.println("Incorrect command format. Usage " + parts[0] + " <Quest Name>");
-        }
-    }
-
-    /**
      * Traitement de la commande /use <Item Name> et /take <Item Name>
      * @param command
      */
@@ -185,7 +166,7 @@ public class Command {
             String objectName = parts[1];
             game.look(objectName);
         } else {
-            System.out.println("Incorrect command format. Usage " + parts[0] + " <Item Name> | <Quest Name> | <Map Name> | <Character Name>");
+            System.out.println("Incorrect command format. Usage " + parts[0] + " <Item Name> | <Character Name>");
         }
     }
 
