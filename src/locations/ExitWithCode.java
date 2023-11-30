@@ -16,9 +16,9 @@ public class ExitWithCode extends ExitWithLock {
     public String enterCode(String code) {
         if (code.equals(this.CODE)) {
             this.has_code_been_entered = true;
-            return this.CODE_MESSAGE_OK;
+            return ExitWithCode.CODE_MESSAGE_OK;
         } else {
-            return this.CODE_MESSAGE_WRONG;
+            return ExitWithCode.CODE_MESSAGE_WRONG;
         }
     }
 
@@ -27,6 +27,6 @@ public class ExitWithCode extends ExitWithLock {
         if (this.has_code_been_entered)
             super.unlock();
         else
-            throw new Exception(this.CODE_UNLOCK_UNAUTHORIZED);
+            throw new Exception(ExitWithCode.CODE_UNLOCK_UNAUTHORIZED);
     }
 }

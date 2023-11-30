@@ -11,7 +11,6 @@ import characters.Fighter;
 import characters.Healer;
 import characters.Diogene;
 import characters.RabbitOfCaerbannog;
-import characters.NPC;
 import characters.Crab;
 
 import items.Item;
