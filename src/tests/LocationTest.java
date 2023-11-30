@@ -6,6 +6,12 @@ import org.junit.*;
 
 import locations.*;
 
+import entities.Entity;
+import entities.Fighter;
+import entities.Talker;
+import entities.Crab;
+import entities.Healer;
+
 public class LocationTest {
 	
 	@Test
@@ -159,5 +165,62 @@ public class LocationTest {
 		assertEquals(loc, currentLoc);
 	}
 	
-	/* Faire les tests des codes */
+	@Test
+	public void addCharacterStructTest1Fighter() {
+		Location loc = new Location("", "");
+		Fighter crab = new Crab();
+		loc.addCharacter(crab);
+
+		assertEquals(loc.getFighters().get(0), crab);
+	}
+
+	@Test
+	public void addCharacterStructTest2Talker() {
+		Location loc = new Location("", "");
+		Talker healer = new Healer();
+		loc.addCharacter((Entity)healer);
+
+		assertEquals(loc.getTalkers().get(0), healer);
+	}
+
+	@Test
+	public void addCharacterStructTest3Error() {
+		Location loc = new Location("", "");
+
+		// Defining an anonymous class that inherits entity, so that it doesn't implements talker nor can fight
+		Entity anonEntity = new Entity("", "") {}; 
+		
+		loc.addCharacter(anonEntity);
+
+		assertEquals(loc.getFighters().size(), 0);
+		assertEquals(loc.getTalkers().size(), 0);		
+	}
+
+	@Test
+	public void unlockExitFromLocStructTest1Exception() {
+		Location loc = new Location("", "");
+		try {
+			loc.unlock("noLoc");
+			assertTrue("The exit must not exist", false);
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "enterExitCode : the location doesn't exist !");
+		}
+	}
+
+	@Test
+	public void unlockExitFromLocStructTest2NoLock() {
+		Location loc = new Location("", "");
+		Location end = new Location("c", "");
+		loc.addExit(end, "");
+		try {
+			loc.unlock("c");
+			assertTrue("The exit has been unlocked although it should not have a lock", false);
+		} catch (Exception e) {
+			if (e.getMessage().equals(Location.ERROR_EXIT_HAS_NO_LOCK)) {
+				assertTrue(true);
+			} else {
+				assertTrue("The exit has not been found", false);
+		}
+		}
+	}
 }

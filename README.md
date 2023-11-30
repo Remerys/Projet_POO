@@ -2,6 +2,10 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Contributors](https://img.shields.io/badge/contributors%20-%203%20-%20)
 
+- Lilian Marchebout
+- Romain Dugas
+- Philéas afchain--Boucher
+
 ## Description du projet :
 Le projet consiste en la conception et la mise en œuvre d'un jeu de rôle textuel inspiré du style de Colossal Cave Adventure. Dans ce RPG textuel, les joueurs évoluent dans un univers interactif où ils peuvent explorer des lieux, interagir avec des personnages, collecter des objets et accomplir des quêtes.
 
@@ -45,7 +49,9 @@ Le jeu adopte exclusivement une interface textuelle pour les interactions. Il es
 - `/quest <Nom de la quête>` : Affiche les informations de la quête sélectionnée.
 - `/use <Nom de l'item>` : Utiliser un item de l’inventaire si l’item est utilisable.
 - `/map` : Affiche les informations de la carte actuelle.
-- `/take <Nom de l'item>` : Prend un item de la carte actuelle.
+- `/take <Nom de l'item>` : Prend un item de la carte actuelle..
+- `/unlock <Code> <Nom de la carte>` : Prend un item de la carte actuelle..
+- `/look <Nom de l'item> | <Nom du personnage>` : Prend un item de la carte actuelle.
 - `/stop` : Met fin au jeu.
 
 
