@@ -10,6 +10,11 @@ public abstract class Fighter extends Character {
 	protected int hp;
 	private final int MAX_HP;
 	private int xpDropped;
+	
+	/**
+	 * DEFAULT_MAX_HP (int) : 500
+	 */
+	public static final int DEFAULT_MAX_HP = 500;
 	/**
 	 * MAX_DAMAGE (int) : 1000
 	 */

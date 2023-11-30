@@ -8,16 +8,19 @@ import java.util.HashMap;
 public abstract class Quest {
 	private final String NAME;
 	private String description;
-	private HashMap <String, QuestStatus> steps = new HashMap <String, QuestStatus>();
-	private QuestStatus state;
-	protected boolean isQuestFinished = false;
+	private HashMap <String, Quest> steps = new HashMap <String, Quest>();
+	private boolean isQuestFinished = false;
+	private boolean hasSteps = false;
 
 	public abstract void updateQuest() throws Exception;;
 	
 	public Quest(String name, String description) {
 		this.NAME = name;
 		this.description = description;
-		this.state = QuestStatus.Todo;
+	}
+	
+	public String getName() {
+		return this.NAME;
 	}
 
 	public void setDescription(String description) {
@@ -28,46 +31,33 @@ public abstract class Quest {
 		return this.isQuestFinished;
 	}
 
-	private String printState(QuestStatus state) {
-		switch (state) {
-			case Todo:
-				return "Todo";
-			case Ongoing:
-				return "Ongoing";
-			case Done:
-				return "Done";
-			default:
-				return "Not Evaluate";
-		}
+	public void addStep(Quest quest) {
+		this.hasSteps = true;
+		this.steps.put(quest.getName(), quest);
+	}
+
+	public void done() {
+		this.steps.forEach((key, value) -> {
+		      value.done();
+		    }
+		);
+		this.isQuestFinished = true;
+	}
+
+	public void doneStep(String name) {
+		this.steps.get(name).done();
 	}
 
 	public void printQuest() {
-		System.out.println(this.NAME + " : " + printState(this.state));
+		System.out.println(this.NAME + " : ");
 		System.out.println(this.description);
-		System.out.println("Steps : ");
-		this.steps.forEach((key, value) -> {
-		      System.out.println("\t- " + key + " : " + printState(value));
-		    }
-		);
-	}
-
-	public void addStep(String name) {
-		this.steps.put(name, QuestStatus.Todo);
-	}
-
-	public void OngoingQuest() {
-		this.state = QuestStatus.Ongoing;
-	}
-
-	public void DoneQuest() {
-		this.state = QuestStatus.Done;
-	}
-
-	public void OngoingStep(String name) {
-		this.steps.put(name, QuestStatus.Ongoing);
-	}
-
-	public void DoneStep(String name) {
-		this.steps.put(name, QuestStatus.Done);
+		if (this.hasSteps) {
+			System.out.println("Steps : ");
+			this.steps.forEach((key, value) -> {
+			      System.out.println("\t- " + key + " : ");
+			      value.printQuest();
+			    }
+			);
+		}
 	}
 }

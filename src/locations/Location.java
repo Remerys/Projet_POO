@@ -11,7 +11,6 @@ import characters.Fighter;
 import characters.Healer;
 import characters.Diogene;
 import characters.RabbitOfCaerbannog;
-import characters.NPC;
 import characters.Crab;
 
 import items.Item;
@@ -40,7 +39,6 @@ public class Location {
     public static ArrayList<Location> createGameLocations() {
         ArrayList<Location> locs = new ArrayList<Location>();
 
-        // TODO: Add characters to the locations
         // Creation of the locations
         locs.add(new Location("Origin", "A peaceful island far from the rest of the world."));
         locs.add(new Location("Island #1", "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
