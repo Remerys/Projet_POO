@@ -54,6 +54,8 @@ public class Location {
 
         locs.get(1).addCharacter(Diogene.getDiogene());
 
+        locs.get(1).addItem(new MagicWand());
+
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3),
                 "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
@@ -61,8 +63,9 @@ public class Location {
         locs.get(2).addCharacter(Diogene.getDiogene());
         locs.get(2).addCharacter(new Healer());
         locs.get(2).addCharacter(new Crab());
+
         locs.get(2).addItem(new Sword());
-        locs.get(2).addItem(new Sword());
+        locs.get(2).addItem(new Bow());
         locs.get(2).addItem(new HealthPotion());
 
         // Exits for the 3rd island
@@ -73,6 +76,13 @@ public class Location {
         locs.get(3).addCharacter(new Crab());
         locs.get(3).addCharacter(new Crab());
         locs.get(3).addCharacter(new RabbitOfCaerbannog());
+
+        locs.get(2).addItem(new Sword());
+        locs.get(2).addItem(new Sword());
+        locs.get(2).addItem(new Bow());
+        locs.get(2).addItem(new HealthPotion());
+        locs.get(2).addItem(new HealthPotion());
+        locs.get(2).addItem(new HealthPotion());
 
         return locs;
     }
