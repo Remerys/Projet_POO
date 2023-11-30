@@ -2,9 +2,9 @@ package locations;
 
 public class ExitWithCode extends ExitWithLock {
     private final String CODE;
-    private final String CODE_MESSAGE_OK = "The code is good !";
-    private final String CODE_MESSAGE_WRONG = "The entered code is incorrect.";
-    private final String CODE_UNLOCK_UNAUTHORIZED = "The exit is not open.";
+    private static final String CODE_MESSAGE_OK = "The code is good !";
+    private static final String CODE_MESSAGE_WRONG = "The entered code is incorrect.";
+    private static final String CODE_UNLOCK_UNAUTHORIZED = "The exit is not open.";
 
     private boolean has_code_been_entered = false;
 
