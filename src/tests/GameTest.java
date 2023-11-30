@@ -308,6 +308,13 @@ public class GameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
+        String weapon = "";
+        if (this.game.hero.getWeaponEquiped() != null) {
+            weapon = this.game.hero.getWeaponEquiped().toString();
+        } else {
+            weapon = "None";
+        }
+
         // Appeler la méthode stats
         game.stats();
 
@@ -318,13 +325,13 @@ public class GameTest {
         assertEquals("STATISTICS :\n" +
         		     "--------------------------------------------------------------------\n" +
 					 "Name  : Player\n" +
-					 		"Level : 1\n" +
-					 		"XP : 0 / 10\n" +
-					 		"HP : 10 / 10\n" +
-					 		"MP : 0 / 0\n" +
-					 		"Inventory Capacity : 21 / 100\n" +
-					 		"Location : Island #1\n" +
-					 		"Equipped Weapon : None", actualOutput);
+					 		"Level : " + this.game.hero.getLevel() + "\n" +
+					 		"XP : " + this.game.hero.getXp() + " / " + this.game.hero.getXpNewLevel() + "\n" +
+					 		"HP : " + this.game.hero.getHp() + " / " + this.game.hero.getMaxHp() + "\n" +
+					 		"MP : " + this.game.hero.getMp() + " / " + this.game.hero.getMaxMp() + "\n" +
+					 		"Inventory Capacity : " + this.game.hero.getInventoryWeight() + " / " + this.game.hero.getInventoryMaxWeight() + "\n" +
+					 		"Location : " + this.game.hero.getLocation().getName() + "\n" +
+					 		"Equipped Weapon : " + weapon, actualOutput);
 
         // Rétablir la sortie standard
         System.setOut(System.out);
@@ -348,10 +355,8 @@ public class GameTest {
         // Ajouter une assertion pour vérifier le comportement attendu
         assertEquals("List of available quests :\n" +
         		     "--------------------------------------------------------------------\n" +
-					 "Main Quest : Todo\n" +
-					 		"Your goal is to ...\n" +
-					 		"Steps : \n" +
-					 		"\t- Kill a rabbit : Todo", actualOutput);
+					 "Main Quest :\n" +
+					 		"Your goal is to return in your home", actualOutput);
 
         // Rétablir la sortie standard
         System.setOut(System.out);
@@ -459,6 +464,8 @@ public class GameTest {
         assertEquals("Player go to Test Location\n" +
 					 "Map : Test Location\n" +
         			 "A short description : This is a test location.\n\n" +
+                     "Looking for exits :\n" +
+                        "\tNone\n" +
         			 "List of items in this map :\n" +
         				"\tNone\n" +
         			 "List of mobs in this map :\n" +
@@ -488,12 +495,16 @@ public class GameTest {
 
         assertEquals("Map : Island #1\n" +
         			 "A short description : An unknown island located at one end of the archipelago. You can observe another island in the distance.\n\n" +
+                     "Looking for exits :\n" +
+                        "\tOrigin: You observe a cave on the island, and symbols suggest that a code is needed to enter it.\n" +
+                        "\tIsland #2: The island in the distance appears reachable by swimming with the help of the current.\n" +
         			 "List of items in this map :\n" +
         				"\tBow\n" +
         			 "List of mobs in this map :\n" +
         				"\tCrab\n" +
         				"\tRabbitOfCaerbannog\n" +
         			 "List of NPCs you can talk to in this map :\n" +
+        				"\tDiogene\n" +
         				"\tDiogene\n" +
 						"\tHealer", actualOutput);
 

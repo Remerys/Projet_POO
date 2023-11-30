@@ -49,7 +49,7 @@ public abstract class Quest {
 	}
 
 	public void printQuest() {
-		System.out.println(this.NAME + " : ");
+		System.out.println(this.NAME + " :");
 		System.out.println(this.description);
 		if (this.hasSteps) {
 			System.out.println("Steps : ");

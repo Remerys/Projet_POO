@@ -16,10 +16,10 @@ public class Diogene extends NPC {
 
 	public static Diogene getDiogene() {
 		// singleton
-		if (instance == null) {
-			instance = new Diogene();
+		if (Diogene.instance == null) {
+			Diogene.instance = new Diogene();
 		}
-		return instance;
+		return Diogene.instance;
 	}
 
 	@Override

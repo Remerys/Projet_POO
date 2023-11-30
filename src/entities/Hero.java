@@ -209,6 +209,14 @@ public class Hero extends Fighter {
 		return this.inventory.getPotion();
 	}
 
+	public int getInventoryMaxWeight() {
+		return this.inventory.getMaxWeight();
+	}
+
+	public int getInventoryWeight() {
+		return this.inventory.getWeight();
+	}
+
 	/*------------------------------------------------------------------------------------
 	 *
 	 * Setters
