@@ -1,14 +1,16 @@
 package quests;
+
 import java.util.HashMap;
 
 /**
  * The abstract class of quests
+ * 
  * @author Lilian
  */
 public abstract class Quest {
 	private final String NAME;
 	private String description;
-	private HashMap <String, Quest> steps = new HashMap <String, Quest>();
+	private HashMap<String, Quest> steps = new HashMap<String, Quest>();
 	private boolean isQuestFinished = false;
 	private boolean hasSteps = false;
 
@@ -27,6 +29,12 @@ public abstract class Quest {
 		this.description = description;
 	}
 
+	/**
+	 * Verify
+	 *
+	 * @param choice (String)
+	 * @return (String) : the text talked
+	 */
 	public boolean isQuestFinished() {
 		return this.isQuestFinished;
 	}
@@ -38,9 +46,8 @@ public abstract class Quest {
 
 	public void done() {
 		this.steps.forEach((key, value) -> {
-		      value.done();
-		    }
-		);
+			value.done();
+		});
 		this.isQuestFinished = true;
 	}
 
@@ -54,10 +61,9 @@ public abstract class Quest {
 		if (this.hasSteps) {
 			System.out.println("Steps : ");
 			this.steps.forEach((key, value) -> {
-			      System.out.println("\t- " + key + " : ");
-			      value.printQuest();
-			    }
-			);
+				System.out.println("\t- " + key + " : ");
+				value.printQuest();
+			});
 		}
 	}
 }
