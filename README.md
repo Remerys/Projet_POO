@@ -68,13 +68,6 @@ La documentation complète de ce projet est disponible au format HTML dans le do
 
 3. La page d'accueil de la documentation devrait s'afficher, vous permettant de naviguer à travers les différentes sections pour obtenir des informations détaillées sur les classes et méthodes de notre projet.
 
-### Documentation : Diagrammes de classes, d’états et de séquences
-Vous trouverez les diagrammes dans le dossiser `diagrammes`:
-1. Diagrammes de classes : 
-2. Diagrammes d'états : 
-3. Diagrammes de séquences : 
-
-
 ## Contacts
 Pour des questions ou des commentaires, veuillez contacter :
 1. DUGAS Romain à l'adresse `romain.dugas@etu.univ-poitiers.fr`.
