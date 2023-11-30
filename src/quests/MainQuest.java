@@ -8,7 +8,7 @@ import locations.Location;
  * @author Lilian
  */
 public class MainQuest extends Quest {
-	
+
 	private Location lastLocation;
 
 	public MainQuest(Location lastLocation) {

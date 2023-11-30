@@ -31,7 +31,7 @@ public class Location {
     private List<Item> items = new ArrayList<Item>();
 
     /**
-     * Returns a list of locations for the game. 
+     * Returns a list of locations for the game.
      * This function might become large if the project growws anymore and might have to be split, maybe in different classes
      */
     public static ArrayList<Location> createGameLocations() {
@@ -39,8 +39,8 @@ public class Location {
 
         // Creation of the locations
         locs.add(new Location("Origin", "A peaceful island far from the rest of the world."));
-             locs.add(new Location("Island #1", "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
-        locs.add(new Location("Island #2", "The main island of the archipelago."));
+             locs.add(new Location("Island 1", "An unknown island located at one end of the archipelago. You can observe another island in the distance."));
+        locs.add(new Location("Island 2", "The main island of the archipelago."));
         locs.add(new Location("Quest Island", "A lost island almost outside the archipelago. The atmosphere there is hostile."));
 
         // 1st Island
@@ -49,10 +49,10 @@ public class Location {
         locs.get(1).addExitWithCode(locs.get(0), "coucou", "You observe a cave on the island, and symbols suggest that a code is needed to enter it.");
 
         locs.get(1).addCharacter(Diogene.getDiogene());
-        
+
         // Exits for the 2nd island
         locs.get(2).addExit(locs.get(3), "As you gaze at the horizon, you easily make out a vast island. It appears inhabited. Swimming there seems possible.");
-        
+
         locs.get(2).addCharacter(Diogene.getDiogene());
         locs.get(2).addCharacter(new Healer());
         locs.get(2).addCharacter(new Crab());

@@ -13,12 +13,12 @@ public abstract class Quest {
 	private boolean hasSteps = false;
 
 	public abstract void updateQuest() throws Exception;;
-	
+
 	public Quest(String name, String description) {
 		this.NAME = name;
 		this.description = description;
 	}
-	
+
 	public String getName() {
 		return this.NAME;
 	}
@@ -26,7 +26,7 @@ public abstract class Quest {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public boolean isQuestFinished() {
 		return this.isQuestFinished;
 	}

@@ -10,7 +10,7 @@ public abstract class Fighter extends Entity {
 	protected int hp;
 	private final int MAX_HP;
 	private int xpDropped;
-	
+
 	/**
 	 * DEFAULT_MAX_HP (int) : 500
 	 */
